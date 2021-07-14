@@ -21,6 +21,7 @@
 
 #include "L_RunAction.h"
 #include "L_EventAction.h"
+#include "L_TrackingAction.h"
 #include "L_SteppingAction.h"
 #include "L_PhysicsList.h"
 
@@ -31,7 +32,7 @@ int main(int argc, char** argv)
 {
 
 	G4UIExecutive* ui = 0;
-    if ( argc == 1 ) {
+	if ( argc == 1 ) {
 		ui = new G4UIExecutive(argc, argv);
 	}
 	G4long myseed = 345354;
@@ -42,32 +43,35 @@ int main(int argc, char** argv)
 	// Run manager initialization
 	G4RunManager* runManager = new G4RunManager;
 
-    L_DetectorConstruction* detector = new L_DetectorConstruction;
+	L_DetectorConstruction* detector = new L_DetectorConstruction;
 	runManager->SetUserInitialization(detector);
 
 
-    // QGSP_BERT Physics list with Optical processes (HEP, used by ATLAS)
+	// QGSP_BERT Physics list with Optical processes (HEP, used by ATLAS)
 
-//    G4VModularPhysicsList* physicsList = new QGSP_BERT;
-    G4VModularPhysicsList* physicsList = new L_PhysicsList();
-    physicsList->SetVerboseLevel(0);
+	//    G4VModularPhysicsList* physicsList = new QGSP_BERT;
+	G4VModularPhysicsList* physicsList = new L_PhysicsList();
+	physicsList->SetVerboseLevel(0);
 	runManager->SetUserInitialization(physicsList);
 
 
 
-    L_RunAction* runAction = new L_RunAction;
-    if (argc == 3) runAction->SetOutputFileName(G4String(argv[2]));
-    runManager->SetUserAction(runAction);
+	L_RunAction* runAction = new L_RunAction;
+	if (argc == 3) runAction->SetOutputFileName(G4String(argv[2]));
+	runManager->SetUserAction(runAction);
 
-    L_PrimaryGeneratorAction* genAction = new L_PrimaryGeneratorAction();
+	L_PrimaryGeneratorAction* genAction = new L_PrimaryGeneratorAction();
 	runManager->SetUserAction(genAction);
 
-    L_SteppingAction* stepAction = new L_SteppingAction(genAction);
+	L_SteppingAction* stepAction = new L_SteppingAction(genAction);
 	runManager->SetUserAction(stepAction);
 
-    L_EventAction* eventAction = new L_EventAction(runAction, stepAction);
+	L_EventAction* eventAction = new L_EventAction(runAction, stepAction);
 	runManager->SetUserAction(eventAction);
-    detector->SetEventAction(eventAction);
+	detector->SetEventAction(eventAction);
+
+	L_TrackingAction* trackingAction = new L_TrackingAction(eventAction);
+	runManager->SetUserAction(trackingAction);
 
 
 
@@ -95,11 +99,5 @@ int main(int argc, char** argv)
 		delete ui;
 	}
 
-
-
-
-
-
-
-	return 0;
+ 	return 0;
 }
