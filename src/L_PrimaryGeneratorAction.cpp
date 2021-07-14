@@ -54,11 +54,11 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
 
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition* particle = particleTable->FindParticle("pi-");
+    G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
     G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
 
-    G4double momentum = 500 * GeV;
+    G4double momentum = 6 * GeV;
     G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
 
     _particleGun->SetParticleDefinition(particle);
