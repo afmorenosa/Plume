@@ -59,7 +59,7 @@ G4bool L_SensitiveDetector::ProcessHits(G4Step* aStep,
 
     // Handling only optical photons
     if (aParticle->GetDefinition()->GetParticleName() != "opticalphoton")
-        return false;
+    return false;
 
 
     // Vectors of sector's and detector's names splitted into words
@@ -71,18 +71,17 @@ G4bool L_SensitiveDetector::ProcessHits(G4Step* aStep,
     splitName(PostName, detectorWords);
 
 
-    // Sector ID discrimination for the hit
-//    if (sectorWords[0] == "sector" && detectorWords[0] == "detector") {
-//        G4int stationID = atoi(detectorWords[2]);
-//        _eventAction->InsertPhoton(stationID);
-//    }
+    // // Sector ID discrimination for the hit
+    // if (sectorWords[0] == "sector" && detectorWords[0] == "detector") {
+    //   G4int stationID = atoi(detectorWords[2]);
+    //   _eventAction->InsertPhoton(stationID);
+    // }
+
     if (PreName == "window" && PostName == "detector") {
         // G4int stationID = atoi(detectorWords[2]);
         _eventAction->InsertPhoton(0);
         aTrack->SetTrackStatus(fStopAndKill);
-    }
-
-    else return false;
+    } else return false;
 
 
     return true;
@@ -90,5 +89,3 @@ G4bool L_SensitiveDetector::ProcessHits(G4Step* aStep,
 
 void L_SensitiveDetector::EndOfEvent(G4HCofThisEvent*)
 {}
-
-
