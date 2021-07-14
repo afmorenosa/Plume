@@ -29,6 +29,7 @@ public:
 
     void SetPrimGenerator(L_PrimaryGeneratorAction *gen){_primGenerator = gen;}
     inline void InsertPhoton(G4int secID){ int id = (secID > 0) ? (secID-1) : (LConst::pmt_n_channels - secID - 1); _nPhot[id] ++; }
+    void InsertPhotonCreation() {_nPhotCreated++;}
 
 private:
     L_RunAction* runAction;
@@ -37,6 +38,7 @@ private:
     G4int theCollectionID;
 
     G4int _nPhot[LConst::pmt_n_channels];
+    G4int _nPhotCreated;
 
     L_PrimaryGeneratorAction* _primGenerator;
 };
