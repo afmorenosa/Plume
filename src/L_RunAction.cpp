@@ -48,6 +48,8 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nSec", &_nSec, "nSec/I");
     // Number of photons detected in each sector
     tree->Branch("nPhot", _nPhot, "nPhot[nSec]/I");
+    // Number of photons detected in each sector
+    tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated[nSec]/I");
 
     // Branches filled for each HIT (commented due to "optimization")
 
