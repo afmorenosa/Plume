@@ -69,6 +69,8 @@ int main(int argc, char** argv)
 	L_EventAction* eventAction = new L_EventAction(runAction, stepAction);
 	runManager->SetUserAction(eventAction);
 	detector->SetEventAction(eventAction);
+	// Set EventAction for the steppingAction.
+	stepAction->SetEventAction(eventAction);
 
 	L_TrackingAction* trackingAction = new L_TrackingAction(eventAction);
 	runManager->SetUserAction(trackingAction);
