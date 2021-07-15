@@ -16,13 +16,18 @@
 #include "G4SystemOfUnits.hh"
 #include "G4PhysicalConstants.hh"
 
-L_SteppingAction::L_SteppingAction(L_PrimaryGeneratorAction *genAction) :
-    _genAction(genAction){
+L_SteppingAction::L_SteppingAction(
+  L_PrimaryGeneratorAction *genAction
+) : _genAction(genAction){
     Reset();
     ResetPerEvent();
 }
 
 L_SteppingAction::~L_SteppingAction() {
+}
+
+void L_SteppingAction::SetEventAction(L_EventAction *eventAction) {
+  _eventAction = eventAction;
 }
 
 void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
@@ -105,6 +110,8 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
             break;
         case FresnelReflection:
             // Reflections of surfaces of different media
+            if (aPrePV->GetName() == "tablet")
+            _eventAction->InsertPhotonReflection();
             break;
         case TotalInternalReflection:
             // Actually check if particle is reflected
@@ -113,9 +120,13 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
                 aNonConstTrack->SetTrackStatus(fStopAndKill);
 //                G4cout << "KILL THAT BASTARD \n";
             }
-//            G4cout << "TOTAL INTERNAL REFLECTION"<< G4endl;
+            //            G4cout << "TOTAL INTERNAL REFLECTION"<< G4endl;
+            if (aPrePV->GetName() == "tablet")
+            _eventAction->InsertPhotonReflection();
             break;
         case SpikeReflection:
+        if (aPrePV->GetName() == "tablet")
+          _eventAction->InsertPhotonReflection();
             break;
         default:
             break;
@@ -188,4 +199,3 @@ void L_SteppingAction::InternalReflectionProbability(G4double energy,
 
     // probability = 0;
 }
-
