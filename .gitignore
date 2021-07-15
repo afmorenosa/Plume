@@ -61,3 +61,4 @@ screenlog*
 log*
 time*
 .vscode
+.DS_Store
