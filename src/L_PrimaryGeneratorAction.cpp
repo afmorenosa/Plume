@@ -65,7 +65,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     _particleGun->SetParticleMomentumDirection(dir);
     _particleGun->SetParticleEnergy(Ekin);
     _particleGun->SetParticleTime(0);
-    _particleGun->SetParticlePosition(G4ThreeVector(0.,0.,5.*cm));
+    _particleGun->SetParticlePosition(G4ThreeVector(0.,0.,25.*cm));
 
     _particleGun->GeneratePrimaryVertex(anEvent);
 
