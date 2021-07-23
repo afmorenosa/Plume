@@ -19,7 +19,7 @@ namespace LConst{
 // World size
 const G4double worldSizeX = .1*m;
 const G4double worldSizeY = .1*m;
-const G4double worldSizeZ = .1*m;
+const G4double worldSizeZ = .5*m;
 
 
 // Outer and inner radius of the beampipe
@@ -180,4 +180,3 @@ const G4double VertexSigmaZ = 0.*cm;
 
 
 }
-
