@@ -13,7 +13,7 @@
 #/run/numberOfThreads 5
 
 
-/vis/scene/add/axes
+# /vis/scene/add/axes
 
 /run/verbose 0
 /event/verbose 0
@@ -22,8 +22,10 @@
 /vis/scene/add/trajectories smooth
 /vis/scene/add/hits
 
+/vis/geometry/set/colour World 0 0.6 0.6 1.0 .1
+/vis/geometry/set/colour tablet 0 1.0 0.5 0.5 1
+/vis/geometry/set/colour window 0 0.5 1.0 0.5 1
+/vis/geometry/set/colour detector 0 0.5 0.6 1.0 1
+
 
 /vis/viewer/set/viewpointThetaPhi -90 0 deg
-
-
-
