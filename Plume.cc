@@ -66,24 +66,32 @@ int main(int argc, char** argv)
 	L_SteppingAction* stepAction = new L_SteppingAction(genAction);
 	runManager->SetUserAction(stepAction);
 
+	std::cout << "1" << '\n';
+
 	L_EventAction* eventAction = new L_EventAction(runAction, stepAction);
+	std::cout << "1.1" << '\n';
 	runManager->SetUserAction(eventAction);
+	std::cout << "1.2" << '\n';
 	detector->SetEventAction(eventAction);
+	std::cout << "1.3" << '\n';
 	// Set EventAction for the steppingAction.
 	stepAction->SetEventAction(eventAction);
+	std::cout << "2" << '\n';
 
 	L_TrackingAction* trackingAction = new L_TrackingAction(eventAction);
 	runManager->SetUserAction(trackingAction);
+	std::cout << "3" << '\n';
 
 
 
 	G4VisManager* visManager = new G4VisExecutive;
 	// G4VisExecutive can take a verbosity argument - see /vis/verbose guidance.
 	// G4VisManager* visManager = new G4VisExecutive("Quiet");
+	std::cout << "4" << '\n';
 	visManager->Initialize();
+	std::cout << "5" << '\n';
 
 	G4UImanager* UImanager = G4UImanager::GetUIpointer();
-
 
 	if ( ! ui ) {
 		// batch mode
