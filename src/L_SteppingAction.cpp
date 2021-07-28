@@ -125,7 +125,7 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
             _eventAction->InsertPhotonReflection();
             break;
         case SpikeReflection:
-        if (aPrePV->GetName() == "tablet")
+          if (aPrePV->GetName() == "tablet")
           _eventAction->InsertPhotonReflection();
             break;
         default:
