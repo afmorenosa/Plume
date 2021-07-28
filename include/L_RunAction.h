@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <vector>
+
 #include <G4UserRunAction.hh>
 
 #include "G4Run.hh"
@@ -40,12 +42,16 @@ public:
     TTree* tree;
     HitData HitInfo;
 
-//    G4int _nPart;
+    //    G4int _nPart;
     G4int _EventID;
     G4int _nSec;
     G4int _nPhot[LConst::pmt_n_channels];
     G4int _nPhotCreated;
     G4int _nPhotReflected;
+    G4int _nElecCreated;
+
+    std::vector<G4double> _secElecEnergy = {};
+    TBranch *_secElecEnergyBranch;
 
 //    static const G4int _nPartMax = 200000;
 //    G4int _TrackID[_nPartMax];
