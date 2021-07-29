@@ -51,6 +51,8 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nPhot", _nPhot, "nPhot[nSec]/I");
     // Number of photons created in each sector
     tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated/I");
+    // Number of secondary photons created in each sector
+    tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
     // Number of photons reflected in each sector
     tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
     // Number of photons created in each sector

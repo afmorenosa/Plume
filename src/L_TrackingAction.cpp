@@ -28,8 +28,14 @@ void L_TrackingAction::PreUserTrackingAction(const G4Track* track) {
 
 void L_TrackingAction::CountPhotons(const G4Track* track, G4String VolName) {
 
-  if (track->GetParentID() == 1 && VolName == "tablet") {
-    _eventAction->InsertPhotonCreation();
+  if (VolName == "tablet") {
+
+    if (track->GetParentID() == 1) {
+      _eventAction->InsertPhotonCreation();
+    } else {
+      _eventAction->InsertSecondaryPhotonCreation();
+    }
+
   }
 
 }

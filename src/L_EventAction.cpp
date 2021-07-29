@@ -26,6 +26,7 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   std::cout << "Event action construction" << '\n';
 
   _nPhotCreated = 0;
+  _nSecondaryPhotCreated = 0;
   _nPhotReflected = 0;
   _nElecCreated = 0;
   _secElecEnergy = new std::vector<G4double>{};
@@ -51,6 +52,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 	}
 
   _nPhotCreated = 0;
+  _nSecondaryPhotCreated = 0;
   _nPhotReflected = 0;
   _nElecCreated = 0;
   _secElecEnergy->clear();
@@ -80,6 +82,7 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
 
     runAction->_nPhotCreated = _nPhotCreated;
+    runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
     runAction->_nPhotReflected = _nPhotReflected;
     runAction->_nElecCreated = _nElecCreated;
 
