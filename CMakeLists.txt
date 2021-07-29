@@ -132,6 +132,7 @@ set(Plume_SCRIPTS
     vis.mac
     vis_file.mac
     PythiaSettings.cmnd
+    HistPlotter/PhotonCounter.C
     )
 
 foreach(_script ${Plume_SCRIPTS})
@@ -152,6 +153,3 @@ add_custom_target(L DEPENDS Plume)
 # Install the executable to 'bin' directory under CMAKE_INSTALL_PREFIX
 #
 install(TARGETS Plume DESTINATION bin)
-
-
-
