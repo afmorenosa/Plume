@@ -35,7 +35,7 @@ public:
     void InsertPhotonReflection() {_nPhotReflected++;}
     void InsertElectronCreation() {_nElecCreated++;}
     void SecondaryElectronEnergy(G4double energy) {
-      _secElecEnergy.push_back(energy);
+      _secElecEnergy->push_back(energy);
     }
 
 private:
@@ -49,7 +49,7 @@ private:
     G4int _nPhotReflected;
     G4int _nElecCreated;
 
-    std::vector<G4double> _secElecEnergy;
+    std::vector<G4double> *_secElecEnergy{};
 
     L_PrimaryGeneratorAction *_primGenerator;
 };

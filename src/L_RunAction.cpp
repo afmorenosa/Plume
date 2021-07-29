@@ -12,6 +12,7 @@ L_RunAction::L_RunAction() {
     //	_outputFileName = "data.root";
     timer = new G4Timer();
 
+    _secElecEnergy = new std::vector<G4double>{};
 
     G4cout << "Run action constructor" << G4endl;
 }
@@ -55,7 +56,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     // Number of photons created in each sector
     tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
 
-    _secElecEnergyBranch = tree->Branch("secElecEnergy", &_secElecEnergy);
+    _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
 
     // Branches filled for each HIT (commented due to "optimization")
 

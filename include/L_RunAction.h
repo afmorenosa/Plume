@@ -30,28 +30,30 @@
 
 class L_RunAction: public G4UserRunAction {
 public:
-    L_RunAction();
-    virtual ~L_RunAction();
+  L_RunAction();
+  virtual ~L_RunAction();
 public:
-    virtual void BeginOfRunAction(const G4Run* run);
-    virtual void   EndOfRunAction(const G4Run* run);
+  virtual void BeginOfRunAction(const G4Run* run);
+  virtual void   EndOfRunAction(const G4Run* run);
 
 public:
-    void SetOutputFileName(G4String fileName) {_outputFileName = fileName;}
-    G4String GetOutputFileName() { return _outputFileName;}
-    TTree* tree;
-    HitData HitInfo;
+  void SetOutputFileName(G4String fileName) {_outputFileName = fileName;}
+  G4String GetOutputFileName() { return _outputFileName;}
+  TTree* tree;
+  HitData HitInfo;
 
-    //    G4int _nPart;
-    G4int _EventID;
-    G4int _nSec;
-    G4int _nPhot[LConst::pmt_n_channels];
-    G4int _nPhotCreated;
-    G4int _nPhotReflected;
-    G4int _nElecCreated;
+  //    G4int _nPart;
+  G4int _EventID;
+  G4int _nSec;
+  G4int _nPhot[LConst::pmt_n_channels];
+  G4int _nPhotCreated;
+  G4int _nPhotReflected;
+  G4int _nElecCreated;
 
-    std::vector<G4double> _secElecEnergy = {};
-    TBranch *_secElecEnergyBranch;
+public:
+
+  std::vector<G4double> *_secElecEnergy{};
+  TBranch *_secElecEnergyBranch;
 
 //    static const G4int _nPartMax = 200000;
 //    G4int _TrackID[_nPartMax];

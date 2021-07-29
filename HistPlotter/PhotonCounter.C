@@ -13,9 +13,11 @@ void PhotonCounter() {
 
   Int_t nPhotCreated = -1;
   Int_t nPhotReflected = -1;
+  std::vector<double> *secElecEnergy = {};
 
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
   tree->SetBranchAddress("nPhotReflected", &nPhotReflected);
+  tree->SetBranchAddress("secElecEnergy", &secElecEnergy);
 
   TH1F *hist_photon_counter = new TH1F(
     "Photon Counter",
@@ -40,6 +42,12 @@ void PhotonCounter() {
     nbytes = tree->GetEntry(i);
     hist_photon_counter->Fill(nPhotCreated);
     hist_photon_reflected->Fill(nPhotReflected);
+
+    std::cout << "A: ";
+    for (size_t i = 0; i < secElecEnergy->size(); i++) {
+      std::cout << secElecEnergy->at(i) << '\t';
+    }
+    std::cout << '\n';
   }
 
   hist_photon_counter->SetFillColor(kYellow);
