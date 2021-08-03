@@ -55,6 +55,7 @@ CMakeLists.txt.user*
 # User
 *.root
 build
+run
 *.pyc
 alarm.py
 screenlog*
