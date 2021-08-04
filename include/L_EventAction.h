@@ -35,8 +35,24 @@ public:
     void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
     void InsertPhotonReflection() {_nPhotReflected++;}
     void InsertElectronCreation() {_nElecCreated++;}
+    void InsertSecondModuleElectron() {_nSecondModuleElecCreated++;}
     void SecondaryElectronEnergy(G4double energy) {
       _secElecEnergy->push_back(energy);
+    }
+    void ElectronPositionReach(
+      const G4ThreeVector PrePoint, const G4ThreeVector PostPoint
+    ) {
+      _nPrePVxPosition = PrePoint.x();
+      _nPrePVyPosition = PrePoint.y();
+
+      _nPostPVxPosition = PostPoint.x();
+      _nPostPVyPosition = PostPoint.y();
+    }
+    void ElectronEnergyReach(
+      G4double PreEnergy, G4double PostEnergy
+    ) {
+      _nPrePVElecEnergy = PreEnergy;
+      _nPostPVElecEnergy = PostEnergy;
     }
 
 private:
@@ -50,6 +66,13 @@ private:
     G4int _nSecondaryPhotCreated;
     G4int _nPhotReflected;
     G4int _nElecCreated;
+    G4int _nSecondModuleElecCreated;
+    G4double _nPrePVxPosition;
+    G4double _nPrePVyPosition;
+    G4double _nPrePVElecEnergy;
+    G4double _nPostPVxPosition;
+    G4double _nPostPVyPosition;
+    G4double _nPostPVElecEnergy;
 
     std::vector<G4double> *_secElecEnergy{};
 

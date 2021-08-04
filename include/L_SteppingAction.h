@@ -35,4 +35,10 @@ private:
 
     void InternalReflectionProbability(G4double energy,
                                        G4double& probability);
+
+    void SecondModuleElectrons(
+      G4StepPoint *PrePoint,
+      G4StepPoint *PostPoint,
+      G4Track *track
+    );
 };

@@ -215,7 +215,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     G4VPhysicalVolume *tabletPhysical = new G4PVPlacement(0,
                                                           G4ThreeVector(),
                                                           tabletLogical,
-                                                          "tablet",
+                                                          "tablet1",
                                                           worldLogical,
                                                           false,
                                                           0);
@@ -236,13 +236,13 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
                                                             worldLogical,
                                                             false,
                                                             0);
-/*
+
   //---------------- Second Module ------------------------------------------/
 
     G4VPhysicalVolume *tabletPhysical_2 = new G4PVPlacement(0,
                                                           G4ThreeVector(0., 0., -220.*mm),
                                                           tabletLogical,
-                                                          "tablet",
+                                                          "tablet2",
                                                           worldLogical,
                                                           false,
                                                           0);
@@ -264,7 +264,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
                                                             false,
                                                             0);
 
-*/
+
 
     DefineOpticalBorders();
 

@@ -50,6 +50,13 @@ public:
   G4int _nSecondaryPhotCreated;
   G4int _nPhotReflected;
   G4int _nElecCreated;
+  G4int _nSecondModuleElecCreated;
+  G4double _nPrePVxPosition;
+  G4double _nPrePVyPosition;
+  G4double _nPrePVElecEnergy;
+  G4double _nPostPVxPosition;
+  G4double _nPostPVyPosition;
+  G4double _nPostPVElecEnergy;
 
 public:
 

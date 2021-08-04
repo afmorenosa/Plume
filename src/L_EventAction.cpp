@@ -29,6 +29,13 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   _nSecondaryPhotCreated = 0;
   _nPhotReflected = 0;
   _nElecCreated = 0;
+  _nSecondModuleElecCreated = 0;
+  _nPrePVxPosition = 0.0;
+  _nPrePVyPosition = 0.0;
+  _nPrePVElecEnergy = 0.0;
+  _nPostPVxPosition = 0.0;
+  _nPostPVyPosition = 0.0;
+  _nPostPVElecEnergy = 0.0;
   _secElecEnergy = new std::vector<G4double>{};
   for (G4int i = 0; i < LConst::pmt_n_channels; ++i) {
     _nPhot[i] = 0;
@@ -55,6 +62,13 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nSecondaryPhotCreated = 0;
   _nPhotReflected = 0;
   _nElecCreated = 0;
+  _nSecondModuleElecCreated = 0;
+  _nPrePVxPosition = 0.0;
+  _nPrePVyPosition = 0.0;
+  _nPrePVElecEnergy = 0.0;
+  _nPostPVxPosition = 0.0;
+  _nPostPVyPosition = 0.0;
+  _nPostPVElecEnergy = 0.0;
   _secElecEnergy->clear();
   // Setting the number of photons in each sector to 0 for further counting
   for (G4int i = 0; i < LConst::pmt_n_channels; ++i) {
@@ -85,6 +99,13 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
     runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
     runAction->_nPhotReflected = _nPhotReflected;
     runAction->_nElecCreated = _nElecCreated;
+    runAction->_nSecondModuleElecCreated = _nSecondModuleElecCreated;
+    runAction->_nPrePVxPosition = _nPrePVxPosition;
+    runAction->_nPrePVyPosition = _nPrePVyPosition;
+    runAction->_nPrePVElecEnergy = _nPrePVElecEnergy;
+    runAction->_nPostPVxPosition = _nPostPVxPosition;
+    runAction->_nPostPVyPosition = _nPostPVyPosition;
+    runAction->_nPostPVElecEnergy = _nPostPVElecEnergy;
 
     runAction->_secElecEnergy->clear();
 

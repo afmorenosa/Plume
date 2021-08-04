@@ -7,7 +7,7 @@ void PhotonCounter() {
     600
   );
 
-  TFile *plume_file = TFile::Open("quartz.root");
+  TFile *plume_file = TFile::Open("quartz2.root");
 
   TTree *tree = (TTree *) plume_file->Get("T");
 
@@ -15,6 +15,12 @@ void PhotonCounter() {
   Int_t nPhotReflected = -1;
   Int_t nSecondaryPhotCreated = -1;
   Int_t nElecCreated = -1;
+  Double_t nPrePVxPosition = -1.0;
+  Double_t nPrePVyPosition = -1.0;
+  Double_t nPrePVElecEnergy = -1.0;
+  Double_t nPostPVxPosition = -1.0;
+  Double_t nPostPVyPosition = -1.0;
+  Double_t nPostPVElecEnergy = -1.0;
   std::vector<double> *secElecEnergy = {};
 
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
@@ -22,6 +28,12 @@ void PhotonCounter() {
   tree->SetBranchAddress("nSecondaryPhotCreated", &nSecondaryPhotCreated);
   tree->SetBranchAddress("nElecCreated", &nElecCreated);
   tree->SetBranchAddress("secElecEnergy", &secElecEnergy);
+  tree->SetBranchAddress("nPrePVxPosition", &nPrePVxPosition);
+  tree->SetBranchAddress("nPrePVyPosition", &nPrePVyPosition);
+  tree->SetBranchAddress("nPrePVElecEnergy", &nPrePVElecEnergy);
+  tree->SetBranchAddress("nPostPVxPosition", &nPostPVxPosition);
+  tree->SetBranchAddress("nPostPVyPosition", &nPostPVyPosition);
+  tree->SetBranchAddress("nPostPVElecEnergy", &nPostPVElecEnergy);
 
   TH1I *hist_photon_counter = new TH1I(
     "Photon Counter",
@@ -79,6 +91,28 @@ void PhotonCounter() {
     6
   );
 
+  TH2D *hist_pre_PVPosition = new TH2D(
+    "Pre Position",
+    "Pre Position; X [mm]; Y[mm]; Events",
+    100,
+    -0.08,
+    0.08,
+    100,
+    -0.08,
+    0.08
+  );
+
+  TH2D *hist_pos_PVPosition = new TH2D(
+    "Pos Position",
+    "Pos Position; X [mm]; Y[mm]; Events",
+    100,
+    -5,
+    5,
+    100,
+    -5,
+    5
+  );
+
   int nentries, nbytes;
   nentries = (Int_t)tree->GetEntries();
 
@@ -91,6 +125,9 @@ void PhotonCounter() {
     hist_electron_counter->Fill(nElecCreated);
 
     hist_photon_counter_totals->Fill(nSecondaryPhotCreated + nPhotCreated);
+
+    hist_pre_PVPosition->Fill(nPrePVxPosition, nPrePVyPosition);
+    hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
 
     if (nSecondaryPhotCreated > 0) {
       hist_secondary_photon_counter_tail->Fill(
@@ -120,6 +157,14 @@ void PhotonCounter() {
   hist_photon_reflected->SetFillColor(kYellow);
   hist_photon_reflected->Draw();
   canvas->Print("reflected.pdf");
+  canvas->Clear();
+
+  hist_pre_PVPosition->Draw("COLZ");
+  canvas->Print("pre_PVPosition.pdf");
+  canvas->Clear();
+
+  hist_pos_PVPosition->Draw("COLZ");
+  canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
 
   // Log y plots

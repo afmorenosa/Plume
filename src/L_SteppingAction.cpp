@@ -49,6 +49,12 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
 
     // Further operations are only for optical photons
     G4ParticleDefinition* particleType = aTrack->GetDefinition();
+
+
+    if (particleType->GetParticleName() == "e-")
+    SecondModuleElectrons(aPrePoint, aPostPoint, aTrack);
+
+
     if (particleType != G4OpticalPhoton::OpticalPhotonDefinition())
         return;
 
@@ -110,7 +116,7 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
             break;
         case FresnelReflection:
             // Reflections of surfaces of different media
-            if (aPrePV->GetName() == "tablet")
+            if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
             _eventAction->InsertPhotonReflection();
             break;
         case TotalInternalReflection:
@@ -121,11 +127,11 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
 //                G4cout << "KILL THAT BASTARD \n";
             }
             //            G4cout << "TOTAL INTERNAL REFLECTION"<< G4endl;
-            if (aPrePV->GetName() == "tablet")
+            if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
             _eventAction->InsertPhotonReflection();
             break;
         case SpikeReflection:
-          if (aPrePV->GetName() == "tablet")
+          if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
           _eventAction->InsertPhotonReflection();
             break;
         default:
@@ -198,4 +204,33 @@ void L_SteppingAction::InternalReflectionProbability(G4double energy,
 
 
     // probability = 0;
+}
+
+void L_SteppingAction::SecondModuleElectrons(
+  G4StepPoint *PrePoint,
+  G4StepPoint *PostPoint,
+  G4Track *track
+) {
+
+  if (!PrePoint->GetPhysicalVolume()) return;
+  if (!PostPoint->GetPhysicalVolume()) return;
+
+  G4String PrePVname = PrePoint->GetPhysicalVolume()->GetName();
+  G4String PostPVname = PostPoint->GetPhysicalVolume()->GetName();
+
+  if (
+    PrePVname == "World" &&
+    PostPVname == "tablet2"
+  ) {
+    if (track->GetTrackID() == 1) {
+      _eventAction->ElectronPositionReach(
+        PrePoint->GetPosition(), PostPoint->GetPosition()
+      );
+      _eventAction->ElectronEnergyReach(
+        PrePoint->GetTotalEnergy(), PostPoint->GetTotalEnergy()
+      );
+    } else {
+      _eventAction->InsertSecondModuleElectron();
+    }
+  }
 }
