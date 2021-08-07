@@ -53,9 +53,19 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated/I");
     // Number of secondary photons created in each sector
     tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
+    // Number of photons created in first module
+
+    tree->Branch("nPhotCreated1", &_nPhotCreated1, "nPhotCreated1/I");
+    // Number of secondary photons created in first module
+    tree->Branch("nSecondaryPhotCreated1", &_nSecondaryPhotCreated1, "nSecondaryPhotCreated1/I");
+    // Number of photons created in second module
+    tree->Branch("nPhotCreated2", &_nPhotCreated2, "nPhotCreated2/I");
+    // Number of secondary photons created in second module
+    tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
     // Number of photons reflected in each sector
+    
     tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
-    // Number of secondary electrons created in each sector
+    // Number of secondary electrons created each sector
     tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
     // Number of secondary electrons in second module
     tree->Branch("nSecondModuleElecCreated", &_nSecondModuleElecCreated, "nSecondModuleElecCreated/I");

@@ -48,6 +48,12 @@ public:
   G4int _nPhot[LConst::pmt_n_channels];
   G4int _nPhotCreated;
   G4int _nSecondaryPhotCreated;
+
+  G4int _nPhotCreated1;
+  G4int _nSecondaryPhotCreated1;
+  G4int _nPhotCreated2;
+  G4int _nSecondaryPhotCreated2;
+
   G4int _nPhotReflected;
   G4int _nElecCreated;
   G4int _nSecondModuleElecCreated;

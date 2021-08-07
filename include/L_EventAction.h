@@ -35,6 +35,12 @@ public:
     void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
     void InsertPhotonReflection() {_nPhotReflected++;}
     void InsertElectronCreation() {_nElecCreated++;}
+
+    void InsertPhotonCreationTablet1() {_nPhotCreated1++;}
+    void InsertSecondaryPhotonCreationTablet1() {_nSecondaryPhotCreated1++;}
+    void InsertPhotonCreationTablet2() {_nPhotCreated2++;}
+    void InsertSecondaryPhotonCreationTablet2() {_nSecondaryPhotCreated2++;}
+
     void InsertSecondModuleElectron() {_nSecondModuleElecCreated++;}
     void SecondaryElectronEnergy(G4double energy) {
       _secElecEnergy->push_back(energy);
@@ -64,6 +70,12 @@ private:
     G4int _nPhot[LConst::pmt_n_channels];
     G4int _nPhotCreated;
     G4int _nSecondaryPhotCreated;
+
+    G4int _nPhotCreated1;
+    G4int _nSecondaryPhotCreated1;
+    G4int _nPhotCreated2;
+    G4int _nSecondaryPhotCreated2;
+
     G4int _nPhotReflected;
     G4int _nElecCreated;
     G4int _nSecondModuleElecCreated;

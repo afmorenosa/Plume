@@ -18,8 +18,8 @@ public:
 public:
     virtual void PreUserTrackingAction(const G4Track*);
 
-    void CountPhotons(const G4Track*, G4String);
-    void CountElectron(const G4Track*, G4String);
+    void CountPhotons(const G4Track*, G4VPhysicalVolume*);
+    void CountElectron(const G4Track*);
 
 private:
     L_EventAction* _eventAction;
