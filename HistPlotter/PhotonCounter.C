@@ -90,9 +90,9 @@ void PhotonCounter() {
   TH1I *hist_electron_counter = new TH1I(
     "Electron Counter",
     "Electron Counter; n Electrons; Events",
-    30,
+    70,
     0,
-    30
+    70
   );
 
   TH1F *hist_electron = new TH1F(
@@ -241,6 +241,10 @@ void PhotonCounter() {
   canvas->Clear();
 
   hist_photon_counter_2d_primary->Draw("COLZ");
+  //gPad->Update();
+  //TPaveStats *st = (TPaveStats*)hist_photon_counter_2d_primary->FindObject("stats");
+  //st->SetX1NDC(0); //new x start position
+  //st->SetX2NDC(50); //new x end position
   canvas->Print("photon_counter_2d_primary.pdf");
   canvas->Clear();
 
@@ -257,6 +261,7 @@ void PhotonCounter() {
     "Gauss_x", "gaus", -0.02, 0.02
   );
   hist_nPrePVxPosition->Fit(gauss_funcx, "R");
+  hist_nPrePVxPosition->SetFillColorAlpha(kCyan, 1.0);
   hist_nPrePVxPosition->Draw();
   gauss_funcx->Draw("SAME");
   canvas->Print("fit_nPrePVxPosition.pdf");
@@ -268,6 +273,7 @@ void PhotonCounter() {
     "Gauss_y", "gaus", -0.02, 0.02
   );
   hist_nPrePVyPosition->Fit(gauss_funcy, "R");
+  hist_nPrePVyPosition->SetFillColorAlpha(kCyan, 1.0);
   hist_nPrePVyPosition->Draw();
   gauss_funcy->Draw("SAME");
   canvas->Print("fit_nPrePVyPosition.pdf");
