@@ -169,10 +169,10 @@ void PhotonCounter() {
     "Total Photons Creation; n Photons tablet 1; n Photons tablet 1; Events",
     100,
     0,
-    800,
+    1000,
     100,
     0,
-    800
+    1000
   );
 
   int nentries, nbytes;
@@ -218,11 +218,11 @@ void PhotonCounter() {
   canvas->Print("quartz.pdf");
   canvas->Clear();
 
-  hist_photon_counter->SetFillColorAlpha(kYellow, 1.0);
-  hist_photon_counter_totals->SetFillColorAlpha(kRed, 0.5);
-  hist_secondary_photon_counter_tail->SetFillColorAlpha(kCyan, 0.25);
-  hist_photon_counter->Draw();
-  hist_photon_counter_totals->Draw("SAME");
+  //hist_photon_counter->SetFillColorAlpha(kYellow, 1.0);
+  hist_photon_counter_totals->SetFillColorAlpha(kYellow, 1.0);
+  hist_secondary_photon_counter_tail->SetFillColorAlpha(kRed, 0.5);
+  //hist_photon_counter->Draw();
+  hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
   canvas->Print("total_photons.pdf");
   canvas->Clear();
@@ -241,10 +241,6 @@ void PhotonCounter() {
   canvas->Clear();
 
   hist_photon_counter_2d_primary->Draw("COLZ");
-  //gPad->Update();
-  //TPaveStats *st = (TPaveStats*)hist_photon_counter_2d_primary->FindObject("stats");
-  //st->SetX1NDC(0); //new x start position
-  //st->SetX2NDC(50); //new x end position
   canvas->Print("photon_counter_2d_primary.pdf");
   canvas->Clear();
 
