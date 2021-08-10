@@ -153,24 +153,40 @@ void PhotonCounter() {
 
   // Scatter plot
 
+  TH1F *hist_photon_counter_first_primary = new TH1F(
+    "Primary Photons Creation",
+    "Primary Photons; n Photons; Events",
+    180,
+    360,
+    540
+  );
+
+  TH1F *hist_photon_counter_second_primary = new TH1F(
+    "Primary Photons Creation",
+    "Primary Photons; n Photons; Events",
+    180,
+    360,
+    540
+  );
+
   TH2D *hist_photon_counter_2d_primary = new TH2D(
     "Primary Photons Creation",
-    "Primary Photons Creation; n Photons tablet 1; n Photons tablet 1; Events",
-    100,
+    "Primary Photons Creation; n Photons tablet 1; n Photons tablet 2; Events",
+    180,
     360,
     540,
-    100,
+    180,
     360,
     540
   );
 
   TH2D *hist_photon_counter_2d_totals = new TH2D(
     "Total Photons Creation",
-    "Total Photons Creation; n Photons tablet 1; n Photons tablet 1; Events",
-    100,
+    "Total Photons Creation; n Photons tablet 1; n Photons tablet 2; Events",
+    180,
     0,
     1000,
-    100,
+    180,
     0,
     1000
   );
@@ -195,6 +211,9 @@ void PhotonCounter() {
     hist_nPrePVxPosition->Fill(nPrePVxPosition);
     hist_nPrePVyPosition->Fill(nPrePVyPosition);
     hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
+
+    hist_photon_counter_first_primary->Fill(nPhotCreated1);
+    hist_photon_counter_second_primary->Fill(nPhotCreated2);
 
     hist_photon_counter_2d_primary->Fill(nPhotCreated1, nPhotCreated2);
     hist_photon_counter_2d_totals->Fill(
@@ -227,9 +246,28 @@ void PhotonCounter() {
   canvas->Print("total_photons.pdf");
   canvas->Clear();
 
+
+
   hist_photon_reflected->SetFillColor(kYellow);
   hist_photon_reflected->Draw();
   canvas->Print("reflected.pdf");
+  canvas->Clear();
+
+  hist_photon_counter_first_primary->SetFillColorAlpha(kYellow, 0.8);
+  hist_photon_counter_first_primary->Draw();
+  canvas->Print("photon_counter_first_primary.pdf");
+  canvas->Clear();
+
+  hist_photon_counter_second_primary->SetFillColorAlpha(kCyan, 0.5);
+  hist_photon_counter_second_primary->Draw();
+  canvas->Print("photon_counter_second_primary.pdf");
+  canvas->Clear();
+
+  hist_photon_counter_first_primary->SetFillColorAlpha(kYellow, 1.0);
+  hist_photon_counter_second_primary->SetFillColorAlpha(kCyan, 0.3);
+  hist_photon_counter_first_primary->Draw();
+  hist_photon_counter_second_primary->Draw("SAME");
+  canvas->Print("photon_counter_comparison_primary.pdf");
   canvas->Clear();
 
   hist_pre_PVPosition->Draw("COLZ");
