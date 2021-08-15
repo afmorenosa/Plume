@@ -48,6 +48,7 @@ public:
   G4int _nPhot[LConst::pmt_n_channels];
   G4int _nPhotCreated;
   G4int _nSecondaryPhotCreated;
+  G4int _Zone;
 
   G4int _nPhotCreated1;
   G4int _nSecondaryPhotCreated1;

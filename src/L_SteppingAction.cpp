@@ -232,5 +232,32 @@ void L_SteppingAction::SecondModuleElectrons(
     } else {
       _eventAction->InsertSecondModuleElectron();
     }
+  } else if (
+    PrePVname == "World" &&
+    PostPVname == "tablet1"
+  ) {
+
+    if (track->GetTrackID() == 1) {
+
+      G4ThreeVector position_vec = PrePoint->GetPosition();
+
+      G4double radious = std::sqrt(
+        position_vec.x*position_vec.x + position_vec.y*position_vec.y
+      );
+
+      if (radious < 2*mm) {
+        _eventAction->SetZone(0);
+      } else if (radious < 4*mm) {
+        _eventAction->SetZone(1);
+      } else if (radious < 5*mm) {
+        _eventAction->SetZone(2);
+      } else {
+        _eventAction->SetZone(-1);
+      }
+
+    }
+
   }
+
+
 }

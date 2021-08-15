@@ -53,8 +53,11 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated/I");
     // Number of secondary photons created in each sector
     tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
-    // Number of photons created in first module
+    // Number of secondary photons created in each sector
+    tree->Branch("Zone", &_Zone, "Zone/I");
+    
 
+    // Number of photons created in first module
     tree->Branch("nPhotCreated1", &_nPhotCreated1, "nPhotCreated1/I");
     // Number of secondary photons created in first module
     tree->Branch("nSecondaryPhotCreated1", &_nSecondaryPhotCreated1, "nSecondaryPhotCreated1/I");
@@ -63,7 +66,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     // Number of secondary photons created in second module
     tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
     // Number of photons reflected in each sector
-    
+
     tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
     // Number of secondary electrons created each sector
     tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
@@ -83,6 +86,9 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
 
     _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
+
+
+
 
     // Branches filled for each HIT (commented due to "optimization")
 

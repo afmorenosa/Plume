@@ -66,13 +66,14 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 
   _nPhotCreated = 0;
   _nSecondaryPhotCreated = 0;
+  _nPhotReflected = 0;
+  _Zone = 0;
 
   _nPhotCreated1 = 0;
   _nSecondaryPhotCreated1 = 0;
   _nPhotCreated2 = 0;
   _nSecondaryPhotCreated2 = 0;
 
-  _nPhotReflected = 0;
   _nElecCreated = 0;
   _nSecondModuleElecCreated = 0;
   _nPrePVxPosition = 0.0;
@@ -109,13 +110,14 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
     runAction->_nPhotCreated = _nPhotCreated;
     runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
-
+    runAction->_nPhotReflected = _nPhotReflected;
+    runAction->_Zone = _Zone;
+    
     runAction->_nPhotCreated1 = _nPhotCreated1;
     runAction->_nSecondaryPhotCreated1 = _nSecondaryPhotCreated1;
     runAction->_nPhotCreated2 = _nPhotCreated2;
     runAction->_nSecondaryPhotCreated2 = _nSecondaryPhotCreated2;
 
-    runAction->_nPhotReflected = _nPhotReflected;
     runAction->_nElecCreated = _nElecCreated;
     runAction->_nSecondModuleElecCreated = _nSecondModuleElecCreated;
     runAction->_nPrePVxPosition = _nPrePVxPosition;

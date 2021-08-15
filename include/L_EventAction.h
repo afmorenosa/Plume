@@ -35,6 +35,7 @@ public:
     void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
     void InsertPhotonReflection() {_nPhotReflected++;}
     void InsertElectronCreation() {_nElecCreated++;}
+    void SetZone() {_Zone++;}
 
     void InsertPhotonCreationTablet1() {_nPhotCreated1++;}
     void InsertSecondaryPhotonCreationTablet1() {_nSecondaryPhotCreated1++;}
@@ -70,6 +71,7 @@ private:
     G4int _nPhot[LConst::pmt_n_channels];
     G4int _nPhotCreated;
     G4int _nSecondaryPhotCreated;
+    G4int _Zone;
 
     G4int _nPhotCreated1;
     G4int _nSecondaryPhotCreated1;
