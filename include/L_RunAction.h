@@ -59,10 +59,13 @@ public:
   G4int _nSecondModuleElecCreated;
   G4double _nPrePVxPosition;
   G4double _nPrePVyPosition;
+  G4double _nPrePVzPosition;
   G4double _nPrePVElecEnergy;
   G4double _nPostPVxPosition;
   G4double _nPostPVyPosition;
+  G4double _nPostPVzPosition;
   G4double _nPostPVElecEnergy;
+  G4double _zDiff;
 
 public:
 
