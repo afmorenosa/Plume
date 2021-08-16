@@ -35,7 +35,7 @@ public:
     void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
     void InsertPhotonReflection() {_nPhotReflected++;}
     void InsertElectronCreation() {_nElecCreated++;}
-    G4int SetZone(int Zone) {_Zone = Zone;}
+    void SetZone(G4int Zone) {_Zone = Zone;}
 
     void InsertPhotonCreationTablet1() {_nPhotCreated1++;}
     void InsertSecondaryPhotonCreationTablet1() {_nSecondaryPhotCreated1++;}
