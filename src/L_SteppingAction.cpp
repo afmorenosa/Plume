@@ -239,7 +239,7 @@ void L_SteppingAction::SecondModuleElectrons(
 
     if (track->GetTrackID() == 1) {
 
-      G4ThreeVector position_vec = PrePoint->GetPosition();
+      G4ThreeVector position_vec = PostPoint->GetPosition();
 
       G4double radious = std::sqrt(
         position_vec.x()*position_vec.x() + position_vec.y()*position_vec.y()

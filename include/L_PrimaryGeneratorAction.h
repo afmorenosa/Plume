@@ -32,6 +32,8 @@
 #include "LConst.hh"
 #include <time.h>
 
+#include "L_VolumeStructures.h"
+
 #include "Randomize.hh"
 
 
@@ -50,6 +52,8 @@ public:
 
 private:
     // bool GetEvent(Pythia8::Event event);
+
+    PMT_tablet tablet;
 
 private:
     G4ParticleGun *_particleGun = new G4ParticleGun();
@@ -75,4 +79,3 @@ private:
     // // Pythia event declaration
     // Pythia8::Event& PythiaEvent = pythia.event;
 };
-
