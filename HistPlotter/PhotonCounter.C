@@ -7,7 +7,7 @@ void PhotonCounter() {
     600
   );
 
-  TFile *plume_file = TFile::Open("quartz2.root");
+  TFile *plume_file = TFile::Open("quartz.root");
 
   TTree *tree = (TTree *) plume_file->Get("T");
 

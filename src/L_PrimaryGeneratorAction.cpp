@@ -6,7 +6,6 @@
  */
 
 #include "L_PrimaryGeneratorAction.h"
-#include "Randomize.hh"
 
 
 L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
@@ -58,8 +57,8 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
     G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
-    G4double x0 = 10. * (G4UniformRand()-0.5) * mm;
-    G4double y0 = 0; 
+    G4double x0 = 2 * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    G4double y0 = 2 * std::sqrt(LConst::sphereThickness*LConst::sphereThickness - x0*x0) * (G4UniformRand()-0.5) * mm;
     G4double z0 = 5. * cm;
     G4double momentum = 6 * GeV;
     G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
