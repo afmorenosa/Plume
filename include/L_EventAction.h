@@ -57,6 +57,10 @@ public:
       _nPostPVzPosition = PostPoint.z();
       _zDiff = PostPoint.z() - PrePoint.z();
 
+      G4ThreeVector direction = PostPoint - PrePoint;
+
+      _nPostPVAngle = M_PI - direction.theta();
+
     }
     void ElectronEnergyReach(
       G4double PreEnergy, G4double PostEnergy
@@ -91,6 +95,7 @@ private:
     G4double _nPostPVyPosition;
     G4double _nPostPVzPosition;
     G4double _nPostPVElecEnergy;
+    G4double _nPostPVAngle;
     G4double _zDiff;
 
     std::vector<G4double> *_secElecEnergy{};

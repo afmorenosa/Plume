@@ -65,6 +65,7 @@ public:
   G4double _nPostPVyPosition;
   G4double _nPostPVzPosition;
   G4double _nPostPVElecEnergy;
+  G4double _nPostPVAngle;
   G4double _zDiff;
 
 public:

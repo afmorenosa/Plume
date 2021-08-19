@@ -85,7 +85,9 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nPostPVzPosition", &_nPostPVzPosition, "nPostPVzPosition/D");
     // Energy of primary electron after Tablet2 in second module
     tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
-    // Z difference of primary electron before and after Tablet2 in second module.
+    // Angle of primary electron before Tablet2 in second module
+    tree->Branch("nPostPVAngle", &_nPostPVAngle, "nPostPVAngle/D");
+    // Z difference of primary electron before and after Tablet2 in second module
     tree->Branch("zDiff", &_zDiff, "zDiff/D");
 
     _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);

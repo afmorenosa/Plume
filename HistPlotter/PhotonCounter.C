@@ -27,6 +27,7 @@ void PhotonCounter() {
   Double_t nPostPVxPosition = -1.0;
   Double_t nPostPVyPosition = -1.0;
   Double_t nPostPVElecEnergy = -1.0;
+  Double_t nPostPVAngle = -1.0;
   std::vector<double> *secElecEnergy = {};
 
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
@@ -46,6 +47,7 @@ void PhotonCounter() {
   tree->SetBranchAddress("nPostPVxPosition", &nPostPVxPosition);
   tree->SetBranchAddress("nPostPVyPosition", &nPostPVyPosition);
   tree->SetBranchAddress("nPostPVElecEnergy", &nPostPVElecEnergy);
+  tree->SetBranchAddress("nPostPVAngle", &nPostPVAngle);
 
   TH1I *hist_photon_counter = new TH1I(
     "Photon Counter",
@@ -125,6 +127,14 @@ void PhotonCounter() {
     100,
     0,
     6
+  );
+
+  TH1F *hist_nPostPVAngle = new TH1F(
+    "Angle",
+    "Angle; angle [rad]; Events",
+    100,
+    0,
+    0.025
   );
 
   // ------------------------------------------------------------------- //
@@ -211,6 +221,8 @@ void PhotonCounter() {
     hist_nPrePVxPosition->Fill(nPrePVxPosition);
     hist_nPrePVyPosition->Fill(nPrePVyPosition);
     hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
+
+    hist_nPostPVAngle->Fill(nPostPVAngle);
 
     hist_photon_counter_first_primary->Fill(nPhotCreated1);
     hist_photon_counter_second_primary->Fill(nPhotCreated2);
@@ -323,8 +335,13 @@ void PhotonCounter() {
   std::cout << " ----------------> " << par[4] << '\n';
   std::cout << " ----------------> " << par[5] << '\n';
 
-  // Log y plots
   canvas->SetLogy();
+  hist_nPostPVAngle->SetFillColor(kYellow);
+  hist_nPostPVAngle->Draw();
+  canvas->Print("nPostPVAngle.pdf");
+  canvas->Clear();
+
+  // Log y plots
 
   hist_electron->SetFillColor(kYellow);
   hist_electron->Draw();
