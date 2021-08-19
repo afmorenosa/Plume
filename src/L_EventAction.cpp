@@ -28,6 +28,8 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   _nPhotCreated = 0;
   _nSecondaryPhotCreated = 0;
 
+  _Zone = -1;
+
   _nPhotCreated1 = 0;
   _nSecondaryPhotCreated1 = 0;
   _nPhotCreated2 = 0;
@@ -67,7 +69,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nPhotCreated = 0;
   _nSecondaryPhotCreated = 0;
   _nPhotReflected = 0;
-  _Zone = 0;
+  _Zone = -1;
 
   _nPhotCreated1 = 0;
   _nSecondaryPhotCreated1 = 0;
@@ -112,7 +114,7 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
     runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
     runAction->_nPhotReflected = _nPhotReflected;
     runAction->_Zone = _Zone;
-    
+
     runAction->_nPhotCreated1 = _nPhotCreated1;
     runAction->_nSecondaryPhotCreated1 = _nSecondaryPhotCreated1;
     runAction->_nPhotCreated2 = _nPhotCreated2;
