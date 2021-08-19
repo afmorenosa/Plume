@@ -21,6 +21,8 @@ void PhotonCounter() {
   Int_t nPhotCreated2 = -1;
   Int_t nSecondaryPhotCreated2 = -1;
 
+  Int_t Zone = -1;
+
   Int_t nElecCreated = -1;
   Double_t nPrePVxPosition = -1.0;
   Double_t nPrePVyPosition = -1.0;
@@ -39,6 +41,8 @@ void PhotonCounter() {
   tree->SetBranchAddress("nSecondaryPhotCreated1", &nSecondaryPhotCreated1);
   tree->SetBranchAddress("nPhotCreated2", &nPhotCreated2);
   tree->SetBranchAddress("nSecondaryPhotCreated2", &nSecondaryPhotCreated2);
+
+  tree->SetBranchAddress("Zone", &Zone);
 
   tree->SetBranchAddress("nElecCreated", &nElecCreated);
   tree->SetBranchAddress("secElecEnergy", &secElecEnergy);
@@ -198,6 +202,8 @@ void PhotonCounter() {
 
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
+
+    if (Zone == -1) continue;
 
     //if (Zone==2) {
       hist_photon_counter->Fill(nPhotCreated);
