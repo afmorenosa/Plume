@@ -21,8 +21,6 @@ void PhotonCounter() {
   Int_t nPhotCreated2 = -1;
   Int_t nSecondaryPhotCreated2 = -1;
 
-  Int_t Zone = -1;
-
   Int_t nElecCreated = -1;
   Double_t nPrePVxPosition = -1.0;
   Double_t nPrePVyPosition = -1.0;

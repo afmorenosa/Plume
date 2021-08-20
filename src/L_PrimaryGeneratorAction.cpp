@@ -7,17 +7,17 @@
 
 #include "L_PrimaryGeneratorAction.h"
 
-void insideModule(G4double x0, G4double y0) {
+void insideModule(G4double &x0, G4double &y0) {
   G4double radius = std::sqrt(x0*x0 + y0*y0);
   if (radius >= LConst::sphereThickness) {
     x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
     y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    radius = std::sqrt(x0*x0 + y0*y0);
     if (radius >= LConst::sphereThickness) {
       insideModule(x0,y0);
-    } else {}
+    }
   }
 }
-
 
 L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
     iEv = 0;
