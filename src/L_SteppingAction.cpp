@@ -245,7 +245,7 @@ void L_SteppingAction::SecondModuleElectrons(
         PrePoint->GetPosition(), PostPoint->GetPosition()
       );
 
-      G4double radious = std::sqrt(
+      G4double radius = std::sqrt(
         position_vec.x()*position_vec.x() + position_vec.y()*position_vec.y()
       );
 
@@ -253,7 +253,7 @@ void L_SteppingAction::SecondModuleElectrons(
         _eventAction->SetZone(0);
       } else if (radius < std::sqrt(50./3.)*mm) {
         _eventAction->SetZone(1);
-      } else if (radious < 5*mm) {
+      } else if (radius < 5*mm) {
         _eventAction->SetZone(2);
       } else {
         _eventAction->SetZone(-1);
