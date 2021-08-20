@@ -113,15 +113,15 @@ void PhotonCounter() {
     "Pre x",
     "Pre x; X [mm]; Events",
     100,
-    -0.02,
-    0.02
+    -5,
+    5
   );
   TH1F *hist_nPrePVyPosition = new TH1F(
     "Pre y",
     "Pre y; Y [mm]; Events",
     100,
-    -0.02,
-    0.02
+    -5,
+    5
   );
   TH1F *hist_nPrePVElecEnergy = new TH1F(
     "Pre Energy",
@@ -166,16 +166,16 @@ void PhotonCounter() {
   );
 
   TH1F *hist_photon_counter_second_primary = new TH1F(
-    "Primary Photons Creation",
-    "Primary Photons; n Photons; Events",
+    "Secondary Photons Creation",
+    "Secondary Photons; n Photons; Events",
     180,
     360,
     540
   );
 
   TH2D *hist_photon_counter_2d_primary = new TH2D(
-    "Primary Photons Creation",
-    "Primary Photons Creation; n Photons tablet 1; n Photons tablet 2; Events",
+    "Primary Photons Creation per Module",
+    "Primary Photons Creation per Module; n Photons tablet 1; n Photons tablet 2; Events",
     180,
     360,
     540,
@@ -215,8 +215,8 @@ void PhotonCounter() {
     hist_pre_PVPosition->Fill(nPrePVxPosition, nPrePVyPosition);
     hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
 
-    hist_nPrePVxPosition->Fill(nPrePVxPosition);
-    hist_nPrePVyPosition->Fill(nPrePVyPosition);
+    hist_nPrePVxPosition->Fill(nPostPVxPosition);
+    hist_nPrePVyPosition->Fill(nPostPVyPosition);
     hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
 
     hist_photon_counter_first_primary->Fill(nPhotCreated1);
@@ -281,6 +281,7 @@ void PhotonCounter() {
   canvas->Print("pre_PVPosition.pdf");
   canvas->Clear();
 
+  hist_pos_PVPosition->SetStats(false);
   hist_pos_PVPosition->Draw("COLZ");
   canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
