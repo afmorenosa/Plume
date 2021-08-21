@@ -55,7 +55,7 @@ public:
   G4int _nPhotCreated2;
   G4int _nSecondaryPhotCreated2;
 
-  G4int _nPhotReflected;
+  G4int _nPhotReflection;
   G4int _nElecCreated;
   G4int _nSecondModuleElecCreated;
   G4double _nPrePVxPosition;
@@ -65,9 +65,15 @@ public:
   G4double _nPostPVyPosition;
   G4double _nPostPVElecEnergy;
 
+    std::vector<G4double> *_secElecEnergy{};
+
+    // Photon Paths
+    G4int _nPhotonStraight;
+    G4int _nPhotReflected;
+    std::vector<G4int> *_nReflectionPerPhoton{};
+
 public:
 
-  std::vector<G4double> *_secElecEnergy{};
   TBranch *_secElecEnergyBranch;
 
 //    static const G4int _nPartMax = 200000;

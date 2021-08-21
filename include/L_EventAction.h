@@ -8,6 +8,7 @@
 #pragma once
 
 #include <vector>
+#include <map>
 
 #include <G4UserEventAction.hh>
 #include "globals.hh"
@@ -33,7 +34,7 @@ public:
     inline void InsertPhoton(G4int secID){ int id = (secID > 0) ? (secID-1) : (LConst::pmt_n_channels - secID - 1); _nPhot[id] ++; }
     void InsertPhotonCreation() {_nPhotCreated++;}
     void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
-    void InsertPhotonReflection() {_nPhotReflected++;}
+    void InsertPhotonReflection() {_nPhotReflection++;}
     void InsertElectronCreation() {_nElecCreated++;}
     void SetZone(int Zone) {_Zone = Zone;}
 
@@ -46,6 +47,7 @@ public:
     void SecondaryElectronEnergy(G4double energy) {
       _secElecEnergy->push_back(energy);
     }
+
     void ElectronPositionReach(
       const G4ThreeVector PrePoint, const G4ThreeVector PostPoint
     ) {
@@ -55,11 +57,40 @@ public:
       _nPostPVxPosition = PostPoint.x();
       _nPostPVyPosition = PostPoint.y();
     }
+
     void ElectronEnergyReach(
       G4double PreEnergy, G4double PostEnergy
     ) {
       _nPrePVElecEnergy = PreEnergy;
       _nPostPVElecEnergy = PostEnergy;
+    }
+
+    void AddKeyToMaps (G4int trackID) {
+
+      if (track_reflected.find(trackID) == track_reflected.end()) {
+        track_reflected[trackID] = false;
+      }
+
+      if (
+        track_reflected_counter.find(trackID) == track_reflected_counter.end()
+      ) {
+        track_reflected_counter[trackID] = 0;
+      }
+
+    }
+
+    void AddReflection (G4int trackID) {
+      track_reflected[trackID] = true;
+      track_reflected_counter[trackID]++;
+    }
+
+    void PhotonReflectedCount (G4int trackID) {
+      if (track_reflected[trackID]) {
+        _nPhotReflected ++;
+        _nReflectionPerPhoton->push_back(track_reflected_counter[trackID]);
+      } else {
+        _nPhotonStraight ++;
+      }
     }
 
 private:
@@ -78,7 +109,7 @@ private:
     G4int _nPhotCreated2;
     G4int _nSecondaryPhotCreated2;
 
-    G4int _nPhotReflected;
+    G4int _nPhotReflection;
     G4int _nElecCreated;
     G4int _nSecondModuleElecCreated;
     G4double _nPrePVxPosition;
@@ -89,6 +120,14 @@ private:
     G4double _nPostPVElecEnergy;
 
     std::vector<G4double> *_secElecEnergy{};
+
+    std::map<G4int, bool> track_reflected;
+    std::map<G4int, int> track_reflected_counter;
+
+    // Photon Paths
+    G4int _nPhotonStraight;
+    G4int _nPhotReflected;
+    std::vector<G4int> *_nReflectionPerPhoton{};
 
     L_PrimaryGeneratorAction *_primGenerator;
 };

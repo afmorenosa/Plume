@@ -37,7 +37,6 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
     G4int trackID = aTrack->GetTrackID();
     //G4cout<<"trackID = "<<trackID<<G4endl;
 
-
     // Pre step point and physical volume
     G4StepPoint* aPrePoint = aStep->GetPreStepPoint();
     G4VPhysicalVolume* aPrePV = aPrePoint->GetPhysicalVolume();
@@ -52,7 +51,7 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
 
 
     if (particleType->GetParticleName() == "e-")
-    SecondModuleElectrons(aPrePoint, aPostPoint, aTrack);
+    SecondModuleElectrons(aPrePoint, aPostPoint, trackID);
 
 
     if (particleType != G4OpticalPhoton::OpticalPhotonDefinition())
@@ -60,6 +59,10 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
 
     // Check if particle trying to escape the World
     if (!aPostPV) return;
+
+    _eventAction->AddKeyToMaps(trackID);
+
+    PhotonsPath(aPrePoint, aPostPoint, trackID);
 
     // TO BE REVIEWED, GONNA BE A MISTAKE HERE///////////////////////////////
 //    if(!aPostPV->GetLogicalVolume()->GetSensitiveDetector()) return;
@@ -116,8 +119,10 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
             break;
         case FresnelReflection:
             // Reflections of surfaces of different media
-            if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
-            _eventAction->InsertPhotonReflection();
+            if (aPrePV->GetLogicalVolume()->GetName() == "tablet") {
+              _eventAction->AddReflection(trackID);
+              _eventAction->InsertPhotonReflection();
+            }
             break;
         case TotalInternalReflection:
             // Actually check if particle is reflected
@@ -127,13 +132,17 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
 //                G4cout << "KILL THAT BASTARD \n";
             }
             //            G4cout << "TOTAL INTERNAL REFLECTION"<< G4endl;
-            if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
-            _eventAction->InsertPhotonReflection();
+            if (aPrePV->GetLogicalVolume()->GetName() == "tablet") {
+              _eventAction->AddReflection(trackID);
+              _eventAction->InsertPhotonReflection();
+            }
             break;
         case SpikeReflection:
-          if (aPrePV->GetLogicalVolume()->GetName() == "tablet")
-          _eventAction->InsertPhotonReflection();
-            break;
+          if (aPrePV->GetLogicalVolume()->GetName() == "tablet") {
+            _eventAction->AddReflection(trackID);
+            _eventAction->InsertPhotonReflection();
+          }
+          break;
         default:
             break;
 
@@ -206,10 +215,33 @@ void L_SteppingAction::InternalReflectionProbability(G4double energy,
     // probability = 0;
 }
 
+void L_SteppingAction::PhotonsPath(
+  G4StepPoint *PrePoint,
+  G4StepPoint *PostPoint,
+  G4int trackID
+) {
+
+  if (!PrePoint->GetPhysicalVolume()) return;
+  if (!PostPoint->GetPhysicalVolume()) return;
+
+  G4String PrePVname = PrePoint->GetPhysicalVolume()->GetName();
+  G4String PostPVname = PostPoint->GetPhysicalVolume()->GetName();
+
+  if (
+    PrePVname == "tablet1" &&
+    PostPVname == "window1"
+  ) {
+
+    _eventAction->PhotonReflectedCount(trackID);
+
+  }
+
+}
+
 void L_SteppingAction::SecondModuleElectrons(
   G4StepPoint *PrePoint,
   G4StepPoint *PostPoint,
-  G4Track *track
+  G4int trackID
 ) {
 
   if (!PrePoint->GetPhysicalVolume()) return;
@@ -222,7 +254,7 @@ void L_SteppingAction::SecondModuleElectrons(
     PrePVname == "World" &&
     PostPVname == "tablet2"
   ) {
-    if (track->GetTrackID() == 1) {
+    if (trackID == 1) {
       _eventAction->ElectronPositionReach(
         PrePoint->GetPosition(), PostPoint->GetPosition()
       );
@@ -237,7 +269,7 @@ void L_SteppingAction::SecondModuleElectrons(
     PostPVname == "tablet1"
   ) {
 
-    if (track->GetTrackID() == 1) {
+    if (trackID == 1) {
 
       G4ThreeVector position_vec = PostPoint->GetPosition();
 
@@ -262,6 +294,5 @@ void L_SteppingAction::SecondModuleElectrons(
     }
 
   }
-
 
 }

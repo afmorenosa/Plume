@@ -13,6 +13,7 @@ L_RunAction::L_RunAction() {
     timer = new G4Timer();
 
     _secElecEnergy = new std::vector<G4double>{};
+    _nReflectionPerPhoton = new std::vector<G4int>{};
 
     G4cout << "Run action constructor" << G4endl;
 }
@@ -55,7 +56,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
     // Number of secondary photons created in each sector
     tree->Branch("Zone", &_Zone, "Zone/I");
-    
+
 
     // Number of photons created in first module
     tree->Branch("nPhotCreated1", &_nPhotCreated1, "nPhotCreated1/I");
@@ -67,7 +68,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
     // Number of photons reflected in each sector
 
-    tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
+    tree->Branch("nPhotReflection", &_nPhotReflection, "nPhotReflection/I");
     // Number of secondary electrons created each sector
     tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
     // Number of secondary electrons in second module
@@ -88,6 +89,12 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
 
 
+    // Count of photons that reach the window without reflection
+    tree->Branch("nPhotonStraight", &_nPhotonStraight, "nPhotonStraight/I");
+    // Count of photons that reach the window with at least one reflection
+    tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
+
+    _secElecEnergyBranch = tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
 
 
     // Branches filled for each HIT (commented due to "optimization")

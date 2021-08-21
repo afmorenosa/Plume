@@ -33,12 +33,20 @@ private:
     G4double _probOfReflection;
     G4double _particleID;
 
-    void InternalReflectionProbability(G4double energy,
-                                       G4double& probability);
+    void InternalReflectionProbability(
+      G4double energy,
+      G4double& probability
+    );
+
+    void PhotonsPath(
+      G4StepPoint *PrePoint,
+      G4StepPoint *PostPoint,
+      G4int trackID
+    );
 
     void SecondModuleElectrons(
       G4StepPoint *PrePoint,
       G4StepPoint *PostPoint,
-      G4Track *track
+      G4int trackID
     );
 };
