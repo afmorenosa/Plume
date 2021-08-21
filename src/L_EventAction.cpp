@@ -35,7 +35,7 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   _nPhotCreated2 = 0;
   _nSecondaryPhotCreated2 = 0;
 
-  _nPhotReflected = 0;
+  _nPhotReflection = 0;
   _nElecCreated = 0;
   _nSecondModuleElecCreated = 0;
   _nPrePVxPosition = 0.0;
@@ -45,6 +45,14 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   _nPostPVyPosition = 0.0;
   _nPostPVElecEnergy = 0.0;
   _secElecEnergy = new std::vector<G4double>{};
+
+  _nPhotonStraight = 0;
+  _nPhotReflected = 0;
+  _nReflectionPerPhoton = new std::vector<G4int>{};
+
+  track_reflected[-1] = 0;
+  track_reflected_counter[-1] = 0;
+
   for (G4int i = 0; i < LConst::pmt_n_channels; ++i) {
     _nPhot[i] = 0;
   }
@@ -68,7 +76,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 
   _nPhotCreated = 0;
   _nSecondaryPhotCreated = 0;
-  _nPhotReflected = 0;
+  _nPhotReflection = 0;
   _Zone = -1;
 
   _nPhotCreated1 = 0;
@@ -85,6 +93,14 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nPostPVyPosition = 0.0;
   _nPostPVElecEnergy = 0.0;
   _secElecEnergy->clear();
+
+  _nPhotonStraight = 0;
+  _nPhotReflected = 0;
+  _nReflectionPerPhoton->clear();
+
+  track_reflected.clear();
+  track_reflected_counter.clear();
+
   // Setting the number of photons in each sector to 0 for further counting
   for (G4int i = 0; i < LConst::pmt_n_channels; ++i) {
     runAction->_nPhot[i] = 0;
@@ -112,7 +128,7 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
     runAction->_nPhotCreated = _nPhotCreated;
     runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
-    runAction->_nPhotReflected = _nPhotReflected;
+    runAction->_nPhotReflection = _nPhotReflection;
     runAction->_Zone = _Zone;
 
     runAction->_nPhotCreated1 = _nPhotCreated1;
@@ -129,10 +145,19 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
     runAction->_nPostPVyPosition = _nPostPVyPosition;
     runAction->_nPostPVElecEnergy = _nPostPVElecEnergy;
 
+    runAction->_nPhotonStraight = _nPhotonStraight;
+    runAction->_nPhotReflected = _nPhotReflected;
+
     runAction->_secElecEnergy->clear();
 
     for (size_t i = 0; i < _secElecEnergy->size(); i++) {
       runAction->_secElecEnergy->push_back(_secElecEnergy->at(i));
+    }
+
+    runAction->_nReflectionPerPhoton->clear();
+
+    for (size_t i = 0; i < _nReflectionPerPhoton->size(); i++) {
+      runAction->_nReflectionPerPhoton->push_back(_nReflectionPerPhoton->at(i));
     }
 
     for (G4int i = 0; i < LConst::pmt_n_channels; ++i)
