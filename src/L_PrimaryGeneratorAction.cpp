@@ -7,7 +7,6 @@
 
 #include "L_PrimaryGeneratorAction.h"
 
-
 L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
     iEv = 0;
 
@@ -38,6 +37,17 @@ L_PrimaryGeneratorAction::~L_PrimaryGeneratorAction() {
 
 }
 
+void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
+  G4double radius = std::sqrt(x0*x0 + y0*y0);
+
+  while (radius > LConst::sphereThickness) {
+    x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    radius = std::sqrt(x0*x0 + y0*y0);
+  }
+
+}
+
 void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
 
@@ -57,19 +67,11 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
 
-    // G4double r = 5. * mm * G4UniformRand();
-    // G4double theta = twopi * G4UniformRand();
-    //
-    // G4double x0 = r * std::cos(theta);
-    // G4double y0 = r * std::sin(theta);
-
     G4double x0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
 
     G4double y0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
 
-    // G4double y0 = std::sqrt(
-    //   tablet.radius * tablet.radius - x0 * x0
-    // ) * 2 * (G4UniformRand() - 0.5);
+    CheckHit (x0, y0);
 
     G4double z0 = -1680*mm;
 
@@ -83,7 +85,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     _particleGun->SetParticleEnergy(Ekin);
     _particleGun->SetParticleTime(0);
     _particleGun->SetParticlePosition(
-      G4ThreeVector(0.0, 0.0, 1680*mm + tablet.thickness / 2.)
+      G4ThreeVector(0.0, 0.0, -z0 + tablet.thickness / 2.)
     );
 
     _particleGun->GeneratePrimaryVertex(anEvent);

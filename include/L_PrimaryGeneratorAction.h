@@ -55,6 +55,8 @@ private:
 
     PMT_tablet tablet;
 
+    void CheckHit (G4double &x0, G4double &y0);
+
 private:
     G4ParticleGun *_particleGun = new G4ParticleGun();
 

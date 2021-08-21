@@ -7,7 +7,7 @@ void RadiusDivision () {
     600
   );
 
-  TFile *root_file = TFile::Open("quartz_t.root");
+  TFile *root_file = TFile::Open("quartz.root");
 
   TTree *tree = (TTree *) root_file->Get("T");
 
@@ -90,7 +90,7 @@ void RadiusDivision () {
     "Reflection Per Photon; n Photons; Events",
     100,
     0,
-    80000
+    10000
   );
 
   //>>>>>>>>>>>>>>>>>>> Zone_0
