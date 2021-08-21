@@ -66,11 +66,17 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
-    G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
-    G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-    G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-    G4double z0 = 5. * cm;
-    CheckHit (x0,y0);
+
+    G4double x0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
+
+    G4double y0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
+
+    CheckHit (x0, y0);
+
+    G4double z0 = -1680*mm;
+
+    G4ThreeVector dir = G4ThreeVector(x0, y0, z0);
+
     G4double momentum = 6 * GeV;
     G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
 
@@ -78,7 +84,9 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     _particleGun->SetParticleMomentumDirection(dir);
     _particleGun->SetParticleEnergy(Ekin);
     _particleGun->SetParticleTime(0);
-    _particleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
+    _particleGun->SetParticlePosition(
+      G4ThreeVector(0.0, 0.0, -z0 + tablet.thickness / 2.)
+    );
 
     _particleGun->GeneratePrimaryVertex(anEvent);
 

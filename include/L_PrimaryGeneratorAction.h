@@ -32,6 +32,8 @@
 #include "LConst.hh"
 #include <time.h>
 
+#include "L_VolumeStructures.h"
+
 #include "Randomize.hh"
 
 
@@ -50,6 +52,8 @@ public:
 
 private:
     // bool GetEvent(Pythia8::Event event);
+
+    PMT_tablet tablet;
 
     void CheckHit (G4double &x0, G4double &y0);
 
