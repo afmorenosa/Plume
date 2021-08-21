@@ -281,14 +281,12 @@ void L_SteppingAction::SecondModuleElectrons(
         position_vec.x()*position_vec.x() + position_vec.y()*position_vec.y()
       );
 
-      if (radius < std::sqrt(25./3.)*mm) {
-        _eventAction->SetZone(0);
-      } else if (radius < std::sqrt(50./3.)*mm) {
-        _eventAction->SetZone(1);
-      } else if (radius < 5*mm) {
-        _eventAction->SetZone(2);
-      } else {
-        _eventAction->SetZone(-1);
+      int N = 10;
+
+      for (G4int n = 0; n < N; n++) {
+        if (radius < std::sqrt(25. * (n+1.)/N)*mm) {
+          _eventAction->SetZone(n);
+        }
       }
 
     }
