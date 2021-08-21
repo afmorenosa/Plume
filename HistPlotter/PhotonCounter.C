@@ -13,7 +13,7 @@ void PhotonCounter() {
 
   Int_t nPhotCreated = -1;
   Int_t nSecondaryPhotCreated = -1;
-  Int_t nPhotReflected = -1;
+  Int_t nPhotReflection = -1;
 
   Int_t nPhotCreated1 = -1;
   Int_t nSecondaryPhotCreated1 = -1;
@@ -33,7 +33,7 @@ void PhotonCounter() {
 
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
   tree->SetBranchAddress("nSecondaryPhotCreated", &nSecondaryPhotCreated);
-  tree->SetBranchAddress("nPhotReflected", &nPhotReflected);
+  tree->SetBranchAddress("nPhotReflection", &nPhotReflection);
 
   tree->SetBranchAddress("nPhotCreated1", &nPhotCreated1);
   tree->SetBranchAddress("nSecondaryPhotCreated1", &nSecondaryPhotCreated1);
@@ -206,7 +206,7 @@ void PhotonCounter() {
     hist_photon_counter->Fill(nPhotCreated);
     hist_secondary_photon_counter->Fill(nSecondaryPhotCreated);
 
-    hist_photon_reflected->Fill(nPhotReflected);
+    hist_photon_reflected->Fill(nPhotReflection);
 
     hist_electron_counter->Fill(nElecCreated);
 
