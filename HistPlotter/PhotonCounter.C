@@ -195,6 +195,31 @@ void PhotonCounter() {
     1000
   );
 
+  //*************************************************************************//
+
+  const int n_Zones = 10;
+
+  std::map<int, TH2D *> hist_pos_PVPosition_zone;
+
+  for (size_t zone_i = 0; zone_i < n_Zones; zone_i++) {
+    hist_pos_PVPosition_zone[zone_i] = new TH2D(
+      TString("Pos Position Zone: ") +
+      TString(std::to_string(zone_i).c_str()),
+      TString("Pos Position Zone: ") +
+      TString(std::to_string(zone_i).c_str()) +
+      TString("; X [mm]; Y[mm]; Events"),
+      100,
+      -5,
+      5,
+      100,
+      -5,
+      5
+    );
+
+  }
+
+  //*************************************************************************//
+
   int nentries, nbytes;
   nentries = (Int_t)tree->GetEntries();
 
@@ -215,8 +240,11 @@ void PhotonCounter() {
     hist_pre_PVPosition->Fill(nPrePVxPosition, nPrePVyPosition);
     hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
 
+    hist_pos_PVPosition_zone[Zone]->Fill(nPostPVxPosition, nPostPVyPosition);
+
     hist_nPrePVxPosition->Fill(nPostPVxPosition);
     hist_nPrePVyPosition->Fill(nPostPVyPosition);
+
     hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
 
     hist_photon_counter_first_primary->Fill(nPhotCreated1);
@@ -253,8 +281,6 @@ void PhotonCounter() {
   canvas->Print("total_photons.pdf");
   canvas->Clear();
 
-
-
   hist_photon_reflected->SetFillColor(kYellow);
   hist_photon_reflected->Draw();
   canvas->Print("reflected.pdf");
@@ -285,6 +311,17 @@ void PhotonCounter() {
   hist_pos_PVPosition->Draw("COLZ");
   canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
+
+  for (size_t zone_i = 0; zone_i < n_Zones; zone_i++) {
+    hist_pos_PVPosition_zone[zone_i]->SetStats(false);
+    hist_pos_PVPosition_zone[zone_i]->Draw("COLZ");
+    canvas->Print(
+      TString("Zones/pos_PVPosition_zone_") +
+      TString(std::to_string(zone_i).c_str()) +
+      TString(".pdf")
+    );
+    canvas->Clear();
+  }
 
   hist_photon_counter_2d_primary->Draw("COLZ");
   canvas->Print("photon_counter_2d_primary.pdf");
