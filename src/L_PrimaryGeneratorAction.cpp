@@ -7,18 +7,6 @@
 
 #include "L_PrimaryGeneratorAction.h"
 
-void insideModule(G4double &x0, G4double &y0) {
-  G4double radius = std::sqrt(x0*x0 + y0*y0);
-  if (radius >= LConst::sphereThickness) {
-    x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-    y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-    radius = std::sqrt(x0*x0 + y0*y0);
-    if (radius >= LConst::sphereThickness) {
-      insideModule(x0,y0);
-    }
-  }
-}
-
 L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
     iEv = 0;
 
@@ -49,6 +37,17 @@ L_PrimaryGeneratorAction::~L_PrimaryGeneratorAction() {
 
 }
 
+void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
+  G4double radius = std::sqrt(x0*x0 + y0*y0);
+
+  while (radius > LConst::sphereThickness) {
+    x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+    radius = std::sqrt(x0*x0 + y0*y0);
+  }
+
+}
+
 void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
 
@@ -68,16 +67,10 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
     G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
-//    G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-//    G4double y0 = 2. * std::sqrt(LConst::sphereThickness*LConst::sphereThickness - x0*x0) * (G4UniformRand()-0.5) * mm;
-//    G4double radius = LConst::sphereThickness *  G4UniformRand();
-//    G4double theta = 2. * M_PI * G4UniformRand();
-//    G4double x0 = radius * std::cos(theta) * mm;
-//    G4double y0 = radius * std::sin(theta) * mm;
     G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
     G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
     G4double z0 = 5. * cm;
-    insideModule(x0,y0);
+    CheckHit (x0,y0);
     G4double momentum = 6 * GeV;
     G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
 

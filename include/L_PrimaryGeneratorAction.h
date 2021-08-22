@@ -51,6 +51,8 @@ public:
 private:
     // bool GetEvent(Pythia8::Event event);
 
+    void CheckHit (G4double &x0, G4double &y0);
+
 private:
     G4ParticleGun *_particleGun = new G4ParticleGun();
 
@@ -75,4 +77,3 @@ private:
     // // Pythia event declaration
     // Pythia8::Event& PythiaEvent = pythia.event;
 };
-
