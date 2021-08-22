@@ -92,8 +92,8 @@ void PhotonCounter() {
   );
 
   TH1I *hist_electron_counter = new TH1I(
-    "Electron Counter",
-    "Electron Counter; n Electrons; Events",
+    "Secondary Electron Creation",
+    "Secondary Electron Creation; n Electrons; Events",
     70,
     0,
     70
@@ -279,6 +279,7 @@ void PhotonCounter() {
   canvas->Clear();
 
   hist_pos_PVPosition->Draw("COLZ");
+  hist_pos_PVPosition->SetStats(kFALSE);
   canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
 

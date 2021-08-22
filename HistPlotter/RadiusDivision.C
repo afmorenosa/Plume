@@ -154,7 +154,7 @@ void RadiusDivision () {
     hist_photon_reflection_counter_zones[zone_i] = new TH1I(
       TString("Reflection Photon Creation, Zone: ") +
       TString(std::to_string(zone_i).c_str()),
-      "Reflection Photon Creation; n Photons; Events",
+      "Reflection Photon Creation; n Reflections; Events",
       100,
       0,
       2000
@@ -181,7 +181,7 @@ void RadiusDivision () {
     hist_photon_reflected_counter_zones[zone_i] = new TH1I(
       TString("Reflected Photon, Zone: ") +
       TString(std::to_string(zone_i).c_str()),
-      "Reflected Photon; n Photons; Events",
+      "Reflected Photon; n Reflections; Events",
       100,
       0,
       400
