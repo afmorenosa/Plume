@@ -82,7 +82,7 @@ void RadiusDivision () {
     "Secondary Electron Creation; n Electrons; Events",
     50,
     0,
-    50
+    80
   );
 
   TH1I *hist_photon_straight_counter = new TH1I(
@@ -98,7 +98,7 @@ void RadiusDivision () {
     "Reflected Photon; n Photons; Events",
     100,
     0,
-    400
+    1000
   );
 
   TH1I *hist_reflections_per_photon_counter = new TH1I(
@@ -166,7 +166,7 @@ void RadiusDivision () {
       "Secondary Electron Creation; n Electrons; Events",
       50,
       0,
-      50
+      80
     );
 
     hist_photon_straight_counter_zones[zone_i] = new TH1I(
@@ -184,7 +184,7 @@ void RadiusDivision () {
       "Reflected Photon; n Photons; Events",
       100,
       0,
-      400
+      1000
     );
 
     hist_reflections_per_photon_counter_zones[zone_i] = new TH1I(
