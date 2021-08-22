@@ -284,9 +284,12 @@ void L_SteppingAction::SecondModuleElectrons(
       int N = 10;
 
       for (G4int n = 0; n < N; n++) {
+
         if (radius < std::sqrt(25. * (n+1.)/N)*mm) {
           _eventAction->SetZone(n);
+          break;
         }
+
       }
 
     }
