@@ -73,7 +73,9 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
     CheckHit (x0, y0);
 
-    G4double z0 = -1680*mm;
+    std::cout << "x0: " << x0 << "\ty0: " << y0 << '\n';
+
+    G4double z0 = -tablet.thickness;
 
     G4ThreeVector dir = G4ThreeVector(x0, y0, z0);
 
@@ -85,7 +87,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     _particleGun->SetParticleEnergy(Ekin);
     _particleGun->SetParticleTime(0);
     _particleGun->SetParticlePosition(
-      G4ThreeVector(0.0, 0.0, -z0 + tablet.thickness / 2.)
+      G4ThreeVector(0.0, 0.0, tablet.thickness / 2.)
     );
 
     _particleGun->GeneratePrimaryVertex(anEvent);
