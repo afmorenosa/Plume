@@ -65,12 +65,14 @@ public:
   G4double _nPostPVyPosition;
   G4double _nPostPVElecEnergy;
 
-    std::vector<G4double> *_secElecEnergy{};
+  G4double _nPhotonDetected;
 
-    // Photon Paths
-    G4int _nPhotonStraight;
-    G4int _nPhotReflected;
-    std::vector<G4int> *_nReflectionPerPhoton{};
+  std::vector<G4double> *_secElecEnergy{};
+
+  // Photon Paths
+  G4int _nPhotonStraight;
+  G4int _nPhotReflected;
+  std::vector<G4int> *_nReflectionPerPhoton{};
 
 public:
 

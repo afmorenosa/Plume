@@ -73,8 +73,6 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
     CheckHit (x0, y0);
 
-    std::cout << "x0: " << x0 << "\ty0: " << y0 << '\n';
-
     G4double z0 = -tablet.thickness;
 
     G4ThreeVector dir = G4ThreeVector(x0, y0, z0);

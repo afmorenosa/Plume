@@ -234,6 +234,12 @@ void L_SteppingAction::PhotonsPath(
 
     _eventAction->PhotonReflectedCount(trackID);
 
+  } else if (
+    PostPVname == "detector1"
+  ) {
+
+    _eventAction->PhotonDetected(trackID);
+
   }
 
 }

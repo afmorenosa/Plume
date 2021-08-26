@@ -93,6 +93,17 @@ public:
       }
     }
 
+    void PhotonDetected (G4int trackID) {
+
+      if (
+        track_detected.find(trackID) == track_detected.end()
+      ) {
+        track_detected[trackID] = true;
+        _nPhotonDetected += 1;
+      }
+
+    }
+
 private:
     L_RunAction* runAction;
     L_SteppingAction* _steppingAction;
@@ -119,10 +130,14 @@ private:
     G4double _nPostPVyPosition;
     G4double _nPostPVElecEnergy;
 
+    G4double _nPhotonDetected;
+
     std::vector<G4double> *_secElecEnergy{};
 
     std::map<G4int, bool> track_reflected;
     std::map<G4int, int> track_reflected_counter;
+
+    std::map<G4int, bool> track_detected;
 
     // Photon Paths
     G4int _nPhotonStraight;

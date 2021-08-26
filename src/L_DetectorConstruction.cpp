@@ -232,7 +232,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     G4VPhysicalVolume *detectorPhysical = new G4PVPlacement(0,
                                                             G4ThreeVector(0.,0., - pmt_window.thickness - (tablet.thickness + pmt_detector.thickness) / 2.),
                                                             detectorLogical,
-                                                            "detector",
+                                                            "detector1",
                                                             worldLogical,
                                                             false,
                                                             0);
@@ -259,7 +259,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     G4VPhysicalVolume *detectorPhysical_2 = new G4PVPlacement(0,
                                                             G4ThreeVector(0.,0., -220.*mm - pmt_window.thickness - (tablet.thickness + pmt_detector.thickness) / 2.),
                                                             detectorLogical,
-                                                            "detector",
+                                                            "detector2",
                                                             worldLogical,
                                                             false,
                                                             0);

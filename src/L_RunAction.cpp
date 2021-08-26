@@ -86,6 +86,9 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
     // Energy of primary electron after Tablet2 in second module
     tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
 
+    // Photon that reach the detector module
+    tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/D");
+
     _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
 
 
