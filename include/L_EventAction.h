@@ -43,8 +43,6 @@ public:
   void InsertPhotonCreation() {_nPhotCreated++;}
   void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
 
-
-
   void InsertPhotonCreationTablet1() {_nPhotCreated1++;}
   void InsertSecondaryPhotonCreationTablet1() {_nSecondaryPhotCreated1++;}
   void InsertPhotonCreationTablet2() {_nPhotCreated2++;}
