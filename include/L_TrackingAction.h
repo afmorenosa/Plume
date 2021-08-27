@@ -13,14 +13,14 @@
 
 class L_TrackingAction: public G4UserTrackingAction {
 public:
-    L_TrackingAction(L_EventAction*);
-    virtual ~L_TrackingAction();
+  L_TrackingAction(L_EventAction*);
+  virtual ~L_TrackingAction();
 public:
-    virtual void PreUserTrackingAction(const G4Track*);
+  virtual void PreUserTrackingAction(const G4Track*);
 
-    void CountPhotons(const G4Track*, G4VPhysicalVolume*);
-    void CountElectron(const G4Track*);
+  void CountPhotons(const G4Track*, G4VPhysicalVolume*);
+  void CountElectron(const G4Track*);
 
 private:
-    L_EventAction* _eventAction;
+  L_EventAction* _eventAction;
 };
