@@ -9,43 +9,43 @@
 
 
 L_RunAction::L_RunAction() {
-    //	_outputFileName = "data.root";
-    timer = new G4Timer();
+  //	_outputFileName = "data.root";
+  timer = new G4Timer();
 
-    _secElecEnergy = new std::vector<G4double>{};
-    _nReflectionPerPhoton = new std::vector<G4int>{};
+  _secElecEnergy = new std::vector<G4double>{};
+  _nReflectionPerPhoton = new std::vector<G4int>{};
 
-    G4cout << "Run action constructor" << G4endl;
+  G4cout << "Run action constructor" << G4endl;
 }
 
 L_RunAction::~L_RunAction() {
-    delete tree;
-    delete hfile;
+  delete tree;
+  delete hfile;
 }
 
 void L_RunAction::BeginOfRunAction(const G4Run* run)
 {
 
-    G4cout << "BeginOfRunAction" << G4endl;
+  G4cout << "BeginOfRunAction" << G4endl;
 
-    timer->Start();
+  timer->Start();
 
-    // Histogramming
+  // Histogramming
 
-    hfile = new TFile(_outputFileName, "RECREATE", "LHCb Luminometer Simulation Data", 1);
+  hfile = new TFile(_outputFileName, "RECREATE", "LHCb Luminometer Simulation Data", 1);
 
-    G4cout << "Output file created" << G4endl;
-    if (hfile->IsZombie()) exit(-1);
-    tree = new TTree("T", "LHCb Luminometer Data Tree");
-    //	tree->SetAutoSave(1000000);
+  G4cout << "Output file created" << G4endl;
+  if (hfile->IsZombie()) exit(-1);
+  tree = new TTree("T", "LHCb Luminometer Data Tree");
+  //	tree->SetAutoSave(1000000);
 
-    // Create new event
-    TTree::SetBranchStyle(0);
+  // Create new event
+  TTree::SetBranchStyle(0);
 
-    // Branches filled for each EVENT
+  // Branches filled for each EVENT
 
-    // Event ID
-    tree->Branch("EventID",  &_EventID,  "EventID/I");
+  // Event ID
+  tree->Branch("EventID",  &_EventID,  "EventID/I");
   // Number of sectors (constant every event, just for array length)
   tree->Branch("nSec", &_nSec, "nSec/I");
 
@@ -123,15 +123,15 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
 
 void L_RunAction::EndOfRunAction(const G4Run* )
 {
-    //	hfile = tree->GetCurrentFile();
+  //	hfile = tree->GetCurrentFile();
 
-    G4cout << "End of run action" << G4endl;
-    tree->Write();
-    hfile->Write();
-    tree->Print();
-    timer->Stop();
-    hfile->Close();
+  G4cout << "End of run action" << G4endl;
+  tree->Write();
+  hfile->Write();
+  tree->Print();
+  timer->Stop();
+  hfile->Close();
 
-    G4cout << "Time: " << *timer << G4endl;
+  G4cout << "Time: " << *timer << G4endl;
 
 }
