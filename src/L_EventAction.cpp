@@ -83,11 +83,10 @@ L_EventAction::~L_EventAction() {
 void L_EventAction::BeginOfEventAction(const G4Event* event)
 {
 
+  // G4cout << "BeginOfEventAction" << G4endl;
+  G4int eventNum = event->GetEventID();
 
-//    G4cout << "BeginOfEventAction" << G4endl;
-    G4int eventNum = event->GetEventID();
-
-    // Printing an event number
+  // Printing an event number
 	if (eventNum%printModulo == 0) {
 		G4cout << "\n---> Begin of Event: " << eventNum << G4endl;
 	}
