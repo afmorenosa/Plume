@@ -1,4 +1,4 @@
-*
+/*
  * L_SteppingAction.h
  *
  *  Created on: Oct 2, 2018
