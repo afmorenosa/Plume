@@ -8,29 +8,27 @@
 #include "L_PrimaryGeneratorAction.h"
 
 L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
-    iEv = 0;
+  iEv = 0;
 
+  //    G4cout << "Start creating primary generator" << G4endl;
 
-    //    G4cout << "Start creating primary generator" << G4endl;
+  // Pythia seed is generated from system time
+  // Int_t pythiaSeed = time(NULL)%10000000;
 
-    // Pythia seed is generated from system time
-    Int_t pythiaSeed = time(NULL)%10000000;
+  // Getting number of event to be run in order to give Pythia
+  // an information how many event to generate
+  // G4RunManager *runManager = G4RunManager::GetRunManager();
+  // G4int evToGen = runManager->GetNumberOfEventsToBeProcessed();
 
-    // Getting number of event to be run in order to give Pythia
-    // an information how many event to generate
-    G4RunManager *runManager = G4RunManager::GetRunManager();
-    G4int evToGen = runManager->GetNumberOfEventsToBeProcessed();
+  // Reading configuration file, setting number of events and seed
+  // pythia.readFile("PythiaSettings.cmnd");
+  // pythia.readString("Main:numberOfEvents = " + std::to_string(evToGen));
+  // pythia.readString("Random:seed = " + std::to_string(pythiaSeed));
 
-    // Reading configuration file, setting number of events and seed
-    // pythia.readFile("PythiaSettings.cmnd");
-    // pythia.readString("Main:numberOfEvents = " + std::to_string(evToGen));
-    // pythia.readString("Random:seed = " + std::to_string(pythiaSeed));
+  // Starting up the pythia instance
+  // pythia.init();
 
-    // Starting up the pythia instance
-    // pythia.init();
-
-
-    //    G4cout << "Primary generator created" << G4endl;
+  //    G4cout << "Primary generator created" << G4endl;
 }
 
 L_PrimaryGeneratorAction::~L_PrimaryGeneratorAction() {
@@ -38,6 +36,7 @@ L_PrimaryGeneratorAction::~L_PrimaryGeneratorAction() {
 }
 
 void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
+  // Check that the primary hit the module
   G4double radius = std::sqrt(x0*x0 + y0*y0);
 
   while (radius > LConst::sphereThickness) {
@@ -50,75 +49,76 @@ void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
 
 void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
+  // G4cout << "Generate primaries" << G4endl;
 
-    //    G4cout << "Generate primaries" << G4endl;
+  // G4LogicalVolume* worldLV
+  //         = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
 
-    //    G4LogicalVolume* worldLV
-    //            = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
+  // If current event is inapropriate trying another time
+  // if (!pythia.next()) GeneratePrimaries(anEvent);
 
-    // If current event is inapropriate trying another time
-//    if (!pythia.next()) GeneratePrimaries(anEvent);
+  // filling up class variables with event data from pythia
+  // GetEvent(PythiaEvent);
 
-    // filling up class variables with event data from pythia
-//    GetEvent(PythiaEvent);
+  // Get the particle definition}
+  G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  G4ParticleDefinition* particle = particleTable->FindParticle("e-");
+  G4double m = particle->GetPDGMass();
 
+  G4double x0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
 
-    G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    G4ParticleDefinition* particle = particleTable->FindParticle("e-");
-    G4double m = particle->GetPDGMass();
+  G4double y0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
 
-    G4double x0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
+  CheckHit (x0, y0);
 
-    G4double y0 = 2 * tablet.radius * (G4UniformRand() - 0.5);
+  G4double z0 = -1680*mm;
 
-    CheckHit (x0, y0);
+  G4ThreeVector dir = G4ThreeVector(x0, y0, z0);
 
-    G4double z0 = -1680*mm;
+  G4double momentum = 6 * GeV;
+  G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
 
-    G4ThreeVector dir = G4ThreeVector(x0, y0, z0);
+  // Set the properties for the particle gun
+  _particleGun->SetParticleDefinition(particle);
+  _particleGun->SetParticleMomentumDirection(dir);
+  _particleGun->SetParticleEnergy(Ekin);
+  _particleGun->SetParticleTime(0);
+  _particleGun->SetParticlePosition(
+    G4ThreeVector(0.0, 0.0, -z0 + tablet.thickness / 2.)
+  );
 
-    G4double momentum = 6 * GeV;
-    G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
+  // Generate the primary
+  _particleGun->GeneratePrimaryVertex(anEvent);
 
-    _particleGun->SetParticleDefinition(particle);
-    _particleGun->SetParticleMomentumDirection(dir);
-    _particleGun->SetParticleEnergy(Ekin);
-    _particleGun->SetParticleTime(0);
-    _particleGun->SetParticlePosition(
-      G4ThreeVector(0.0, 0.0, -z0 + tablet.thickness / 2.)
-    );
+  // generating all primaries from event
+  //    for (G4int pId = 0; pId < nParticles; ++pId){
+  //        G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
+  //        G4ParticleDefinition* particle = particleTable->FindParticle(pdgID[pId]);
+  //        G4double mass = particle->GetPDGMass();
 
-    _particleGun->GeneratePrimaryVertex(anEvent);
+  //        G4ThreeVector dir = G4ThreeVector(pX[pId],pY[pId],pZ[pId]);
 
-    // generating all primaries from event
-    //    for (G4int pId = 0; pId < nParticles; ++pId){
-    //        G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-    //        G4ParticleDefinition* particle = particleTable->FindParticle(pdgID[pId]);
-    //        G4double m = particle->GetPDGMass();
+  //        G4double momentum = TMath::Sqrt(pX[pId]*pX[pId] + pY[pId]*pY[pId] + pZ[pId]*pZ[pId]);
+  //        G4double Ekin = (TMath::Sqrt(momentum*momentum + mass*mass) - mass);
 
-    //        G4ThreeVector dir = G4ThreeVector(pX[pId],pY[pId],pZ[pId]);
+  //        _particleGun->SetParticleDefinition(particle);
+  //        _particleGun->SetParticleMomentumDirection(dir);
+  //        _particleGun->SetParticleEnergy(Ekin);
+  //        _particleGun->SetParticleTime(T[pId]);
 
-    //        G4double momentum = TMath::Sqrt(pX[pId]*pX[pId] + pY[pId]*pY[pId] + pZ[pId]*pZ[pId]);
-    //        G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
-
-    //        _particleGun->SetParticleDefinition(particle);
-    //        _particleGun->SetParticleMomentumDirection(dir);
-    //        _particleGun->SetParticleEnergy(Ekin);
-    //        _particleGun->SetParticleTime(T[pId]);
-
-    //        _particleGun->SetParticlePosition(G4ThreeVector(X[pId], Y[pId], Z[pId]));
-
-
-    //        // Cut off low-momentum particles (< 20 MeV)
-    //        if (momentum < 20.) continue; //////////////////////// Momentum cut ////////////////////////////
-
-    //        _particleGun->GeneratePrimaryVertex(anEvent);
-
-    //			G4cout << "Particle name = " << particle->GetParticleName() << G4endl;
-    //}
+  //        _particleGun->SetParticlePosition(G4ThreeVector(X[pId], Y[pId], Z[pId]));
 
 
-    //    G4cout << "Primaries generated" << G4endl;
+  //        // Cut off low-momentum particles (< 20 MeV)
+  //        if (momentum < 20.) continue; //////////////////////// Momentum cut ////////////////////////////
+
+  //        _particleGun->GeneratePrimaryVertex(anEvent);
+
+  //			G4cout << "Particle name = " << particle->GetParticleName() << G4endl;
+  //}
+
+
+  //    G4cout << "Primaries generated" << G4endl;
 }
 
 

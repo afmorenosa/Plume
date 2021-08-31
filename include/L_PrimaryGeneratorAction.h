@@ -45,39 +45,39 @@ class G4Event;
 
 class L_PrimaryGeneratorAction: public G4VUserPrimaryGeneratorAction {
 public:
-    L_PrimaryGeneratorAction();
-    virtual ~L_PrimaryGeneratorAction();
+  L_PrimaryGeneratorAction();
+  virtual ~L_PrimaryGeneratorAction();
 public:
-    void GeneratePrimaries(G4Event* anEvent);
+  void GeneratePrimaries(G4Event* anEvent);
 
 private:
-    // bool GetEvent(Pythia8::Event event);
+  // bool GetEvent(Pythia8::Event event);
 
-    PMT_tablet tablet;
+  PMT_tablet tablet;
 
-    void CheckHit (G4double &x0, G4double &y0);
+  void CheckHit (G4double &x0, G4double &y0);
 
 private:
-    G4ParticleGun *_particleGun = new G4ParticleGun();
+  G4ParticleGun *_particleGun = new G4ParticleGun();
 
-//    TChain *tree;
+  // TChain *tree;
 
-    // Data to be transported from pythia to gun
-    G4int nEvents;
-    G4int nParticles;
-    G4int pdgID[20000];
-    G4float X[20000];
-    G4float Y[20000];
-    G4float Z[20000];
-    G4float pX[20000];
-    G4float pY[20000];
-    G4float pZ[20000];
-    G4float T[20000];
+  // Data to be transported from pythia to gun
+  G4int nEvents;
+  G4int nParticles;
+  G4int pdgID[20000];
+  G4float X[20000];
+  G4float Y[20000];
+  G4float Z[20000];
+  G4float pX[20000];
+  G4float pY[20000];
+  G4float pZ[20000];
+  G4float T[20000];
 
-    G4int iEv;
+  G4int iEv;
 
-    // Pythia generator declaration
-    // Pythia8::Pythia pythia;
-    // // Pythia event declaration
-    // Pythia8::Event& PythiaEvent = pythia.event;
+  // Pythia generator declaration
+  // Pythia8::Pythia pythia;
+  // // Pythia event declaration
+  // Pythia8::Event& PythiaEvent = pythia.event;
 };

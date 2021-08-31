@@ -43,51 +43,49 @@
 
 class L_DetectorConstruction: public G4VUserDetectorConstruction {
 public:
-    L_DetectorConstruction();
-    virtual ~L_DetectorConstruction();
+  L_DetectorConstruction();
+  virtual ~L_DetectorConstruction();
 
 public:
-    G4VPhysicalVolume* Construct();
-    void ConstructSDandField();
-    void DefineOpticalBorders();
-    void SetVisAttributes();
+  G4VPhysicalVolume* Construct();
+  void ConstructSDandField();
+  void DefineOpticalBorders();
+  void SetVisAttributes();
 
-    void DefineMaterials();
-    G4VPhysicalVolume* DefineVolumes();
-    L_SensitiveDetector *LSD;
+  void DefineMaterials();
+  G4VPhysicalVolume* DefineVolumes();
+  L_SensitiveDetector *LSD;
 
-//    TrapezeSectorStructOut sectorOut;
-    PMT_tablet tablet;
+  // TrapezeSectorStructOut sectorOut;
+  PMT_tablet tablet;
 
-    PMT_window pmt_window;
-    PMT_detector pmt_detector;
+  PMT_window pmt_window;
+  PMT_detector pmt_detector;
 
-    G4LogicalVolume *LWindowOut[LConst::pmt_n_channels*2];
-    G4LogicalVolume *LBarOut[LConst::pmt_n_channels*2];
+  G4LogicalVolume *LWindowOut[LConst::pmt_n_channels*2];
+  G4LogicalVolume *LBarOut[LConst::pmt_n_channels*2];
 
-    G4LogicalVolume *LDetectorOut[LConst::pmt_n_channels*2];
+  G4LogicalVolume *LDetectorOut[LConst::pmt_n_channels*2];
 
-    G4LogicalVolume *worldLogical;
-    G4LogicalVolume *detectorLogical;
-    G4LogicalVolume *tabletLogical;
-    G4LogicalVolume *windowLogical;
+  G4LogicalVolume *worldLogical;
+  G4LogicalVolume *detectorLogical;
+  G4LogicalVolume *tabletLogical;
+  G4LogicalVolume *windowLogical;
 
-    inline void SetEventAction(L_EventAction* evAct){ _eventAction = evAct; };
+  inline void SetEventAction(L_EventAction* evAct){ _eventAction = evAct; };
 
 private:
-    G4Material *worldMaterial;
-    G4Material *ScintMaterial;
-    G4Material *Vacuum;
-    G4Material *BPMaterial;
-    G4Material *INOX;
-    G4Material *SiO2;
-    G4Material *Copper;
-    G4Material *Beryllium;
+  G4Material *worldMaterial;
+  G4Material *ScintMaterial;
+  G4Material *Vacuum;
+  G4Material *BPMaterial;
+  G4Material *INOX;
+  G4Material *SiO2;
+  G4Material *Copper;
+  G4Material *Beryllium;
 
-    G4Material *Air;
+  G4Material *Air;
 
-    L_EventAction *_eventAction;
-
-
+  L_EventAction *_eventAction;
 
 };
