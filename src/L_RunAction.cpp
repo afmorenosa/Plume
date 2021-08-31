@@ -71,8 +71,10 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   // Number of secondary photons created in second module
   tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
 
-  // Photon that reach the detector module
-  tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/D");
+  // Photons that reach the detector module
+  tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/I");
+  // Secondary photons that reach the detector module
+  tree->Branch("nSecPhotonDetected", &_nSecPhotonDetected, "nSecPhotonDetected/I");
 
   //----------------------------- Photon Paths -----------------------------//
   // Count of photons that reach the window without reflection
