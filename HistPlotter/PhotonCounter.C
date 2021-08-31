@@ -11,49 +11,73 @@ void PhotonCounter() {
 
   TTree *tree = (TTree *) plume_file->Get("T");
 
+  // Zones
+  Int_t Zones = -1;
+
+  // Photon Counter
   Int_t nPhotCreated = -1;
   Int_t nSecondaryPhotCreated = -1;
-  Int_t nPhotReflected = -1;
-  Int_t Zone = -1;
 
   Int_t nPhotCreated1 = -1;
   Int_t nSecondaryPhotCreated1 = -1;
   Int_t nPhotCreated2 = -1;
   Int_t nSecondaryPhotCreated2 = -1;
 
+  // Reflections
+  Int_t nPhotReflection = -1;
+
+  // Electron Counter
   Int_t nElecCreated = -1;
-  Double_t nPrePVxPosition = -1.0;
-  Double_t nPrePVyPosition = -1.0;
+
+  // Electron Energy
   Double_t nPrePVElecEnergy = -1.0;
-  Double_t nPostPVxPosition = -1.0;
-  Double_t nPostPVyPosition = -1.0;
   Double_t nPostPVElecEnergy = -1.0;
+
   std::vector<double> *secElecEnergy = {};
 
+  // Positions
+  Double_t nPrePVxPosition = -1.0;
+  Double_t nPrePVyPosition = -1.0;
+  Double_t nPostPVxPosition = -1.0;
+  Double_t nPostPVyPosition = -1.0;
+
+
+  // Zones
+  tree->SetBranchAddress("Zone", &Zone);
+
+  // Photon Counter
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
   tree->SetBranchAddress("nSecondaryPhotCreated", &nSecondaryPhotCreated);
-  tree->SetBranchAddress("nPhotReflected", &nPhotReflected);
-  tree->SetBranchAddress("Zone", &Zone);
 
   tree->SetBranchAddress("nPhotCreated1", &nPhotCreated1);
   tree->SetBranchAddress("nSecondaryPhotCreated1", &nSecondaryPhotCreated1);
   tree->SetBranchAddress("nPhotCreated2", &nPhotCreated2);
   tree->SetBranchAddress("nSecondaryPhotCreated2", &nSecondaryPhotCreated2);
 
-  tree->SetBranchAddress("Zone", &Zone);
+  // Reflections
+  tree->SetBranchAddress("nPhotReflection", &nPhotReflection);
 
+  // Electron Counter
   tree->SetBranchAddress("nElecCreated", &nElecCreated);
-  tree->SetBranchAddress("secElecEnergy", &secElecEnergy);
-  tree->SetBranchAddress("nPrePVxPosition", &nPrePVxPosition);
-  tree->SetBranchAddress("nPrePVyPosition", &nPrePVyPosition);
+
+  // Electron Energy
   tree->SetBranchAddress("nPrePVElecEnergy", &nPrePVElecEnergy);
-  tree->SetBranchAddress("nPostPVxPosition", &nPostPVxPosition);
-  tree->SetBranchAddress("nPostPVyPosition", &nPostPVyPosition);
   tree->SetBranchAddress("nPostPVElecEnergy", &nPostPVElecEnergy);
 
-  TH1I *hist_photon_counter = new TH1I(
-    "Photon Counter",
-    "Photon Counter; n Photon; Events",
+  tree->SetBranchAddress("secElecEnergy", &secElecEnergy);
+
+  // Positions
+  tree->SetBranchAddress("nPrePVxPosition", &nPrePVxPosition);
+  tree->SetBranchAddress("nPrePVyPosition", &nPrePVyPosition);
+  tree->SetBranchAddress("nPostPVxPosition", &nPostPVxPosition);
+  tree->SetBranchAddress("nPostPVyPosition", &nPostPVyPosition);
+
+
+  // Photon Counter
+
+  TH1I *hist_primary_photon_counter = new TH1I(
+    "Primary Photon Counter",
+    "Primary Photon Counter; n Photon; Events",
     180,
     360,
     540
@@ -67,20 +91,22 @@ void PhotonCounter() {
     700
   );
 
-  TH1I *hist_photon_reflected = new TH1I(
-    "Photon Reflected",
-    "Photon Reflected; Photons reflected; Events",
-    100,
-    0,
-    5000
-  );
-
   TH1I *hist_secondary_photon_counter = new TH1I(
     "Secondary Photon Counter",
     "Secondary Photon Counter; n Photons; Events",
     140,
     0,
     1400
+  );
+
+  // Reflections
+
+  TH1I *hist_photon_reflection = new TH1I(
+    "Photon Reflection",
+    "Photon Reflection; Photons reflection; Events",
+    100,
+    0,
+    5000
   );
 
   TH1I *hist_secondary_photon_counter_tail = new TH1I(
@@ -91,71 +117,7 @@ void PhotonCounter() {
     700
   );
 
-  TH1I *hist_electron_counter = new TH1I(
-    "Secondary Electron Creation",
-    "Secondary Electron Creation; n Electrons; Events",
-    70,
-    0,
-    70
-  );
-
-  TH1F *hist_electron = new TH1F(
-    "Electron Energy",
-    "Electron Energy; Energy [GeV]; Events",
-    100,
-    0,
-    6
-  );
-
-  // ------------------------------------------------------------------- //
-
-  TH1F *hist_nPrePVxPosition = new TH1F(
-    "Pre x",
-    "Pre x; X [mm]; Events",
-    100,
-    -5,
-    5
-  );
-  TH1F *hist_nPrePVyPosition = new TH1F(
-    "Pre y",
-    "Pre y; Y [mm]; Events",
-    100,
-    -5,
-    5
-  );
-  TH1F *hist_nPrePVElecEnergy = new TH1F(
-    "Pre Energy",
-    "Pre Energy; Energy [GeV]; Events",
-    100,
-    0,
-    6
-  );
-
-  // ------------------------------------------------------------------- //
-
-  TH2D *hist_pre_PVPosition = new TH2D(
-    "Pre Position",
-    "Pre Position; X [mm]; Y[mm]; Events",
-    100,
-    -5,
-    5,
-    100,
-    -5,
-    5
-  );
-
-  TH2D *hist_pos_PVPosition = new TH2D(
-    "Pos Position",
-    "Pos Position; X [mm]; Y[mm]; Events",
-    100,
-    -5,
-    5,
-    100,
-    -5,
-    5
-  );
-
-  // Scatter plot
+  // Scatter Plot for Photon Creation
 
   TH1F *hist_photon_counter_first_primary = new TH1F(
     "Primary Photons Creation",
@@ -195,6 +157,79 @@ void PhotonCounter() {
     1000
   );
 
+  // Positions
+
+  TH1F *hist_nPrePVxPosition = new TH1F(
+    "Pre x",
+    "Pre x; X [mm]; Events",
+    100,
+    -5,
+    5
+  );
+  TH1F *hist_nPrePVyPosition = new TH1F(
+    "Pre y",
+    "Pre y; Y [mm]; Events",
+    100,
+    -5,
+    5
+  );
+
+  // 2D Positions Histograms
+
+  TH2D *hist_pre_PVPosition = new TH2D(
+    "Pre Position",
+    "Pre Position; X [mm]; Y[mm]; Events",
+    100,
+    -5,
+    5,
+    100,
+    -5,
+    5
+  );
+
+  TH2D *hist_pos_PVPosition = new TH2D(
+    "Pos Position",
+    "Pos Position; X [mm]; Y[mm]; Events",
+    100,
+    -5,
+    5,
+    100,
+    -5,
+    5
+  );
+
+  // Electron Counter
+
+  TH1I *hist_electron_counter = new TH1I(
+    "Secondary Electron Creation",
+    "Secondary Electron Creation; n Electrons; Events",
+    70,
+    0,
+    70
+  );
+
+
+  // Electron Energy
+
+  TH1F *hist_electron = new TH1F(
+    "Electron Energy",
+    "Electron Energy; Energy [GeV]; Events",
+    100,
+    0,
+    6
+  );
+
+  // Electron Energy Before Seconf Module
+  TH1F *hist_nPrePVElecEnergy = new TH1F(
+    "Pre Energy",
+    "Pre Energy; Energy [GeV]; Events",
+    100,
+    0,
+    6
+  );
+
+  //>>>>>>>>>>>>>> Fill Histograms
+
   int nentries, nbytes;
   nentries = (Int_t)tree->GetEntries();
 
@@ -203,29 +238,16 @@ void PhotonCounter() {
 
     if (Zone == -1) continue;
 
-    //if (Zone==2) {
-      hist_photon_counter->Fill(nPhotCreated);
-      hist_secondary_photon_counter->Fill(nSecondaryPhotCreated);
-      hist_photon_reflected->Fill(nPhotReflected);
-      //Take back
-      hist_photon_counter_totals->Fill(nSecondaryPhotCreated + nPhotCreated);
-      if (nSecondaryPhotCreated > 0) {
-        hist_secondary_photon_counter_tail->Fill(
-          nSecondaryPhotCreated + nPhotCreated
-        );
-      }
+    // Photon Counter
+    hist_photon_counter_totals->Fill(nSecondaryPhotCreated + nPhotCreated);
+    hist_primary_photon_counter->Fill(nPhotCreated);
+    hist_secondary_photon_counter->Fill(nSecondaryPhotCreated);
 
-      hist_pre_PVPosition->Fill(nPrePVxPosition, nPrePVyPosition);
-      hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
-
-      hist_nPrePVxPosition->Fill(nPrePVxPosition);
-      hist_nPrePVyPosition->Fill(nPrePVyPosition);
-    //}
-
-    hist_electron_counter->Fill(nElecCreated);
-
-
-    hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
+    if (nSecondaryPhotCreated > 0) {
+      hist_secondary_photon_counter_tail->Fill(
+        nSecondaryPhotCreated + nPhotCreated
+      );
+    }
 
     hist_photon_counter_first_primary->Fill(nPhotCreated1);
     hist_photon_counter_second_primary->Fill(nPhotCreated2);
@@ -236,22 +258,50 @@ void PhotonCounter() {
       nPhotCreated2 + nSecondaryPhotCreated2
     );
 
+    // Reflections
+    hist_photon_reflection->Fill(nPhotReflection);
 
+    // Electron Counter
+    hist_electron_counter->Fill(nElecCreated);
+
+    // Electron Energy
+    hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
 
     for (size_t i = 0; i < secElecEnergy->size(); i++) {
       hist_electron->Fill(secElecEnergy->at(i)/1000);
     }
+
+    // Positions
+    hist_pre_PVPosition->Fill(nPrePVxPosition, nPrePVyPosition);
+    hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
+
+    hist_nPrePVxPosition->Fill(nPrePVxPosition);
+    hist_nPrePVyPosition->Fill(nPrePVyPosition);
+
   }
 
-  hist_photon_counter->SetFillColor(kYellow);
-  hist_photon_counter->Draw();
+  //>>>>>>>>>>>>>>>>> Set Canvas
+
+  // Photon Counter
+  
+  hist_primary_photon_counter->SetFillColor(kYellow);
+  hist_primary_photon_counter->Draw();
   canvas->Print("quartz.pdf");
   canvas->Clear();
 
-  //hist_photon_counter->SetFillColorAlpha(kYellow, 1.0);
+  canvas->SetLogy(true);|
+
+  hist_secondary_photon_counter->SetFillColor(kYellow);
+  hist_secondary_photon_counter->Draw();
+  canvas->Print("secondary_photons.pdf");
+  canvas->Clear();
+
+  canvas->SetLogy(false);
+
+  //hist_primary_photon_counter->SetFillColorAlpha(kYellow, 1.0);
   hist_photon_counter_totals->SetFillColorAlpha(kYellow, 1.0);
   hist_secondary_photon_counter_tail->SetFillColorAlpha(kRed, 0.5);
-  //hist_photon_counter->Draw();
+  //hist_primary_photon_counter->Draw();
   hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
   canvas->Print("total_photons.pdf");
@@ -274,6 +324,40 @@ void PhotonCounter() {
   canvas->Print("photon_counter_comparison_primary.pdf");
   canvas->Clear();
 
+  hist_photon_counter_2d_primary->Draw("COLZ");
+  canvas->Print("photon_counter_2d_primary.pdf");
+  canvas->Clear();
+
+  hist_photon_counter_2d_totals->Draw("COLZ");
+  canvas->Print("photon_counter_2d_totals.pdf");
+  canvas->Clear();
+
+  // Reflections
+  canvas->SetLogy(true);
+
+  hist_photon_reflection->SetFillColor(kYellow);
+  hist_photon_reflection->Draw();
+  canvas->Print("reflection.pdf");
+  canvas->Clear();
+
+  // Electron Counter
+
+  hist_electron_counter->SetFillColor(kYellow);
+  hist_electron_counter->Draw();
+  canvas->Print("electrons.pdf");
+  canvas->Clear();
+
+  // Electron Energy
+
+  hist_electron->SetFillColor(kYellow);
+  hist_electron->Draw();
+  canvas->Print("electron.pdf");
+  canvas->Clear();
+
+  canvas->SetLogy(false);
+
+  // Positions
+
   hist_pre_PVPosition->Draw("COLZ");
   canvas->Print("pre_PVPosition.pdf");
   canvas->Clear();
@@ -283,16 +367,8 @@ void PhotonCounter() {
   canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
 
-  hist_photon_counter_2d_primary->Draw("COLZ");
-  canvas->Print("photon_counter_2d_primary.pdf");
-  canvas->Clear();
 
-  hist_photon_counter_2d_totals->Draw("COLZ");
-  canvas->Print("photon_counter_2d_totals.pdf");
-  canvas->Clear();
-
-
-  // -------------------------------------------------------------------- //
+  // ---------------------------- Gaussian fit ---------------------------- //
 
   Double_t par[6];
 
@@ -327,29 +403,5 @@ void PhotonCounter() {
   std::cout << " ----------------> " << par[3] << '\n';
   std::cout << " ----------------> " << par[4] << '\n';
   std::cout << " ----------------> " << par[5] << '\n';
-
-  // Log y plots
-  canvas->SetLogy();
-
-  hist_electron->SetFillColor(kYellow);
-  hist_electron->Draw();
-  canvas->Print("electron.pdf");
-  canvas->Clear();
-
-  hist_photon_reflected->SetFillColor(kYellow);
-  hist_photon_reflected->Draw();
-  canvas->Print("reflected.pdf");
-  canvas->Clear();
-
-  hist_secondary_photon_counter->SetFillColor(kYellow);
-  hist_secondary_photon_counter->Draw();
-  canvas->Print("secondary_photons.pdf");
-  canvas->Clear();
-
-  hist_electron_counter->SetFillColor(kYellow);
-  hist_electron_counter->Draw();
-  canvas->Print("electrons.pdf");
-  canvas->Clear();
-
 
 }
