@@ -31,7 +31,10 @@ public:
   virtual void BeginOfEventAction(const G4Event* );
   virtual void EndOfEventAction(const G4Event* );
 
-  inline void InsertPhoton(G4int secID){ int id = (secID > 0) ? (secID-1) : (LConst::pmt_n_channels - secID - 1); _nPhot[id] ++; }
+  inline void InsertPhoton(G4int secID){
+    int id = (secID > 0) ? (secID-1) : (LConst::pmt_n_channels - secID - 1);
+    _nPhot[id] ++;
+  }
 
   // Set the zone
   void SetZone(G4int Zone) {_Zone = Zone;}
@@ -39,6 +42,8 @@ public:
   // Photons counter
   void InsertPhotonCreation() {_nPhotCreated++;}
   void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
+
+
 
   void InsertPhotonCreationTablet1() {_nPhotCreated1++;}
   void InsertSecondaryPhotonCreationTablet1() {_nSecondaryPhotCreated1++;}
@@ -54,15 +59,19 @@ public:
     }
   }
 
-  void PhotonDetected (G4int trackID) {
+  void PhotonDetected (G4int trackID, G4int parentTrackID) {
 
     if (
       track_detected.find(trackID) == track_detected.end()
     ) {
       track_detected[trackID] = true;
-      _nPhotonDetected += 1;
-    }
+      _nPhotonDetected++;
 
+      if (parentTrackID != 1) {
+        _nSecPhotonDetected++;
+      }
+
+    }
   }
 
   // Reflections
@@ -138,6 +147,7 @@ private:
   G4int _nSecondaryPhotCreated2;
 
   G4double _nPhotonDetected;
+  G4double _nSecPhotonDetected;
 
   // Photon Paths
   G4int _nPhotonStraight;
