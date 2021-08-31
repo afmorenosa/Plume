@@ -46,61 +46,75 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
 
     // Event ID
     tree->Branch("EventID",  &_EventID,  "EventID/I");
-    // Number of sectors (constant every event, just for array length)
-    tree->Branch("nSec", &_nSec, "nSec/I");
-    // Number of photons detected in each sector
-    tree->Branch("nPhot", _nPhot, "nPhot[nSec]/I");
-    // Number of photons created in each sector
-    tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated/I");
-    // Number of secondary photons created in each sector
-    tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
-    // Number of secondary photons created in each sector
-    tree->Branch("Zone", &_Zone, "Zone/I");
+  // Number of sectors (constant every event, just for array length)
+  tree->Branch("nSec", &_nSec, "nSec/I");
 
+  //--------------------------------- Zones ---------------------------------//
+  // The zone of the detector in which the primary electron hits
+  tree->Branch("Zone", &_Zone, "Zone/I");
 
-    // Number of photons created in first module
-    tree->Branch("nPhotCreated1", &_nPhotCreated1, "nPhotCreated1/I");
-    // Number of secondary photons created in first module
-    tree->Branch("nSecondaryPhotCreated1", &_nSecondaryPhotCreated1, "nSecondaryPhotCreated1/I");
-    // Number of photons created in second module
-    tree->Branch("nPhotCreated2", &_nPhotCreated2, "nPhotCreated2/I");
-    // Number of secondary photons created in second module
-    tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
-    // Number of photons reflected in each sector
+  //---------------------------- Photons counter ----------------------------//
+  // Number of photons detected in each sector
+  tree->Branch("nPhot", _nPhot, "nPhot[nSec]/I");
 
-    tree->Branch("nPhotReflection", &_nPhotReflection, "nPhotReflection/I");
-    // Number of secondary electrons created each sector
-    tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
-    // Number of secondary electrons in second module
-    tree->Branch("nSecondModuleElecCreated", &_nSecondModuleElecCreated, "nSecondModuleElecCreated/I");
-    // X Position of primary electron before Tablet2 in second module
-    tree->Branch("nPrePVxPosition", &_nPrePVxPosition, "nPrePVxPosition/D");
-    // Y Position of primary electron before Tablet2 in second module
-    tree->Branch("nPrePVyPosition", &_nPrePVyPosition, "nPrePVyPosition/D");
-    // Energy of primary electron before Tablet2 in second module
-    tree->Branch("nPrePVElecEnergy", &_nPrePVElecEnergy, "nPrePVElecEnergy/D");
-    // X Position of primary electron after Tablet2 in second module
-    tree->Branch("nPostPVxPosition", &_nPostPVxPosition, "nPostPVxPosition/D");
-    // Y Position of primary electron after Tablet2 in second module
-    tree->Branch("nPostPVyPosition", &_nPostPVyPosition, "nPostPVyPosition/D");
-    // Energy of primary electron after Tablet2 in second module
-    tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
+  // Number of primary photons created in each sector
+  tree->Branch("nPhotCreated", &_nPhotCreated, "nPhotCreated/I");
+  // Number of secondary photons created in each sector
+  tree->Branch("nSecondaryPhotCreated", &_nSecondaryPhotCreated, "nSecondaryPhotCreated/I");
 
-    _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
+  // Number of primary photons created in first module
+  tree->Branch("nPhotCreated1", &_nPhotCreated1, "nPhotCreated1/I");
+  // Number of secondary photons created in first module
+  tree->Branch("nSecondaryPhotCreated1", &_nSecondaryPhotCreated1, "nSecondaryPhotCreated1/I");
+  // Number of primary photons created in second module
+  tree->Branch("nPhotCreated2", &_nPhotCreated2, "nPhotCreated2/I");
+  // Number of secondary photons created in second module
+  tree->Branch("nSecondaryPhotCreated2", &_nSecondaryPhotCreated2, "nSecondaryPhotCreated2/I");
 
+  // Photons that reach the detector module
+  tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/D");
 
-    // Count of photons that reach the window without reflection
-    tree->Branch("nPhotonStraight", &_nPhotonStraight, "nPhotonStraight/I");
-    // Count of photons that reach the window with at least one reflection
-    tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
+  //----------------------------- Photon Paths -----------------------------//
+  // Count of photons that reach the window without reflection
+  tree->Branch("nPhotonStraight", &_nPhotonStraight, "nPhotonStraight/I");
+  // Count of photons that reach the window with at least one reflection
+  tree->Branch("nPhotReflected", &_nPhotReflected, "nPhotReflected/I");
 
-    _secElecEnergyBranch = tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
+  //------------------------------ Reflections ------------------------------//
+  // Number of reflections in each sector
+  tree->Branch("nPhotReflection", &_nPhotReflection, "nPhotReflection/I");
 
+  // Reflections for each photon
+  _nReflectionPerPhotonBranch = tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
 
-    // Branches filled for each HIT (commented due to "optimization")
+  //--------------------------- Electrons counter ---------------------------//
+  // Number of secondary electrons created each sector
+  tree->Branch("nElecCreated", &_nElecCreated, "nElecCreated/I");
+  // Number of secondary electrons in second module
+  tree->Branch("nSecondModuleElecCreated", &_nSecondModuleElecCreated, "nSecondModuleElecCreated/I");
 
+  //--------------------------- Electrons energy ---------------------------//
+  // Energy of primary electron before Tablet2 in second module
+  tree->Branch("nPrePVElecEnergy", &_nPrePVElecEnergy, "nPrePVElecEnergy/D");
+  // Energy of primary electron after Tablet2 in second module
+  tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
 
-    G4cout << "BeginOfRunAction end" << G4endl;
+  // Energy each of the secondary electrons
+  _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
+
+  //------------------------------- Positions -------------------------------//
+  // X Position of primary electron before Tablet2 in second module
+  tree->Branch("nPrePVxPosition", &_nPrePVxPosition, "nPrePVxPosition/D");
+  // Y Position of primary electron before Tablet2 in second module
+  tree->Branch("nPrePVyPosition", &_nPrePVyPosition, "nPrePVyPosition/D");
+  // X Position of primary electron after Tablet2 in second module
+  tree->Branch("nPostPVxPosition", &_nPostPVxPosition, "nPostPVxPosition/D");
+  // Y Position of primary electron after Tablet2 in second module
+  tree->Branch("nPostPVyPosition", &_nPostPVyPosition, "nPostPVyPosition/D");
+
+  // Branches filled for each HIT (commented due to "optimization")
+
+  G4cout << "BeginOfRunAction end" << G4endl;
 }
 
 //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......

@@ -14,12 +14,12 @@ L_PrimaryGeneratorAction::L_PrimaryGeneratorAction() {
     //    G4cout << "Start creating primary generator" << G4endl;
 
     // Pythia seed is generated from system time
-    Int_t pythiaSeed = time(NULL)%10000000;
+    // Int_t pythiaSeed = time(NULL)%10000000;
 
     // Getting number of event to be run in order to give Pythia
     // an information how many event to generate
-    G4RunManager *runManager = G4RunManager::GetRunManager();
-    G4int evToGen = runManager->GetNumberOfEventsToBeProcessed();
+    // G4RunManager *runManager = G4RunManager::GetRunManager();
+    // G4int evToGen = runManager->GetNumberOfEventsToBeProcessed();
 
     // Reading configuration file, setting number of events and seed
     // pythia.readFile("PythiaSettings.cmnd");
@@ -38,6 +38,7 @@ L_PrimaryGeneratorAction::~L_PrimaryGeneratorAction() {
 }
 
 void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
+  // Check that the primary hit the module
   G4double radius = std::sqrt(x0*x0 + y0*y0);
 
   while (radius > LConst::sphereThickness) {
@@ -57,29 +58,39 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
     //            = G4LogicalVolumeStore::GetInstance()->GetVolume("World");
 
     // If current event is inapropriate trying another time
-//    if (!pythia.next()) GeneratePrimaries(anEvent);
+    // if (!pythia.next()) GeneratePrimaries(anEvent);
 
     // filling up class variables with event data from pythia
-//    GetEvent(PythiaEvent);
+    // GetEvent(PythiaEvent);
 
-
+    // Get the particle definition
     G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
     G4ParticleDefinition* particle = particleTable->FindParticle("e-");
     G4double m = particle->GetPDGMass();
-    G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
+
+    // Set the random momentum direction
     G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+
     G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
-    G4double z0 = 5. * cm;
+
     CheckHit (x0,y0);
+
+    G4double z0 = 5. * cm;
+
+    G4ThreeVector dir = G4ThreeVector(0.,0.,-1.);
+
+    // Set the Kinetic energy
     G4double momentum = 6 * GeV;
     G4double Ekin = (TMath::Sqrt(momentum*momentum + m*m) - m);
 
+    // Set the properties for the particle gun
     _particleGun->SetParticleDefinition(particle);
     _particleGun->SetParticleMomentumDirection(dir);
     _particleGun->SetParticleEnergy(Ekin);
     _particleGun->SetParticleTime(0);
     _particleGun->SetParticlePosition(G4ThreeVector(x0,y0,z0));
 
+    // Generate the primary
     _particleGun->GeneratePrimaryVertex(anEvent);
 
     // generating all primaries from event

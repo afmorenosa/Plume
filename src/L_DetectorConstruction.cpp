@@ -36,6 +36,7 @@ void L_DetectorConstruction::ConstructSDandField() {
 
     //    G4cout << "_____________________________________________Detectors are made" << G4endl;
 }
+
 // Defining materials
 void L_DetectorConstruction::DefineMaterials() {
     G4String symbol;
