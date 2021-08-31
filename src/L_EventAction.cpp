@@ -88,7 +88,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   // G4cout << "BeginOfEventAction" << G4endl;
   G4int eventNum = event->GetEventID();
 
-    // Printing an event number
+  // Printing an event number
 	if (eventNum%printModulo == 0) {
 		G4cout << "\n---> Begin of Event: " << eventNum << G4endl;
 	}
@@ -149,16 +149,19 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _steppingAction->Reset();
   _steppingAction->ResetPerEvent();
 
-  }
+}
 
-  //....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
+//....oooOO0OOooo........oooOO0OOooo........oooOO0OOooo........oooOO0OOooo......
 
-  void L_EventAction::EndOfEventAction(const G4Event* event)
-  {
+void L_EventAction::EndOfEventAction(const G4Event* event)
+{
 
   // G4cout << "End of event" << G4endl;
   // Print info about end of the event
   G4int eventNum = event->GetEventID();
+
+  // Getting the number of sectors from the constant collection
+  runAction->_nSec = LConst::pmt_n_channels;
 
   // Zones
   runAction->_Zone = _Zone;
