@@ -26,7 +26,7 @@ void RadiusDivision () {
 
   // Photons Path
   Int_t nPhotonStraight = -1;
-  Int_t nPhotonReflected = -1;
+  Int_t nPhotReflected = -1;
 
   // Reflections
   Int_t nPhotReflection = -1;
@@ -49,7 +49,7 @@ void RadiusDivision () {
 
   // Photons Path
   tree->SetBranchAddress("nPhotonStraight", &nPhotonStraight);
-  tree->SetBranchAddress("nPhotonReflected", &nPhotonReflected);
+  tree->SetBranchAddress("nPhotReflected", &nPhotReflected);
 
   // Reflections
   tree->SetBranchAddress("nPhotReflection", &nPhotReflection);
@@ -327,7 +327,7 @@ void RadiusDivision () {
 
     // Photons Path
     hist_photon_straight_counter->Fill(nPhotonStraight);
-    hist_photon_reflected_counter->Fill(nPhotonReflected);
+    hist_photon_reflected_counter->Fill(nPhotReflected);
 
     // Reflections
     hist_photon_reflection_counter->Fill(nPhotReflection);
@@ -372,7 +372,7 @@ void RadiusDivision () {
       nPhotonStraight
     );
     hist_photon_reflected_counter_zones[Zone]->Fill(
-      nPhotonReflected
+      nPhotReflected
     );
 
     // Reflections
