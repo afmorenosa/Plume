@@ -61,6 +61,7 @@ public:
   G4int _nSecondaryPhotCreated2;
 
   G4double _nPhotonDetected;
+  G4double _nSecPhotonDetected;
 
   // Photon Paths
   G4int _nPhotonStraight;

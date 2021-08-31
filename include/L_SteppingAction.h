@@ -41,7 +41,8 @@ private:
   void PhotonsPath(
     G4StepPoint *PrePoint,
     G4StepPoint *PostPoint,
-    G4int trackID
+    G4int trackID,
+    G4int parentTrackID
   );
 
   void SecondModuleElectrons(

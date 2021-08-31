@@ -38,6 +38,7 @@ L_EventAction::L_EventAction(L_RunAction* runact,
   _nSecondaryPhotCreated2 = 0;
 
   _nPhotonDetected = 0;
+  _nSecPhotonDetected = 0;
 
   // Photon Paths
   _nPhotonStraight = 0;
@@ -104,6 +105,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
     _nSecondaryPhotCreated2 = 0;
 
     _nPhotonDetected = 0;
+    _nSecPhotonDetected = 0;
 
     // Photon Paths
     _nPhotonStraight = 0;
@@ -176,6 +178,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
     runAction->_nPhotReflected = _nPhotReflected;
 
     runAction->_nPhotonDetected = _nPhotonDetected;
+    runAction->_nSecPhotonDetected = _nSecPhotonDetected;
 
     // Photon Paths
 

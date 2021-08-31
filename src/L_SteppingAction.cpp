@@ -63,7 +63,7 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
   _eventAction->AddKeyToMaps(trackID);
 
   // Register the track to follow the path
-  PhotonsPath(aPrePoint, aPostPoint, trackID);
+  PhotonsPath(aPrePoint, aPostPoint, trackID, aTrack->GetParentID());
 
   // TO BE REVIEWED, GONNA BE A MISTAKE HERE///////////////////////////////
   //    if(!aPostPV->GetLogicalVolume()->GetSensitiveDetector()) return;
@@ -226,7 +226,8 @@ void L_SteppingAction::InternalReflectionProbability(
 void L_SteppingAction::PhotonsPath(
   G4StepPoint *PrePoint,
   G4StepPoint *PostPoint,
-  G4int trackID
+  G4int trackID,
+  G4int parentTrackID
 ) {
 
   // Check if the particle does not escape the world
@@ -250,7 +251,7 @@ void L_SteppingAction::PhotonsPath(
   ) {
 
     // Reach the detector tablet
-    _eventAction->PhotonDetected(trackID);
+    _eventAction->PhotonDetected(trackID, parentTrackID);
 
   }
 
