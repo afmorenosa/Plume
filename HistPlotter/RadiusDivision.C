@@ -81,7 +81,7 @@ void RadiusDivision () {
     "Primary Photons Creation; n Photons; Events",
     100,
     0,
-    600
+    1000
   );
 
   TH1I *hist_secondary_photon_counter = new TH1I(
@@ -309,8 +309,6 @@ void RadiusDivision () {
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
 
-    if (Zone == -1) continue;
-
     //>>>>>>>>>>>>>>>>>>> Fill histograms.
 
     // Photon Counter
@@ -339,6 +337,7 @@ void RadiusDivision () {
     // Electron Counter
     hist_secondary_electron_counter->Fill(nElecCreated);
 
+    if (Zone == -1) continue;
 
     //>>>>>>>>>>>>>>>>>>> Fill zone histograms.
 
