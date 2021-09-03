@@ -146,8 +146,8 @@ private:
   G4int _nPhotCreated2;
   G4int _nSecondaryPhotCreated2;
 
-  G4double _nPhotonDetected;
-  G4double _nSecPhotonDetected;
+  G4int _nPhotonDetected;
+  G4int _nSecPhotonDetected;
 
   // Photon Paths
   G4int _nPhotonStraight;
