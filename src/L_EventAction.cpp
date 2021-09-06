@@ -44,6 +44,7 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
 
   // Position of Detected Photons
   _nPhotonDetectedPosition = new std::vector<G4double>{};
+  _nPriPhotonDetectedPosition = new std::vector<G4double>{};
   _nSecPhotonDetectedPosition = new std::vector<G4double>{};
 
   // Photon Paths
@@ -115,6 +116,7 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 
   // Positions of Detected Photons
   _nPhotonDetectedPosition->clear();
+  _nPriPhotonDetectedPosition->clear();
   _nSecPhotonDetectedPosition->clear();
 
   // Photon Paths
@@ -226,6 +228,12 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
   for (size_t i = 0; i < _nPhotonDetectedPosition->size(); i++) {
     runAction->_nPhotonDetectedPosition->push_back(_nPhotonDetectedPosition->at(i));
+  }
+
+  runAction->_nPriPhotonDetectedPosition->clear();
+
+  for (size_t i = 0; i < _nPriPhotonDetectedPosition->size(); i++) {
+    runAction->_nPriPhotonDetectedPosition->push_back(_nPriPhotonDetectedPosition->at(i));
   }
 
   runAction->_nSecPhotonDetectedPosition->clear();

@@ -68,21 +68,23 @@ public:
     ) {
       track_detected[trackID] = true;
       _nPhotonDetected++;
-      _nPhotonDetectedPosition->push_back(
-        std::sqrt(
-          PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
-          PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
-        )
+
+      G4double hit_radius = std::sqrt(
+        PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
+        PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
       );
 
+      _nPhotonDetectedPosition->push_back(hit_radius);
+
       if (parentTrackID != 1) {
+
         _nSecPhotonDetected++;
-        _nSecPhotonDetectedPosition->push_back(
-          std::sqrt(
-            PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
-            PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
-          )
-        );
+        _nSecPhotonDetectedPosition->push_back(hit_radius);
+
+      } else {
+
+        _nPriPhotonDetectedPosition->push_back(hit_radius);
+
       }
 
     }
@@ -166,6 +168,7 @@ private:
 
   //Positions of Detected Photons
   std::vector<G4double> *_nPhotonDetectedPosition{};
+  std::vector<G4double> *_nPriPhotonDetectedPosition{};
   std::vector<G4double> *_nSecPhotonDetectedPosition{};
 
   // Photon Paths

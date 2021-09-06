@@ -66,9 +66,8 @@ public:
 
   // Positions of Detected Photons
   std::vector<G4double> *_nPhotonDetectedPosition{};
+  std::vector<G4double> *_nPriPhotonDetectedPosition{};
   std::vector<G4double> *_nSecPhotonDetectedPosition{};
-  TBranch *_nPhotonDetectedPositionBranch;
-  TBranch *_nSecPhotonDetectedPositionBranch;
 
   // Photon Paths
   G4int _nPhotonStraight;
@@ -78,7 +77,6 @@ public:
   G4int _nPhotReflection;
 
   std::vector<G4int> *_nReflectionPerPhoton{};
-  TBranch *_nReflectionPerPhotonBranch;
 
   // Electrons counter
   G4int _nElecCreated;
@@ -89,7 +87,6 @@ public:
   G4double _nPostPVElecEnergy;
 
   std::vector<G4double> *_secElecEnergy{};
-  TBranch *_secElecEnergyBranch;
 
   // Positions
   G4double _nPrePVxPosition;

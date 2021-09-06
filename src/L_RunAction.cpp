@@ -14,6 +14,7 @@ L_RunAction::L_RunAction() {
 
   // Positions of Detected Photons
   _nPhotonDetectedPosition = new std::vector<G4double>{};
+  _nPriPhotonDetectedPosition = new std::vector<G4double>{};
   _nSecPhotonDetectedPosition = new std::vector<G4double>{};
 
   // Reflections
@@ -84,9 +85,11 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nSecPhotonDetected", &_nSecPhotonDetected, "nSecPhotonDetected/I");
 
   // Positions of Photons that reach the detector module
-  _nPhotonDetectedPositionBranch = tree->Branch("nPhotonDetectedPosition", _nPhotonDetectedPosition);
+  tree->Branch("nPhotonDetectedPosition", _nPhotonDetectedPosition);
+  // Positions of Primary photons that reach the detector module
+  tree->Branch("nPriPhotonDetectedPosition", _nPriPhotonDetectedPosition);
   // Positions of Secondary photons that reach the detector module
-  _nSecPhotonDetectedPositionBranch = tree->Branch("nSecPhotonDetectedPosition", _nSecPhotonDetectedPosition);
+  tree->Branch("nSecPhotonDetectedPosition", _nSecPhotonDetectedPosition);
 
   //----------------------------- Photon Paths -----------------------------//
   // Count of photons that reach the window without reflection
@@ -99,7 +102,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPhotReflection", &_nPhotReflection, "nPhotReflection/I");
 
   // Reflections for each photon
-  _nReflectionPerPhotonBranch = tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
+  tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
 
   //--------------------------- Electrons counter ---------------------------//
   // Number of secondary electrons created each sector
@@ -114,7 +117,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
 
   // Energy each of the secondary electrons
-  _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
+  tree->Branch("secElecEnergy", _secElecEnergy);
 
   //------------------------------- Positions -------------------------------//
   // X Position of primary electron before Tablet2 in second module
