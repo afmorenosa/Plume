@@ -99,6 +99,14 @@ void PhotonCounter() {
     1400
   );
 
+  TH1I *hist_secondary_photon_counter_tail = new TH1I(
+    "Secondary Photon Counter tail",
+    "Secondary Photon Counter tail; n Photons; Events",
+    175,
+    350,
+    700
+  );
+
   // Reflections
 
   TH1I *hist_photon_reflection = new TH1I(
@@ -109,13 +117,6 @@ void PhotonCounter() {
     5000
   );
 
-  TH1I *hist_secondary_photon_counter_tail = new TH1I(
-    "Secondary Photon Counter tail",
-    "Secondary Photon Counter tail; n Photons; Events",
-    175,
-    350,
-    700
-  );
 
   // Scatter Plot for Photon Creation
 
@@ -283,7 +284,7 @@ void PhotonCounter() {
   //>>>>>>>>>>>>>>>>> Set Canvas
 
   // Photon Counter
-  
+
   hist_primary_photon_counter->SetFillColor(kYellow);
   hist_primary_photon_counter->Draw();
   canvas->Print("quartz.pdf");
