@@ -188,10 +188,6 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   runAction->_nPhotonDetected = _nPhotonDetected;
   runAction->_nSecPhotonDetected = _nSecPhotonDetected;
 
-  // Positions of Detected Photons
-  runAction->_nPhotonDetectedPosition = _nPhotonDetectedPosition;
-  runAction->_nSecPhotonDetectedPosition = _nSecPhotonDetectedPosition;
-
   // Photon Paths
   runAction->_nPhotonStraight = _nPhotonStraight;
   runAction->_nPhotReflected = _nPhotReflected;
