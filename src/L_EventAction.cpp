@@ -43,8 +43,8 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   _nSecPhotonDetected = 0;
 
   // Position of Detected Photons
-  _nPhotonDetectedPosition = 0.0;
-  _nSecPhotonDetectedPosition = 0.0;
+  _nPhotonDetectedPosition = new std::vector<G4double>{};
+  _nSecPhotonDetectedPosition = new std::vector<G4double>{};
 
   // Photon Paths
   _nPhotonStraight = 0;
@@ -89,7 +89,6 @@ L_EventAction::~L_EventAction() {
 void L_EventAction::BeginOfEventAction(const G4Event* event)
 {
 
-
   // G4cout << "BeginOfEventAction" << G4endl;
   G4int eventNum = event->GetEventID();
 
@@ -115,8 +114,8 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nSecPhotonDetected = 0;
 
   // Positions of Detected Photons
-  _nPhotonDetectedPosition = 0.0;
-  _nSecPhotonDetectedPosition = 0.0;
+  _nPhotonDetectedPosition->clear();
+  _nSecPhotonDetectedPosition->clear();
 
   // Photon Paths
   _nPhotonStraight = 0;
@@ -225,6 +224,18 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
   for (size_t i = 0; i < _nReflectionPerPhoton->size(); i++) {
     runAction->_nReflectionPerPhoton->push_back(_nReflectionPerPhoton->at(i));
+  }
+
+  runAction->_nPhotonDetectedPosition->clear();
+
+  for (size_t i = 0; i < _nPhotonDetectedPosition->size(); i++) {
+    runAction->_nPhotonDetectedPosition->push_back(_nPhotonDetectedPosition->at(i));
+  }
+
+  runAction->_nSecPhotonDetectedPosition->clear();
+
+  for (size_t i = 0; i < _nSecPhotonDetectedPosition->size(); i++) {
+    runAction->_nSecPhotonDetectedPosition->push_back(_nSecPhotonDetectedPosition->at(i));
   }
 
   for (G4int i = 0; i < LConst::pmt_n_channels; ++i)
