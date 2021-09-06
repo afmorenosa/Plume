@@ -133,8 +133,9 @@ set(Plume_SCRIPTS
     vis_file.mac
     PythiaSettings.cmnd
     HistPlotter/PhotonCounter.C
+    HistPlotter/RadiusDependency.C
     HistPlotter/RadiusDivision.C
-    )
+)
 
 foreach(_script ${Plume_SCRIPTS})
     configure_file(
