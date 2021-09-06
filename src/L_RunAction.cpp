@@ -12,8 +12,15 @@ L_RunAction::L_RunAction() {
   //	_outputFileName = "data.root";
   timer = new G4Timer();
 
-  _secElecEnergy = new std::vector<G4double>{};
+  // Positions of Detected Photons
+  _nPhotonDetectedPosition = new std::vector<G4double>{};
+  _nSecPhotonDetectedPosition = new std::vector<G4double>{};
+
+  // Reflections
   _nReflectionPerPhoton = new std::vector<G4int>{};
+
+  // Electrons energy
+  _secElecEnergy = new std::vector<G4double>{};
 
   G4cout << "Run action constructor" << G4endl;
 }
