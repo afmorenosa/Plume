@@ -90,7 +90,6 @@ L_EventAction::~L_EventAction() {
 void L_EventAction::BeginOfEventAction(const G4Event* event)
 {
 
-
   // G4cout << "BeginOfEventAction" << G4endl;
   G4int eventNum = event->GetEventID();
 

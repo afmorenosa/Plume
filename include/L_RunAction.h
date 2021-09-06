@@ -34,7 +34,7 @@ public:
   virtual ~L_RunAction();
 public:
   virtual void BeginOfRunAction(const G4Run* run);
-  virtual void   EndOfRunAction(const G4Run* run);
+  virtual void EndOfRunAction(const G4Run* run);
 
 public:
   void SetOutputFileName(G4String fileName) {_outputFileName = fileName;}
@@ -77,6 +77,7 @@ public:
   G4int _nPhotReflection;
 
   std::vector<G4int> *_nReflectionPerPhoton{};
+  TBranch *_nReflectionPerPhotonBranch;
 
   // Electrons counter
   G4int _nElecCreated;
@@ -87,6 +88,7 @@ public:
   G4double _nPostPVElecEnergy;
 
   std::vector<G4double> *_secElecEnergy{};
+  TBranch *_secElecEnergyBranch;
 
   // Positions
   G4double _nPrePVxPosition;
