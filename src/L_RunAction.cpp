@@ -24,6 +24,9 @@ L_RunAction::L_RunAction() {
   _secElecEnergy = new std::vector<G4double>{};
   _nReflectionPerPhoton = new std::vector<G4int>{};
 
+  // Electrons energy
+  _secElecEnergy = new std::vector<G4double>{};
+
   G4cout << "Run action constructor" << G4endl;
 }
 
