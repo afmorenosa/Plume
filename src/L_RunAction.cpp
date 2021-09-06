@@ -75,6 +75,11 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/I");
   // Secondary photons that reach the detector module
   tree->Branch("nSecPhotonDetected", &_nSecPhotonDetected, "nSecPhotonDetected/I");
+  
+  // Positions of Photons that reach the detector module
+  tree->Branch("nPhotonDetectedPosition", &_nPhotonDetectedPosition, "nPhotonDetectedPosition/D");
+  // Positions of Secondary photons that reach the detector module
+  tree->Branch("nSecPhotonDetectedPosition", &_nSecPhotonDetectedPosition, "nSecPhotonDetectedPosition/D");
 
   //----------------------------- Photon Paths -----------------------------//
   // Count of photons that reach the window without reflection

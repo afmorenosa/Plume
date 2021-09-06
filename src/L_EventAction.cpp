@@ -38,8 +38,13 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   _nPhotCreated2 = 0;
   _nSecondaryPhotCreated2 = 0;
 
+  // Detected Photons
   _nPhotonDetected = 0;
   _nSecPhotonDetected = 0;
+
+  // Position of Detected Photons
+  _nPhotonDetectedPosition = 0.0;
+  _nSecPhotonDetectedPosition = 0.0;
 
   // Photon Paths
   _nPhotonStraight = 0;
@@ -105,8 +110,13 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nPhotCreated2 = 0;
   _nSecondaryPhotCreated2 = 0;
 
+  // Detected Photons
   _nPhotonDetected = 0;
   _nSecPhotonDetected = 0;
+
+  // Positions of Detected Photons
+  _nPhotonDetectedPosition = 0.0;
+  _nSecPhotonDetectedPosition = 0.0;
 
   // Photon Paths
   _nPhotonStraight = 0;
@@ -175,13 +185,17 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   runAction->_nPhotCreated2 = _nPhotCreated2;
   runAction->_nSecondaryPhotCreated2 = _nSecondaryPhotCreated2;
 
-  runAction->_nPhotonStraight = _nPhotonStraight;
-  runAction->_nPhotReflected = _nPhotReflected;
-
+  // Detected Photons
   runAction->_nPhotonDetected = _nPhotonDetected;
   runAction->_nSecPhotonDetected = _nSecPhotonDetected;
 
+  // Positions of Detected Photons
+  runAction->_nPhotonDetectedPosition = _nPhotonDetectedPosition;
+  runAction->_nSecPhotonDetectedPosition = _nSecPhotonDetectedPosition;
+
   // Photon Paths
+  runAction->_nPhotonStraight = _nPhotonStraight;
+  runAction->_nPhotReflected = _nPhotReflected;
 
   // Reflections
   runAction->_nPhotReflection = _nPhotReflection;

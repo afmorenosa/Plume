@@ -57,16 +57,28 @@ public:
     }
   }
 
-  void PhotonDetected (G4int trackID, G4int parentTrackID) {
+  void PhotonDetected (
+    G4int trackID,
+    G4int parentTrackID,
+    const G4ThreeVector PhotonDetectedPosition
+  ) {
 
     if (
       track_detected.find(trackID) == track_detected.end()
     ) {
       track_detected[trackID] = true;
       _nPhotonDetected++;
+      _nPhotonDetectedPosition = std::sqrt(
+        PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
+        PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
+      );
 
       if (parentTrackID != 1) {
         _nSecPhotonDetected++;
+        _nSecPhotonDetectedPosition = std::sqrt(
+          PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
+          PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
+        );
       }
 
     }
@@ -144,8 +156,13 @@ private:
   G4int _nPhotCreated2;
   G4int _nSecondaryPhotCreated2;
 
+  // Detected Photons
   G4int _nPhotonDetected;
   G4int _nSecPhotonDetected;
+
+  //Positions of Detected Photons
+  G4double _nPhotonDetectedPosition;
+  G4double _nSecPhotonDetectedPosition;
 
   // Photon Paths
   G4int _nPhotonStraight;
@@ -166,7 +183,7 @@ private:
 
   std::vector<G4double> *_secElecEnergy{};
 
-  // Positions
+  // Tablet Positions
   G4double _nPrePVxPosition;
   G4double _nPrePVyPosition;
   G4double _nPostPVxPosition;

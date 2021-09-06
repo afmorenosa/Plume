@@ -251,7 +251,9 @@ void L_SteppingAction::PhotonsPath(
   ) {
 
     // Reach the detector tablet
-    _eventAction->PhotonDetected(trackID, parentTrackID);
+    _eventAction->PhotonDetected(
+      trackID, parentTrackID, PostPoint->GetPosition()
+    );
 
   }
 
