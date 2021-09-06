@@ -96,9 +96,6 @@ public:
 
 public:
 
-  TBranch *_secElecEnergyBranch;
-  TBranch *_nReflectionPerPhotonBranch;
-
   // static const G4int _nPartMax = 200000;
   // G4int _TrackID[_nPartMax];
   // G4int _ParentID[_nPartMax];
