@@ -12,6 +12,15 @@ L_RunAction::L_RunAction() {
   //	_outputFileName = "data.root";
   timer = new G4Timer();
 
+  // Positions of Detected Photons
+  _nPhotonDetectedPosition = new std::vector<G4double>{};
+  _nPriPhotonDetectedPosition = new std::vector<G4double>{};
+  _nSecPhotonDetectedPosition = new std::vector<G4double>{};
+
+  // Reflections
+  _nReflectionPerPhoton = new std::vector<G4int>{};
+
+  // Electrons energy
   _secElecEnergy = new std::vector<G4double>{};
   _nReflectionPerPhoton = new std::vector<G4int>{};
 
@@ -75,11 +84,13 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPhotonDetected", &_nPhotonDetected, "nPhotonDetected/I");
   // Secondary photons that reach the detector module
   tree->Branch("nSecPhotonDetected", &_nSecPhotonDetected, "nSecPhotonDetected/I");
-  
+
   // Positions of Photons that reach the detector module
-  tree->Branch("nPhotonDetectedPosition", &_nPhotonDetectedPosition, "nPhotonDetectedPosition/D");
+  tree->Branch("nPhotonDetectedPosition", _nPhotonDetectedPosition);
+  // Positions of Primary photons that reach the detector module
+  tree->Branch("nPriPhotonDetectedPosition", _nPriPhotonDetectedPosition);
   // Positions of Secondary photons that reach the detector module
-  tree->Branch("nSecPhotonDetectedPosition", &_nSecPhotonDetectedPosition, "nSecPhotonDetectedPosition/D");
+  tree->Branch("nSecPhotonDetectedPosition", _nSecPhotonDetectedPosition);
 
   //----------------------------- Photon Paths -----------------------------//
   // Count of photons that reach the window without reflection
@@ -92,7 +103,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPhotReflection", &_nPhotReflection, "nPhotReflection/I");
 
   // Reflections for each photon
-  _nReflectionPerPhotonBranch = tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
+  tree->Branch("nReflectionPerPhoton", _nReflectionPerPhoton);
 
   //--------------------------- Electrons counter ---------------------------//
   // Number of secondary electrons created each sector
@@ -107,7 +118,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPostPVElecEnergy", &_nPostPVElecEnergy, "nPostPVElecEnergy/D");
 
   // Energy each of the secondary electrons
-  _secElecEnergyBranch = tree->Branch("secElecEnergy", _secElecEnergy);
+  tree->Branch("secElecEnergy", _secElecEnergy);
 
   //------------------------------- Positions -------------------------------//
   // X Position of primary electron before Tablet2 in second module

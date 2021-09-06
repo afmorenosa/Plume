@@ -65,8 +65,9 @@ public:
   G4int _nSecPhotonDetected;
 
   // Positions of Detected Photons
-  G4double _nPhotonDetectedPosition;
-  G4double _nSecPhotonDetectedPosition;
+  std::vector<G4double> *_nPhotonDetectedPosition{};
+  std::vector<G4double> *_nPriPhotonDetectedPosition{};
+  std::vector<G4double> *_nSecPhotonDetectedPosition{};
 
   // Photon Paths
   G4int _nPhotonStraight;
