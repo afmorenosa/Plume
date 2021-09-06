@@ -408,7 +408,7 @@ void RadiusDivision () {
 
   hist_primary_photon_counter->SetFillColor(kYellow);
   hist_primary_photon_counter->Draw();
-  canvas->Print("Totals/_primary_photon_counter.pdf");
+  canvas->Print("Totals/primary_photon_counter.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
