@@ -67,7 +67,6 @@ void RadiusDivision () {
 
   // Photon Counter
 
-
   TH1I *hist_total_photon_counter = new TH1I(
     "Total Photons Creation",
     "Total Photons Creation; n Photons; Events",

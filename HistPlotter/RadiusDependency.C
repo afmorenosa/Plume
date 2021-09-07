@@ -13,6 +13,9 @@ void RadiusDependency () {
 
   //------------------------ Branches variables ------------------------//
 
+  // Hit Angle
+  double hitAngle = 0.0;
+
   // Detected Photons Counter
   Int_t nPhotonDetected = -1;
   Int_t nSecPhotonDetected = -1;
@@ -21,6 +24,9 @@ void RadiusDependency () {
   std::vector<double> *nPhotonDetectedPosition = {};
   std::vector<double> *nPriPhotonDetectedPosition = {};
   std::vector<double> *nSecPhotonDetectedPosition = {};
+
+  // Hit Angle
+  tree->SetBranchAddress("hitAngle", &hitAngle);
 
   // Detected Photons Counter
   tree->SetBranchAddress("nPhotonDetected", &nPhotonDetected);
@@ -34,6 +40,16 @@ void RadiusDependency () {
   //--------------------------------------------------------------------//
 
   //---------------------------- Histograms ----------------------------//
+
+  // Hit Angle
+
+  TH1I *hist_hit_angle = new TH1I(
+    "Hit Angle",
+    "Hit Angle; Angle [°]; Events",
+    100,
+    0,
+    65
+  );
 
   // Detected Photons Counter
 
@@ -103,6 +119,9 @@ void RadiusDependency () {
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
 
+    // Hit Angle
+    hist_hit_angle->Fill(hitAngle / M_PI * 180);
+
     // Detected Photons Counter
     hist_total_photon_detected_counter->Fill(nPhotonDetected);
     hist_primary_photon_detected_counter->Fill(
@@ -140,6 +159,13 @@ void RadiusDependency () {
 
 //-------------------------- Darw Histograms --------------------------//
 
+// Hit Angle
+
+hist_hit_angle->SetFillColor(kYellow);
+hist_hit_angle->Draw();
+canvas->Print("Totals/hit_angle.pdf");
+canvas->Clear();
+
 // Detected Photons Counter
 
 hist_total_photon_detected_counter->SetFillColor(kYellow);
@@ -166,7 +192,7 @@ canvas->SetLogy(false);
 hist_total_photon_detected_position->SetStats(false);
 hist_total_photon_detected_position->SetFillColor(kYellow);
 hist_total_photon_detected_position->Draw();
-canvas->Print("Totals/total_photon__detected_position.pdf");
+canvas->Print("Totals/total_photon_detected_position.pdf");
 canvas->Clear();
 
 hist_primary_photon_detected_position->SetStats(false);
@@ -175,15 +201,11 @@ hist_primary_photon_detected_position->Draw();
 canvas->Print("Totals/primary_photon_detected_position.pdf");
 canvas->Clear();
 
-canvas->SetLogy(true);
-
 hist_secondary_photon_detected_position->SetStats(false);
 hist_secondary_photon_detected_position->SetFillColor(kYellow);
 hist_secondary_photon_detected_position->Draw();
 canvas->Print("Totals/secondary_photon_detected_position.pdf");
 canvas->Clear();
-
-canvas->SetLogy(false);
 
 hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 1.0);
 hist_secondary_photon_detected_counter_tail->SetFillColorAlpha(kRed, 0.5);
