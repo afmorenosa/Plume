@@ -56,7 +56,7 @@ void RadiusDependency () {
   TH1I *hist_secondary_photon_detected_counter = new TH1I(
     "Secondary Detected Photons",
     "Secondary Detected Photons; n Photons; Events",
-    100,
+    120,
     0,
     1200
   );
@@ -73,7 +73,7 @@ void RadiusDependency () {
 
   TH1I *hist_total_photon_detected_position = new TH1I(
     "Positions of Total Detected Photons",
-    "Positions of Total Photons; radius; Events",
+    "Positions of Total Photons; Radius [mm]; Events",
     100,
     0,
     5
@@ -81,7 +81,7 @@ void RadiusDependency () {
 
   TH1I *hist_primary_photon_detected_position = new TH1I(
     "Positions of Primary Detected Photons",
-    "Positions of Primary Photons; radius; Events",
+    "Positions of Primary Photons; Radius [mm]; Events",
     100,
     0,
     5
@@ -89,7 +89,7 @@ void RadiusDependency () {
 
   TH1I *hist_secondary_photon_detected_position = new TH1I(
     "Positions of Secondary Detected Photons",
-    "Positions of Secondary Photons; radius; Events",
+    "Positions of Secondary Photons; Radius [mm]; Events",
     100,
     0,
     5
@@ -175,7 +175,7 @@ hist_primary_photon_detected_position->Draw();
 canvas->Print("Totals/primary_photon_detected_position.pdf");
 canvas->Clear();
 
-canvas->SetLogy(true);
+//canvas->SetLogy(true);
 
 hist_secondary_photon_detected_position->SetStats(false);
 hist_secondary_photon_detected_position->SetFillColor(kYellow);
@@ -183,7 +183,7 @@ hist_secondary_photon_detected_position->Draw();
 canvas->Print("Totals/secondary_photon_detected_position.pdf");
 canvas->Clear();
 
-canvas->SetLogy(false);
+//canvas->SetLogy(false);
 
 hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 1.0);
 hist_secondary_photon_detected_counter_tail->SetFillColorAlpha(kRed, 0.5);
