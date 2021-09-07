@@ -61,7 +61,7 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   // The zone of the detector in which the primary electron hits
   tree->Branch("Zone", &_Zone, "Zone/I");
 
-  //--------------------------------- Zones ---------------------------------//
+  //--------------------------------- Angle ---------------------------------//
   // The angle in which the primary electron hits
   tree->Branch("hitAngle", &_hitAngle, "hitAngle/D");
 
