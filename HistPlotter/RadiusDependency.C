@@ -19,6 +19,7 @@ void RadiusDependency () {
 
   // Positions of Detected Photons
   std::vector<double> *nPhotonDetectedPosition = {};
+  std::vector<double> *nPriPhotonDetectedPosition = {};
   std::vector<double> *nSecPhotonDetectedPosition = {};
 
   // Detected Photons Counter
@@ -27,6 +28,7 @@ void RadiusDependency () {
 
   // Positions of Detected Photons
   tree->SetBranchAddress("nPhotonDetectedPosition", &nPhotonDetectedPosition);
+  tree->SetBranchAddress("nPriPhotonDetectedPosition", &nPriPhotonDetectedPosition);
   tree->SetBranchAddress("nSecPhotonDetectedPosition", &nSecPhotonDetectedPosition);
 
   //--------------------------------------------------------------------//
@@ -120,6 +122,12 @@ void RadiusDependency () {
         nPhotonDetectedPosition->at(j)
       );
 
+    }
+
+    for (size_t j = 0; j < nPriPhotonDetectedPosition->size(); j++) {
+      hist_primary_photon_detected_position->Fill(
+        nPriPhotonDetectedPosition->at(j)
+      );
     }
 
     for (size_t j = 0; j < nSecPhotonDetectedPosition->size(); j++) {
