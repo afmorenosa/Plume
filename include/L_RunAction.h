@@ -49,6 +49,9 @@ public:
   // Zones
   G4int _Zone;
 
+  // Hit Angle
+  G4double _hitAngle;
+
   // Photons counter
   G4int _nPhot[LConst::pmt_n_channels];
 

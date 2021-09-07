@@ -103,6 +103,11 @@ void L_TrackingAction::CountElectron(
     // Add secondary electron energy
     _eventAction->SecondaryElectronEnergy(track->GetTotalEnergy());
 
+  } else {
+
+    // Add secondary electron energy
+    _eventAction->HitAngle(track->GetMomentumDirection());
+
   }
 
 }

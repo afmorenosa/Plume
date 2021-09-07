@@ -29,6 +29,9 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   // Zones
   _Zone = -1;
 
+  // Hit Angle
+  _hitAngle = -1.0;
+
   // Photons counter
   _nPhotCreated = 0;
   _nSecondaryPhotCreated = 0;
@@ -100,6 +103,9 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 
   // Zones
   _Zone = -1;
+
+  // Hit Angle
+  _hitAngle = -1.0;
 
   // Photons counter
   _nPhotCreated = 0;
@@ -176,6 +182,9 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
   // Zones
   runAction->_Zone = _Zone;
+
+  // Hit Angle
+  runAction->_hitAngle = _hitAngle;
 
   // Photons counter
   runAction->_nPhotCreated = _nPhotCreated;

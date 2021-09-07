@@ -39,6 +39,17 @@ public:
   // Set the zone
   void SetZone(G4int Zone) {_Zone = Zone;}
 
+  // Hit Angle
+  void HitAngle(const G4ThreeVector InitialMomentum) {
+
+    if (_hitAngle < 0.0) {
+
+      _hitAngle = M_PI - InitialMomentum.theta();
+
+    }
+
+  }
+
   // Photons counter
   void InsertPhotonCreation() {_nPhotCreated++;}
   void InsertSecondaryPhotonCreation() {_nSecondaryPhotCreated++;};
@@ -150,6 +161,9 @@ private:
 
   // Zones
   G4int _Zone;
+
+  // Hit Angle
+  G4double _hitAngle;
 
   // Photons counter
   G4int _nPhot[LConst::pmt_n_channels];

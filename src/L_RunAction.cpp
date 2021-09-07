@@ -61,6 +61,10 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   // The zone of the detector in which the primary electron hits
   tree->Branch("Zone", &_Zone, "Zone/I");
 
+  //--------------------------------- Zones ---------------------------------//
+  // The angle in which the primary electron hits
+  tree->Branch("hitAngle", &_hitAngle, "hitAngle/D");
+
   //---------------------------- Photons counter ----------------------------//
   // Number of photons detected in each sector
   tree->Branch("nPhot", _nPhot, "nPhot[nSec]/I");
