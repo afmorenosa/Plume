@@ -77,6 +77,39 @@ void RadiusDependency () {
     1200
   );
 
+  TH2F *hist_total_photon_detected_angle_counter = new TH2F(
+    "Total Detected Photons and Hit Angle",
+    "Total Detected Photons and  Hit Angle; n Photons; Angle [°]; Events",
+    100,
+    0,
+    1000,
+    100,
+    0,
+    65
+  );
+
+  TH2F *hist_primary_photon_detected_angle_counter = new TH2F(
+    "Primary Detected Photons and Hit Angle",
+    "Primary Detected Photons and  Hit Angle; n Photons; Angle [°]; Events",
+    100,
+    0,
+    600,
+    100,
+    0,
+    65
+  );
+
+  TH2F *hist_secondary_photon_detected_angle_counter = new TH2F(
+    "Secondary Detected Photons and Hit Angle",
+    "Secondary Detected Photons and  Hit Angle; n Photons; Angle [°]; Events",
+    100,
+    0,
+    1200,
+    100,
+    0,
+    65
+  );
+
   TH1I *hist_secondary_photon_detected_counter_tail = new TH1I(
     "Secondary Detected Photons Counter tail",
     "Secondary Photons Detected Counter tail; n Photons; Events",
@@ -128,6 +161,16 @@ void RadiusDependency () {
       nPhotonDetected - nSecPhotonDetected
     );
     hist_secondary_photon_detected_counter->Fill(nSecPhotonDetected);
+
+    hist_total_photon_detected_angle_counter->Fill(
+        nPhotonDetected, hitAngle / M_PI * 180
+    );
+    hist_primary_photon_detected_angle_counter->Fill(
+        nPhotonDetected - nSecPhotonDetected, hitAngle / M_PI * 180
+    );
+    hist_secondary_photon_detected_angle_counter->Fill(
+        nSecPhotonDetected, hitAngle / M_PI * 180
+    );
 
     if (nSecPhotonDetected > 0) {
       hist_secondary_photon_detected_counter_tail->Fill(
@@ -187,6 +230,21 @@ canvas->Clear();
 
 canvas->SetLogy(false);
 
+hist_total_photon_detected_angle_counter->Draw("COLZ");
+hist_total_photon_detected_angle_counter->SetStats(kFALSE);
+canvas->Print("total_photon_detected_angle_counter.pdf");
+canvas->Clear();
+
+hist_primary_photon_detected_angle_counter->Draw("COLZ");
+hist_primary_photon_detected_angle_counter->SetStats(kFALSE);
+canvas->Print("primary_photon_detected_angle_counter.pdf");
+canvas->Clear();
+
+hist_secondary_photon_detected_angle_counter->Draw("COLZ");
+hist_secondary_photon_detected_angle_counter->SetStats(kFALSE);
+canvas->Print("secondary_photon_detected_angle_counter.pdf");
+canvas->Clear();
+
 // Positions of Detected Photons
 
 hist_total_photon_detected_position->SetStats(false);
@@ -213,5 +271,8 @@ hist_total_photon_detected_counter->Draw();
 hist_secondary_photon_detected_counter_tail->Draw("SAME");
 canvas->Print("Totals/total_photons_detected_counter_tail.pdf");
 canvas->Clear();
+
+hist_primary_photon_detected_angle_counter->Draw("COLZ");
+hist_primary_photon_detected_angle_counter->SetStats(kFALSE);
 
 }

@@ -422,7 +422,7 @@ void RadiusDivision () {
 
   hist_total_photon_detected_counter->SetFillColor(kYellow);
   hist_total_photon_detected_counter->Draw();
-  canvas->Print("Totals/total_photon__detected_counter.pdf");
+  canvas->Print("Totals/total_photon_detected_counter.pdf");
   canvas->Clear();
 
   hist_primary_photon_detected_counter->SetFillColor(kYellow);
