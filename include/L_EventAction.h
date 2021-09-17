@@ -85,6 +85,19 @@ public:
         PhotonDetectedPosition.y()*PhotonDetectedPosition.y()
       );
 
+      if (hit_radius < std::sqrt(5.)*mm) {
+        _nPhotonZone0++;
+      } else if (hit_radius < std::sqrt(10.)*mm) {
+        _nPhotonZone1++;
+      } else if (hit_radius < std::sqrt(15.)*mm) {
+        _nPhotonZone2++;
+      } else if (hit_radius < std::sqrt(20.)*mm) {
+        _nPhotonZone3++;
+      } else {
+        _nPhotonZone4++;
+      }
+
+
       _nPhotonDetectedPosition->push_back(hit_radius);
 
       if (parentTrackID != 1) {
@@ -161,6 +174,13 @@ private:
 
   // Zones
   G4int _Zone;
+
+  // Counter of Photons in Zone Detector
+  G4int _nPhotonZone0;
+  G4int _nPhotonZone1;
+  G4int _nPhotonZone2;
+  G4int _nPhotonZone3;
+  G4int _nPhotonZone4;
 
   // Hit Angle
   G4double _hitAngle;

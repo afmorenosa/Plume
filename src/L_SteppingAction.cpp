@@ -315,7 +315,7 @@ void L_SteppingAction::SecondModuleElectrons(
         position_vec.x()*position_vec.x() + position_vec.y()*position_vec.y()
       );
 
-      int N = 10;
+      int N = 5;
 
       for (G4int n = 0; n < N; n++) {
 

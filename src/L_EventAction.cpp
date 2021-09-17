@@ -29,6 +29,13 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   // Zones
   _Zone = -1;
 
+  // Counter of Photons in Zone Detector
+  _nPhotonZone0 = 0;
+  _nPhotonZone1 = 0;
+  _nPhotonZone2 = 0;
+  _nPhotonZone3 = 0;
+  _nPhotonZone4 = 0;
+
   // Hit Angle
   _hitAngle = -1.0;
 
@@ -103,6 +110,13 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
 
   // Zones
   _Zone = -1;
+
+  // Counter of Photons in Zone Detector
+  _nPhotonZone0 = 0;
+  _nPhotonZone1 = 0;
+  _nPhotonZone2 = 0;
+  _nPhotonZone3 = 0;
+  _nPhotonZone4 = 0;
 
   // Hit Angle
   _hitAngle = -1.0;
@@ -182,6 +196,13 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
 
   // Zones
   runAction->_Zone = _Zone;
+
+  // Counter of Photons in Zone Detector
+  runAction->_nPhotonZone0 = _nPhotonZone0;
+  runAction->_nPhotonZone1 = _nPhotonZone1;
+  runAction->_nPhotonZone2 = _nPhotonZone2;
+  runAction->_nPhotonZone3 = _nPhotonZone3;
+  runAction->_nPhotonZone4 = _nPhotonZone4;
 
   // Hit Angle
   runAction->_hitAngle = _hitAngle;
