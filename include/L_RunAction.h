@@ -49,6 +49,13 @@ public:
   // Zones
   G4int _Zone;
 
+  // Counter of Photons in Zone Detector
+  G4int _nPhotonZone0;
+  G4int _nPhotonZone1;
+  G4int _nPhotonZone2;
+  G4int _nPhotonZone3;
+  G4int _nPhotonZone4;
+
   // Photons counter
   G4int _nPhot[LConst::pmt_n_channels];
 

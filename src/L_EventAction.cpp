@@ -177,6 +177,13 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   // Zones
   runAction->_Zone = _Zone;
 
+  // Counter of Photons in Zone Detector
+  runAction->_nPhotonZone0 = _nPhotonZone0;
+  runAction->_nPhotonZone1 = _nPhotonZone1;
+  runAction->_nPhotonZone2 = _nPhotonZone2;
+  runAction->_nPhotonZone3 = _nPhotonZone3;
+  runAction->_nPhotonZone4 = _nPhotonZone4;
+
   // Photons counter
   runAction->_nPhotCreated = _nPhotCreated;
   runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;

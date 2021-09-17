@@ -62,8 +62,20 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nSec", &_nSec, "nSec/I");
 
   //--------------------------------- Zones ---------------------------------//
-  // The zone of the detector in which the primary electron hits
+  // The zone of the Tablet in which the primary electron hits
   tree->Branch("Zone", &_Zone, "Zone/I");
+
+  // Counter of Photons which hits the zone 0 of the detector
+  tree->Branch("nPhotonZone0", &_nPhotonZone0, "nPhotonZone0/I");
+  // Counter of Photons which hits the zone 1 of the detector
+  tree->Branch("nPhotonZone1", &_nPhotonZone1, "nPhotonZone1/I");
+  // Counter of Photons which hits the zone 2 of the detector
+  tree->Branch("nPhotonZone2", &_nPhotonZone2, "nPhotonZone2/I");
+  // Counter of Photons which hits the zone 3 of the detector
+  tree->Branch("nPhotonZone3", &_nPhotonZone3, "nPhotonZone3/I");
+  // Counter of Photons which hits the zone 4 of the detector
+  tree->Branch("nPhotonZone4", &_nPhotonZone4, "nPhotonZone4/I");
+
 
   //---------------------------- Photons counter ----------------------------//
   // Number of photons detected in each sector
