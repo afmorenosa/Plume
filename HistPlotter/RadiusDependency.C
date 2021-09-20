@@ -145,7 +145,8 @@ void RadiusDependency () {
     -5,
     5
   );
-/////////////------------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+  /////////////------------------------------------------>>>>>>>>>>>>>>>>
 
   // Test
   TH1F *hist_total_photon_detected_position_test1 = new TH1F(
@@ -188,7 +189,7 @@ void RadiusDependency () {
     5
   );
 
-  /////////////--------------------------------------------\\\\\\\\\\\\
+  /////////////-------------------------------------------->>>>>>>>>>>>>>>>
 
   //--------------------------------------------------------------------//
   Double_t totalPhotonsZone0 = 0.;
@@ -277,7 +278,7 @@ void RadiusDependency () {
       );
     }
 
-    // //////////// ------ TEST ------ \\\\\\\\\\\\ \\
+    // //////////// ------ TEST ------ >>>>>>>>>>>>>> >>
 
     for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
       if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
@@ -429,7 +430,7 @@ hist_total_photon_detected_position_normalized->Draw();
 canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
 canvas->Clear();
 
-///////// Test 3 \\\\\\\\\\\\
+///////// Test 3 >>>>>>>>>>>>>>>>
 
 hist_total_photon_detected_position_test1->Scale(
   1./hist_total_photon_detected_position_test1->Integral();
