@@ -150,40 +150,40 @@ void RadiusDependency () {
 
   // Test
   TH1F *hist_total_photon_detected_position_test1 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 1]",
-    "Positions of Total Detected Photons Test [Zone 1]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized [Zone 1]",
+    "Positions of Total Detected Photons Normalized [Zone 1]; Radius [mm]; Events",
     100,
     0,
     5
   );
 
   TH1F *hist_total_photon_detected_position_test2 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 2]",
-    "Positions of Total Detected Photons Test [Zone 2]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized [Zone 2]",
+    "Positions of Total Detected Photons Normalized [Zone 2]; Radius [mm]; Events",
     100,
     0,
     5
   );
 
   TH1F *hist_total_photon_detected_position_test3 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 3]",
-    "Positions of Total Detected Photons Test [Zone 3]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized [Zone 3]",
+    "Positions of Total Detected Photons Normalized [Zone 3]; Radius [mm]; Events",
     100,
     0,
     5
   );
 
   TH1F *hist_total_photon_detected_position_test4 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 4]",
-    "Positions of Total Detected Photons Test [Zone 4]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized [Zone 4]",
+    "Positions of Total Detected Photons Normalized [Zone 4]; Radius [mm]; Events",
     100,
     0,
     5
   );
 
   TH1F *hist_total_photon_detected_position_test5 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 5]",
-    "Positions of Total Detected Photons Test [Zone 5]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized By Zones",
+    "Positions of Total Detected Photons Normalized [Zone 5]; Radius [mm]; Events",
     100,
     0,
     5
