@@ -261,8 +261,22 @@ void RadiusDependency () {
     zones_counter[4] = nPhotonZone4;
 
     for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
+      Int_t phtoton_zone = 0;
+
+      if (nPhotonDetectedPosition->at(j) < std::sqrt(5.0)) {
+        phtoton_zone = 0;
+      } else if (nPhotonDetectedPosition ->at(j)< std::sqrt(10.0)) {
+        phtoton_zone = 1;
+      } else if (nPhotonDetectedPosition ->at(j)< std::sqrt(15.0)) {
+        phtoton_zone = 2;
+      } else if (nPhotonDetectedPosition ->at(j)< std::sqrt(20.0)) {
+        phtoton_zone = 3;
+      } else {
+        phtoton_zone = 4;
+      }
+
       hist_total_photon_detected_position_normalized->Fill(
-        nPhotonDetectedPosition->at(j), 1.0/(zones_counter[Zone]*1.0)
+        nPhotonDetectedPosition->at(j), 1.0/(zones_counter[phtoton_zone]*1.0)
       );
     }
 
@@ -405,7 +419,7 @@ canvas->Clear();
 // Test
 
 hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
-hist_total_photon_detected_position_normalized->Draw();
+hist_total_photon_detected_position_normalized->Draw("hist");
 canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
 canvas->Clear();
 
