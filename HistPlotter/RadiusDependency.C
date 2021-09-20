@@ -423,4 +423,40 @@ hist_total_photon_detected_position_normalized->Draw("hist");
 canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
 canvas->Clear();
 
+///////// Test 3 \\\\\\\\\\\\
+
+hist_total_photon_detected_position_test1->Scale(
+  1./hist_total_photon_detected_position_test1->Integral();
+);
+hist_total_photon_detected_position_test1->SetStats(false);
+hist_total_photon_detected_position_test1->SetFillColor(kYellow);
+hist_total_photon_detected_position_test2->Scale(
+  1./hist_total_photon_detected_position_test2->Integral();
+);
+hist_total_photon_detected_position_test2->SetStats(false);
+hist_total_photon_detected_position_test2->SetFillColor(kYellow);
+hist_total_photon_detected_position_test3->Scale(
+  1./hist_total_photon_detected_position_test3->Integral();
+);
+hist_total_photon_detected_position_test3->SetStats(false);
+hist_total_photon_detected_position_test3->SetFillColor(kYellow);
+hist_total_photon_detected_position_test4->Scale(
+  1./hist_total_photon_detected_position_test4->Integral();
+);
+hist_total_photon_detected_position_test4->SetStats(false);
+hist_total_photon_detected_position_test4->SetFillColor(kYellow);
+hist_total_photon_detected_position_test5->Scale(
+  1./hist_total_photon_detected_position_test5->Integral();
+);
+hist_total_photon_detected_position_test5->SetStats(false);
+hist_total_photon_detected_position_test5->SetFillColor(kYellow);
+
+hist_total_photon_detected_position_test5->Draw("HIST");
+hist_total_photon_detected_position_test4->Draw("HIST SAME");
+hist_total_photon_detected_position_test3->Draw("HIST SAME");
+hist_total_photon_detected_position_test2->Draw("HIST SAME");
+hist_total_photon_detected_position_test1->Draw("HIST SAME");
+canvas->Print("Totals/total_photon__detected_position_test3.pdf");
+canvas->Clear();
+
 }
