@@ -229,8 +229,8 @@ void RadiusDependency () {
   );
 
   TH1F *hist_total_photon_detected_position_test5 = new TH1F(
-    "Positions of Total Detected Photons Normalized By Zones",
-    "Positions of Total Detected Photons Normalized [Zone 5]; Radius [mm]; Events",
+    "Positions of Total Detected Photons Normalized [Zone 5]",
+    "Positions of Total Detected Photons Normalized By Zones; Radius [mm]; Events",
     100,
     0,
     5
