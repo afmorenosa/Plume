@@ -362,27 +362,27 @@ canvas->Clear();
 // Position of Detected Photons Normalized
 
 hist_total_photon_detected_position_zone_1->Scale(
-  1./hist_total_photon_detected_position_zone_1->Integral();
+  1./hist_total_photon_detected_position_zone_1->Integral()
 );
 hist_total_photon_detected_position_zone_1->SetStats(false);
 hist_total_photon_detected_position_zone_1->SetFillColor(kYellow);
 hist_total_photon_detected_position_zone_2->Scale(
-  1./hist_total_photon_detected_position_zone_2->Integral();
+  1./hist_total_photon_detected_position_zone_2->Integral()
 );
 hist_total_photon_detected_position_zone_2->SetStats(false);
 hist_total_photon_detected_position_zone_2->SetFillColor(kYellow);
 hist_total_photon_detected_position_zone_3->Scale(
-  1./hist_total_photon_detected_position_zone_3->Integral();
+  1./hist_total_photon_detected_position_zone_3->Integral()
 );
 hist_total_photon_detected_position_zone_3->SetStats(false);
 hist_total_photon_detected_position_zone_3->SetFillColor(kYellow);
 hist_total_photon_detected_position_zone_4->Scale(
-  1./hist_total_photon_detected_position_zone_4->Integral();
+  1./hist_total_photon_detected_position_zone_4->Integral()
 );
 hist_total_photon_detected_position_zone_4->SetStats(false);
 hist_total_photon_detected_position_zone_4->SetFillColor(kYellow);
 hist_total_photon_detected_position_zone_5->Scale(
-  1./hist_total_photon_detected_position_zone_5->Integral();
+  1./hist_total_photon_detected_position_zone_5->Integral()
 );
 hist_total_photon_detected_position_zone_5->SetStats(false);
 hist_total_photon_detected_position_zone_5->SetFillColor(kYellow);
