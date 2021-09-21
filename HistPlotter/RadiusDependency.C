@@ -123,49 +123,83 @@ void RadiusDependency () {
     -5,
     5
   );
+<<<<<<< HEAD
 
   // Position of Detected Photons Normalized
   TH1F *hist_total_photon_detected_position_zone_1 = new TH1F(
     "Positions of Total Detected Photons Test",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
+=======
+
+  /////////////------------------------------------------>>>>>>>>>>>>>>>>
+
+  // Test
+  TH1F *hist_total_photon_detected_position_test1 = new TH1F(
+    "Positions of Total Detected Photons Normalized [Zone 1]",
+    "Positions of Total Detected Photons Normalized [Zone 1]; Radius [mm]; Events",
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
     100,
     0,
     5
   );
 
+<<<<<<< HEAD
   TH1F *hist_total_photon_detected_position_zone_2 = new TH1F(
     "Positions of Total Detected Photons Test",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
+=======
+  TH1F *hist_total_photon_detected_position_test2 = new TH1F(
+    "Positions of Total Detected Photons Normalized [Zone 2]",
+    "Positions of Total Detected Photons Normalized [Zone 2]; Radius [mm]; Events",
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
     100,
     0,
     5
   );
 
+<<<<<<< HEAD
   TH1F *hist_total_photon_detected_position_zone_3 = new TH1F(
     "Positions of Total Detected Photons Test",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
+=======
+  TH1F *hist_total_photon_detected_position_test3 = new TH1F(
+    "Positions of Total Detected Photons Normalized [Zone 3]",
+    "Positions of Total Detected Photons Normalized [Zone 3]; Radius [mm]; Events",
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
     100,
     0,
     5
   );
 
+<<<<<<< HEAD
   TH1F *hist_total_photon_detected_position_zone_4 = new TH1F(
     "Positions of Total Detected Photons Test",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
+=======
+  TH1F *hist_total_photon_detected_position_test4 = new TH1F(
+    "Positions of Total Detected Photons Normalized [Zone 4]",
+    "Positions of Total Detected Photons Normalized [Zone 4]; Radius [mm]; Events",
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
     100,
     0,
     5
   );
 
+<<<<<<< HEAD
   TH1F *hist_total_photon_detected_position_zone_5 = new TH1F(
     "Positions of Total Detected Photons Test",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
+=======
+  TH1F *hist_total_photon_detected_position_test5 = new TH1F(
+    "Positions of Total Detected Photons Normalized [Zone 5]",
+    "Positions of Total Detected Photons Normalized By Zones; Radius [mm]; Events",
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
     100,
     0,
     5
   );
 
-  /////////////--------------------------------------------\\\\\\\\\\\\
+  /////////////-------------------------------------------->>>>>>>>>>>>>>>>
 
   //--------------------------------------------------------------------//
 
@@ -214,7 +248,25 @@ void RadiusDependency () {
     // Positions of Primary Electron
     hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
 
+<<<<<<< HEAD
     // Positions of Detected Photons Normalized
+=======
+    std::map<Int_t, Int_t> zones_counter;
+
+    zones_counter[0] = nPhotonZone0;
+    zones_counter[1] = nPhotonZone1;
+    zones_counter[2] = nPhotonZone2;
+    zones_counter[3] = nPhotonZone3;
+    zones_counter[4] = nPhotonZone4;
+
+    for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
+      hist_total_photon_detected_position_normalized->Fill(
+        nPhotonDetectedPosition->at(j), 1.0/(zones_counter[Zone]*1.0)
+      );
+    }
+
+    // //////////// ------ TEST ------ >>>>>>>>>>>>>> >>
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
 
     for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
       if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
@@ -359,7 +411,18 @@ canvas->Print("pos_PVPosition.pdf");
 canvas->Clear();
 
 
+<<<<<<< HEAD
 // Position of Detected Photons Normalized
+=======
+// Test
+
+hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
+hist_total_photon_detected_position_normalized->Draw();
+canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
+canvas->Clear();
+
+///////// Test 3 >>>>>>>>>>>>>>>>
+>>>>>>> 6ae243952e8635b02908ceb9480cad1573ae81a8
 
 hist_total_photon_detected_position_zone_1->Scale(
   1./hist_total_photon_detected_position_zone_1->Integral()
