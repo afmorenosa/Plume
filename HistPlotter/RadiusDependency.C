@@ -17,13 +17,6 @@ void RadiusDependency () {
   // Zones
   Int_t Zone = -1;
 
-  // Counter of Photons in Zone Detector
-  Int_t nPhotonZone0 = -1;
-  Int_t nPhotonZone1 = -1;
-  Int_t nPhotonZone2 = -1;
-  Int_t nPhotonZone3 = -1;
-  Int_t nPhotonZone4 = -1;
-
   // Detected Photons Counter
   Int_t nPhotonDetected = -1;
   Int_t nSecPhotonDetected = -1;
@@ -39,13 +32,6 @@ void RadiusDependency () {
 
   // Zones
   tree->SetBranchAddress("Zone", &Zone);
-
-  // Counter of Photons in Zone Detector
-  tree->SetBranchAddress("nPhotonZone0", &nPhotonZone0);
-  tree->SetBranchAddress("nPhotonZone1", &nPhotonZone1);
-  tree->SetBranchAddress("nPhotonZone2", &nPhotonZone2);
-  tree->SetBranchAddress("nPhotonZone3", &nPhotonZone3);
-  tree->SetBranchAddress("nPhotonZone4", &nPhotonZone4);
 
   // Detected Photons Counter
   tree->SetBranchAddress("nPhotonDetected", &nPhotonDetected);
@@ -124,14 +110,6 @@ void RadiusDependency () {
     5
   );
 
-  TH1F *hist_total_photon_detected_position_normalized = new TH1F(
-    "Positions of Total Detected Photons Normalized",
-    "Positions of Total Detected Photons Normalized; Radius [mm]; Events",
-    100,
-    0,
-    5
-  );
-
 
   // 2D Positions Histogram of Primary Electron
 
@@ -145,44 +123,43 @@ void RadiusDependency () {
     -5,
     5
   );
-/////////////------------------------------------------\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-  // Test
-  TH1F *hist_total_photon_detected_position_test1 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 1]",
-    "Positions of Total Detected Photons Test [Zone 1]; Radius [mm]; Events",
+  // Position of Detected Photons Normalized
+  TH1F *hist_total_photon_detected_position_zone_1 = new TH1F(
+    "Positions of Total Detected Photons Test",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
     100,
     0,
     5
   );
 
-  TH1F *hist_total_photon_detected_position_test2 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 2]",
-    "Positions of Total Detected Photons Test [Zone 2]; Radius [mm]; Events",
+  TH1F *hist_total_photon_detected_position_zone_2 = new TH1F(
+    "Positions of Total Detected Photons Test",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
     100,
     0,
     5
   );
 
-  TH1F *hist_total_photon_detected_position_test3 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 3]",
-    "Positions of Total Detected Photons Test [Zone 3]; Radius [mm]; Events",
+  TH1F *hist_total_photon_detected_position_zone_3 = new TH1F(
+    "Positions of Total Detected Photons Test",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
     100,
     0,
     5
   );
 
-  TH1F *hist_total_photon_detected_position_test4 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 4]",
-    "Positions of Total Detected Photons Test [Zone 4]; Radius [mm]; Events",
+  TH1F *hist_total_photon_detected_position_zone_4 = new TH1F(
+    "Positions of Total Detected Photons Test",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
     100,
     0,
     5
   );
 
-  TH1F *hist_total_photon_detected_position_test5 = new TH1F(
-    "Positions of Total Detected Photons Test [Zone 5]",
-    "Positions of Total Detected Photons Test [Zone 5]; Radius [mm]; Events",
+  TH1F *hist_total_photon_detected_position_zone_5 = new TH1F(
+    "Positions of Total Detected Photons Test",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
     100,
     0,
     5
@@ -191,35 +168,9 @@ void RadiusDependency () {
   /////////////--------------------------------------------\\\\\\\\\\\\
 
   //--------------------------------------------------------------------//
-  Double_t totalPhotonsZone0 = 0.;
-  Double_t totalPhotonsZone1 = 0.;
-  Double_t totalPhotonsZone2 = 0.;
-  Double_t totalPhotonsZone3 = 0.;
-  Double_t totalPhotonsZone4 = 0.;
 
   int nentries, nbytes;
   nentries = (Int_t)tree->GetEntries();
-
-  for (int i = 0; i < nentries; i++) {
-    nbytes = tree->GetEntry(i);
-
-    for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
-
-      if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
-        totalPhotonsZone0++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(10.)) {
-        totalPhotonsZone1++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(15.)) {
-        totalPhotonsZone2++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(20.)) {
-        totalPhotonsZone3++;
-      } else {
-        totalPhotonsZone4++;
-      }
-
-    }
-
-  }
 
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
@@ -263,41 +214,27 @@ void RadiusDependency () {
     // Positions of Primary Electron
     hist_pos_PVPosition->Fill(nPostPVxPosition, nPostPVyPosition);
 
-    std::map<Int_t, Int_t> zones_counter;
-
-    zones_counter[0] = nPhotonZone0;
-    zones_counter[1] = nPhotonZone1;
-    zones_counter[2] = nPhotonZone2;
-    zones_counter[3] = nPhotonZone3;
-    zones_counter[4] = nPhotonZone4;
-
-    for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
-      hist_total_photon_detected_position_normalized->Fill(
-        nPhotonDetectedPosition->at(j), 1.0/(zones_counter[Zone]*1.0)
-      );
-    }
-
-    // //////////// ------ TEST ------ \\\\\\\\\\\\ \\
+    // Positions of Detected Photons Normalized
 
     for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
       if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
-        hist_total_photon_detected_position_test1->Fill(
+        hist_total_photon_detected_position_zone_1->Fill(
           nPhotonDetectedPosition->at(j)
         );
       } else if (nPhotonDetectedPosition->at(j) < std::sqrt(10.)) {
-        hist_total_photon_detected_position_test2->Fill(
+        hist_total_photon_detected_position_zone_2->Fill(
           nPhotonDetectedPosition->at(j)
         );
       } else if (nPhotonDetectedPosition->at(j) < std::sqrt(15.)) {
-        hist_total_photon_detected_position_test3->Fill(
+        hist_total_photon_detected_position_zone_3->Fill(
           nPhotonDetectedPosition->at(j)
         );
       } else if (nPhotonDetectedPosition->at(j) < std::sqrt(20.)) {
-        hist_total_photon_detected_position_test4->Fill(
+        hist_total_photon_detected_position_zone_4->Fill(
           nPhotonDetectedPosition->at(j)
         );
       } else {
-        hist_total_photon_detected_position_test5->Fill(
+        hist_total_photon_detected_position_zone_5->Fill(
           nPhotonDetectedPosition->at(j)
         );
       }
@@ -422,47 +359,40 @@ canvas->Print("pos_PVPosition.pdf");
 canvas->Clear();
 
 
-// Test
+// Position of Detected Photons Normalized
 
-hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
-hist_total_photon_detected_position_normalized->Draw();
-canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
-canvas->Clear();
+hist_total_photon_detected_position_zone_1->Scale(
+  1./hist_total_photon_detected_position_zone_1->Integral();
+);
+hist_total_photon_detected_position_zone_1->SetStats(false);
+hist_total_photon_detected_position_zone_1->SetFillColor(kYellow);
+hist_total_photon_detected_position_zone_2->Scale(
+  1./hist_total_photon_detected_position_zone_2->Integral();
+);
+hist_total_photon_detected_position_zone_2->SetStats(false);
+hist_total_photon_detected_position_zone_2->SetFillColor(kYellow);
+hist_total_photon_detected_position_zone_3->Scale(
+  1./hist_total_photon_detected_position_zone_3->Integral();
+);
+hist_total_photon_detected_position_zone_3->SetStats(false);
+hist_total_photon_detected_position_zone_3->SetFillColor(kYellow);
+hist_total_photon_detected_position_zone_4->Scale(
+  1./hist_total_photon_detected_position_zone_4->Integral();
+);
+hist_total_photon_detected_position_zone_4->SetStats(false);
+hist_total_photon_detected_position_zone_4->SetFillColor(kYellow);
+hist_total_photon_detected_position_zone_5->Scale(
+  1./hist_total_photon_detected_position_zone_5->Integral();
+);
+hist_total_photon_detected_position_zone_5->SetStats(false);
+hist_total_photon_detected_position_zone_5->SetFillColor(kYellow);
 
-///////// Test 3 \\\\\\\\\\\\
-
-hist_total_photon_detected_position_test1->Scale(
-  1./hist_total_photon_detected_position_test1->Integral();
-);
-hist_total_photon_detected_position_test1->SetStats(false);
-hist_total_photon_detected_position_test1->SetFillColor(kYellow);
-hist_total_photon_detected_position_test2->Scale(
-  1./hist_total_photon_detected_position_test2->Integral();
-);
-hist_total_photon_detected_position_test2->SetStats(false);
-hist_total_photon_detected_position_test2->SetFillColor(kYellow);
-hist_total_photon_detected_position_test3->Scale(
-  1./hist_total_photon_detected_position_test3->Integral();
-);
-hist_total_photon_detected_position_test3->SetStats(false);
-hist_total_photon_detected_position_test3->SetFillColor(kYellow);
-hist_total_photon_detected_position_test4->Scale(
-  1./hist_total_photon_detected_position_test4->Integral();
-);
-hist_total_photon_detected_position_test4->SetStats(false);
-hist_total_photon_detected_position_test4->SetFillColor(kYellow);
-hist_total_photon_detected_position_test5->Scale(
-  1./hist_total_photon_detected_position_test5->Integral();
-);
-hist_total_photon_detected_position_test5->SetStats(false);
-hist_total_photon_detected_position_test5->SetFillColor(kYellow);
-
-hist_total_photon_detected_position_test5->Draw("HIST");
-hist_total_photon_detected_position_test4->Draw("HIST SAME");
-hist_total_photon_detected_position_test3->Draw("HIST SAME");
-hist_total_photon_detected_position_test2->Draw("HIST SAME");
-hist_total_photon_detected_position_test1->Draw("HIST SAME");
-canvas->Print("Totals/total_photon__detected_position_test3.pdf");
+hist_total_photon_detected_position_zone_5->Draw("HIST");
+hist_total_photon_detected_position_zone_4->Draw("HIST SAME");
+hist_total_photon_detected_position_zone_3->Draw("HIST SAME");
+hist_total_photon_detected_position_zone_2->Draw("HIST SAME");
+hist_total_photon_detected_position_zone_1->Draw("HIST SAME");
+canvas->Print("Totals/total_photon__detected_position_normalized.pdf");
 canvas->Clear();
 
 
