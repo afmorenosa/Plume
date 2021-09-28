@@ -147,7 +147,7 @@ void RadiusDependency () {
 
   // Counter of Positions of Detected Photons
 
-  TH1I *hist_total_photon_detected_position = new TH1I(
+  TH1F *hist_total_photon_detected_position = new TH1F(
     "Positions of Total Detected Photons",
     "Positions of Total Detected Photons; Radius [mm]; Events",
     100,
@@ -155,7 +155,7 @@ void RadiusDependency () {
     5
   );
 
-  TH1I *hist_primary_photon_detected_position = new TH1I(
+  TH1F *hist_primary_photon_detected_position = new TH1F(
     "Positions of Primary Detected Photons",
     "Positions of Primary Detected Photons; Radius [mm]; Events",
     100,
@@ -163,7 +163,7 @@ void RadiusDependency () {
     5
   );
 
-  TH1I *hist_secondary_photon_detected_position = new TH1I(
+  TH1F *hist_secondary_photon_detected_position = new TH1F(
     "Positions of Secondary Detected Photons",
     "Positions of Secondary Detected Photons; Radius [mm]; Events",
     100,
@@ -236,7 +236,17 @@ void RadiusDependency () {
     5
   );
 
-  /////////////--------------------------------------------
+  // Position of Detected Photons Normalized by Radius
+  TH1F *hist_total_photon_detected_position_radius = new TH1F(
+    "Positions of Total Detected Photons Test Normalized",
+    "Positions of Total Detected Photons Test; Radius [mm]; Events",
+    100,
+    0,
+    5
+  );
+
+
+  /////////////-------------------------------------------->>>>>>>>>>>>>>>>
 
   //--------------------------------------------------------------------//
   Double_t totalPhotonsZone0 = 0.;
@@ -299,14 +309,7 @@ void RadiusDependency () {
       );
     }
 
-    // Positions of Detected Photons
-    for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
-
-      hist_total_photon_detected_position->Fill(
-        nPhotonDetectedPosition->at(j)
-      );
-
-    }
+    // Positions of Detected Photons (Primary and secondary)
 
     for (size_t j = 0; j < nPriPhotonDetectedPosition->size(); j++) {
       hist_primary_photon_detected_position->Fill(
@@ -353,6 +356,16 @@ void RadiusDependency () {
 
     // //////////// ------ TEST ------
     for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
+
+      // Positions of Detected Photons
+
+      hist_total_photon_detected_position->Fill(
+        nPhotonDetectedPosition->at(j)
+      );
+
+
+      // Positions of Detected Photons Normalized by Zones
+
       if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
         hist_total_photon_detected_position_test1->Fill(
           nPhotonDetectedPosition->at(j)
@@ -374,6 +387,24 @@ void RadiusDependency () {
           nPhotonDetectedPosition->at(j)
         );
       }
+
+
+      // Position of Detected Photons Normalized by Radius
+
+      Int_t bin = hist_total_photon_detected_position_radius->FindBin(
+        nPhotonDetectedPosition->at(j)
+      );
+
+      float inv_weight = hist_total_photon_detected_position_radius->GetBinCenter(
+        bin
+      );
+      // + hist_total_photon_detected_position_radius->GetBinWidth(
+      //   bin
+      // )/2;
+
+      hist_total_photon_detected_position_radius->Fill(
+        nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+      );
 
     }
 
@@ -554,6 +585,12 @@ hist_total_photon_detected_position_test3->Draw("HIST SAME");
 hist_total_photon_detected_position_test2->Draw("HIST SAME");
 hist_total_photon_detected_position_test1->Draw("HIST SAME");
 canvas->Print("Totals/total_photon__detected_position_test3.pdf");
+canvas->Clear();
+
+// Position of Detected Photons Normalized by Radius
+hist_total_photon_detected_position_radius->SetFillColor(kYellow);
+hist_total_photon_detected_position_radius->Draw("HIST");
+canvas->Print("total_photon_detected_position_radius_norm.pdf");
 canvas->Clear();
 
 }
