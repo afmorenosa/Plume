@@ -169,7 +169,7 @@ void RadiusDependency () {
   TH1F *hist_total_photon_detected_position_radius = new TH1F(
     "Positions of Total Detected Photons Test Normalized",
     "Positions of Total Detected Photons Test; Radius [mm]; Events",
-    100,
+    50,
     0,
     5
   );
@@ -262,9 +262,6 @@ void RadiusDependency () {
       float inv_weight = hist_total_photon_detected_position_radius->GetBinCenter(
         bin
       );
-      // + hist_total_photon_detected_position_radius->GetBinWidth(
-      //   bin
-      // )/2;
 
       hist_total_photon_detected_position_radius->Fill(
         nPhotonDetectedPosition->at(j), 1.0 / inv_weight
@@ -425,6 +422,7 @@ canvas->Print("Totals/total_photon__detected_position_normalized.pdf");
 canvas->Clear();
 
 // Position of Detected Photons Normalized by Radius
+hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0,500e3);
 hist_total_photon_detected_position_radius->SetFillColor(kYellow);
 hist_total_photon_detected_position_radius->Draw("HIST");
 canvas->Print("total_photon_detected_position_radius_norm.pdf");
