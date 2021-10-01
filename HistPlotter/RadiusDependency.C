@@ -378,190 +378,190 @@ void RadiusDependency () {
 
     }
 
-}
+  }
 
-//-------------------------- Darw Histograms --------------------------//
+  //-------------------------- Darw Histograms --------------------------//
 
-// Hit Angle
+  // Hit Angle
 
-hist_hit_angle->SetFillColor(kYellow);
-hist_hit_angle->Draw();
-canvas->Print("Totals/hit_angle.pdf");
-canvas->Clear();
+  hist_hit_angle->SetFillColor(kYellow);
+  hist_hit_angle->Draw();
+  canvas->Print("angle_90-100/hit_angle.pdf");
+  canvas->Clear();
 
-// Detected Photons Counter
+  // Detected Photons Counter
 
-hist_total_photon_detected_counter->SetFillColor(kYellow);
-hist_total_photon_detected_counter->Draw();
-canvas->Print("Totals/total_photon_detected_counter.pdf");
-canvas->Clear();
+  hist_total_photon_detected_counter->SetFillColor(kYellow);
+  hist_total_photon_detected_counter->Draw();
+  canvas->Print("angle_90-100/total_photon_detected_counter.pdf");
+  canvas->Clear();
 
-hist_primary_photon_detected_counter->SetFillColor(kYellow);
-hist_primary_photon_detected_counter->Draw();
-canvas->Print("Totals/primary_photon_detected_counter.pdf");
-canvas->Clear();
+  hist_primary_photon_detected_counter->SetFillColor(kYellow);
+  hist_primary_photon_detected_counter->Draw();
+  canvas->Print("angle_90-100/primary_photon_detected_counter.pdf");
+  canvas->Clear();
 
-canvas->SetLogy(true);
+  canvas->SetLogy(true);
 
-hist_secondary_photon_detected_counter->SetFillColor(kYellow);
-hist_secondary_photon_detected_counter->Draw();
-canvas->Print("Totals/secondary_photon_detected_counter.pdf");
-canvas->Clear();
+  hist_secondary_photon_detected_counter->SetFillColor(kYellow);
+  hist_secondary_photon_detected_counter->Draw();
+  canvas->Print("angle_90-100/secondary_photon_detected_counter.pdf");
+  canvas->Clear();
 
-canvas->SetLogy(false);
+  canvas->SetLogy(false);
 
-hist_total_photon_detected_angle_counter->Draw("COLZ");
-hist_total_photon_detected_angle_counter->SetStats(kFALSE);
-canvas->Print("total_photon_detected_angle_counter.pdf");
-canvas->Clear();
+  hist_total_photon_detected_angle_counter->Draw("COLZ");
+  hist_total_photon_detected_angle_counter->SetStats(kFALSE);
+  canvas->Print("angle_90-100/total_photon_detected_angle_counter.pdf");
+  canvas->Clear();
 
-hist_primary_photon_detected_angle_counter->Draw("COLZ");
-hist_primary_photon_detected_angle_counter->SetStats(kFALSE);
-canvas->Print("primary_photon_detected_angle_counter.pdf");
-canvas->Clear();
+  hist_primary_photon_detected_angle_counter->Draw("COLZ");
+  hist_primary_photon_detected_angle_counter->SetStats(kFALSE);
+  canvas->Print("angle_90-100/primary_photon_detected_angle_counter.pdf");
+  canvas->Clear();
 
-hist_secondary_photon_detected_angle_counter->Draw("COLZ");
-hist_secondary_photon_detected_angle_counter->SetStats(kFALSE);
-canvas->Print("secondary_photon_detected_angle_counter.pdf");
-canvas->Clear();
+  hist_secondary_photon_detected_angle_counter->Draw("COLZ");
+  hist_secondary_photon_detected_angle_counter->SetStats(kFALSE);
+  canvas->Print("angle_90-100/secondary_photon_detected_angle_counter.pdf");
+  canvas->Clear();
 
-// Positions of Detected Photons
+  // Positions of Detected Photons
 
-hist_total_photon_detected_position->SetStats(false);
-hist_total_photon_detected_position->SetFillColor(kYellow);
-hist_total_photon_detected_position->Draw();
-canvas->Print("Totals/total_photon_detected_position.pdf");
-canvas->Clear();
+  hist_total_photon_detected_position->SetStats(false);
+  hist_total_photon_detected_position->SetFillColor(kYellow);
+  hist_total_photon_detected_position->Draw();
+  canvas->Print("angle_90-100/total_photon_detected_position.pdf");
+  canvas->Clear();
 
-hist_primary_photon_detected_position->SetStats(false);
-hist_primary_photon_detected_position->SetFillColor(kYellow);
-hist_primary_photon_detected_position->Draw();
-canvas->Print("Totals/primary_photon_detected_position.pdf");
-canvas->Clear();
+  hist_primary_photon_detected_position->SetStats(false);
+  hist_primary_photon_detected_position->SetFillColor(kYellow);
+  hist_primary_photon_detected_position->Draw();
+  canvas->Print("angle_90-100/primary_photon_detected_position.pdf");
+  canvas->Clear();
 
-hist_secondary_photon_detected_position->SetStats(false);
-hist_secondary_photon_detected_position->SetFillColor(kYellow);
-hist_secondary_photon_detected_position->Draw();
-canvas->Print("Totals/secondary_photon_detected_position.pdf");
-canvas->Clear();
+  hist_secondary_photon_detected_position->SetStats(false);
+  hist_secondary_photon_detected_position->SetFillColor(kYellow);
+  hist_secondary_photon_detected_position->Draw();
+  canvas->Print("angle_90-100/secondary_photon_detected_position.pdf");
+  canvas->Clear();
 
-hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 1.0);
-hist_secondary_photon_detected_counter_tail->SetFillColorAlpha(kRed, 0.5);
-hist_total_photon_detected_counter->Draw();
-hist_secondary_photon_detected_counter_tail->Draw("SAME");
-canvas->Print("Totals/total_photons_detected_counter_tail.pdf");
-canvas->Clear();
+  hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 1.0);
+  hist_secondary_photon_detected_counter_tail->SetFillColorAlpha(kRed, 0.5);
+  hist_total_photon_detected_counter->Draw();
+  hist_secondary_photon_detected_counter_tail->Draw("SAME");
+  canvas->Print("angle_90-100/total_photons_detected_counter_tail.pdf");
+  canvas->Clear();
 
-// -------------------------------------------------------------- //
+  // -------------------------------------------------------------- //
 
-hist_pos_PVPosition->Draw("COLZ");
-hist_pos_PVPosition->SetStats(kFALSE);
-TEllipse *elip1 = new TEllipse(0, 0, std::sqrt(5*1), std::sqrt(5*1));
-TEllipse *elip2 = new TEllipse(0, 0, std::sqrt(5*2), std::sqrt(5*2));
-TEllipse *elip3 = new TEllipse(0, 0, std::sqrt(5*3), std::sqrt(5*3));
-TEllipse *elip4 = new TEllipse(0, 0, std::sqrt(5*4), std::sqrt(5*4));
-TEllipse *elip5 = new TEllipse(0, 0, std::sqrt(5*5), std::sqrt(5*5));
+  hist_pos_PVPosition->Draw("COLZ");
+  hist_pos_PVPosition->SetStats(kFALSE);
+  TEllipse *elip1 = new TEllipse(0, 0, std::sqrt(5*1), std::sqrt(5*1));
+  TEllipse *elip2 = new TEllipse(0, 0, std::sqrt(5*2), std::sqrt(5*2));
+  TEllipse *elip3 = new TEllipse(0, 0, std::sqrt(5*3), std::sqrt(5*3));
+  TEllipse *elip4 = new TEllipse(0, 0, std::sqrt(5*4), std::sqrt(5*4));
+  TEllipse *elip5 = new TEllipse(0, 0, std::sqrt(5*5), std::sqrt(5*5));
 
-elip1->SetLineWidth(2);
-elip2->SetLineWidth(2);
-elip3->SetLineWidth(2);
-elip4->SetLineWidth(2);
-elip5->SetLineWidth(2);
+  elip1->SetLineWidth(2);
+  elip2->SetLineWidth(2);
+  elip3->SetLineWidth(2);
+  elip4->SetLineWidth(2);
+  elip5->SetLineWidth(2);
 
-elip1->SetLineColor(kRed);
-elip2->SetLineColor(kRed);
-elip3->SetLineColor(kRed);
-elip4->SetLineColor(kRed);
-elip5->SetLineColor(kRed);
+  elip1->SetLineColor(kRed);
+  elip2->SetLineColor(kRed);
+  elip3->SetLineColor(kRed);
+  elip4->SetLineColor(kRed);
+  elip5->SetLineColor(kRed);
 
-elip1->SetFillColorAlpha(kRed, 0.0);
-elip2->SetFillColorAlpha(kRed, 0.0);
-elip3->SetFillColorAlpha(kRed, 0.0);
-elip4->SetFillColorAlpha(kRed, 0.0);
-elip5->SetFillColorAlpha(kRed, 0.0);
+  elip1->SetFillColorAlpha(kRed, 0.0);
+  elip2->SetFillColorAlpha(kRed, 0.0);
+  elip3->SetFillColorAlpha(kRed, 0.0);
+  elip4->SetFillColorAlpha(kRed, 0.0);
+  elip5->SetFillColorAlpha(kRed, 0.0);
 
-elip5->Draw("same");
-elip4->Draw("same");
-elip3->Draw("same");
-elip2->Draw("same");
-elip1->Draw("same");
+  elip5->Draw("same");
+  elip4->Draw("same");
+  elip3->Draw("same");
+  elip2->Draw("same");
+  elip1->Draw("same");
 
-TText *text1 = new TText(0.8, 1.4, "Zone 1");
-TText *text2 = new TText(1.4, 2.1, "Zone 2");
-TText *text3 = new TText(1.9, 2.7, "Zone 3");
-TText *text4 = new TText(2.4, 3.2, "Zone 4");
-TText *text5 = new TText(2.8, 3.6, "Zone 5");
+  TText *text1 = new TText(0.8, 1.4, "Zone 1");
+  TText *text2 = new TText(1.4, 2.1, "Zone 2");
+  TText *text3 = new TText(1.9, 2.7, "Zone 3");
+  TText *text4 = new TText(2.4, 3.2, "Zone 4");
+  TText *text5 = new TText(2.8, 3.6, "Zone 5");
 
-text1->SetTextSize(0.03);
-text2->SetTextSize(0.03);
-text3->SetTextSize(0.03);
-text4->SetTextSize(0.03);
-text5->SetTextSize(0.03);
+  text1->SetTextSize(0.03);
+  text2->SetTextSize(0.03);
+  text3->SetTextSize(0.03);
+  text4->SetTextSize(0.03);
+  text5->SetTextSize(0.03);
 
-text1->SetTextAngle(-45.0);
-text2->SetTextAngle(-45.0);
-text3->SetTextAngle(-45.0);
-text4->SetTextAngle(-45.0);
-text5->SetTextAngle(-45.0);
+  text1->SetTextAngle(-45.0);
+  text2->SetTextAngle(-45.0);
+  text3->SetTextAngle(-45.0);
+  text4->SetTextAngle(-45.0);
+  text5->SetTextAngle(-45.0);
 
-text1->Draw("same");
-text2->Draw("same");
-text3->Draw("same");
-text4->Draw("same");
-text5->Draw("same");
+  text1->Draw("same");
+  text2->Draw("same");
+  text3->Draw("same");
+  text4->Draw("same");
+  text5->Draw("same");
 
-canvas->Print("pos_PVPosition.pdf");
-canvas->Clear();
+  canvas->Print("pos_PVPosition.pdf");
+  canvas->Clear();
 
 
-// Test
+  // Test
 
-hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
-hist_total_photon_detected_position_normalized->Draw("hist");
-canvas->Print("Totals/total_photon_detected_position_normalized.pdf");
-canvas->Clear();
+  hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
+  hist_total_photon_detected_position_normalized->Draw("hist");
+  canvas->Print("angle_90-100/total_photon_detected_position_normalized.pdf");
+  canvas->Clear();
 
-///////// Test 3 \\\\\\\\\\\\
+  //// Test 3 ////
 
-hist_total_photon_detected_position_test1->Scale(
-  1./hist_total_photon_detected_position_test1->Integral()
-);
-hist_total_photon_detected_position_test1->SetStats(false);
-hist_total_photon_detected_position_test1->SetFillColor(kYellow);
-hist_total_photon_detected_position_test2->Scale(
-  1./hist_total_photon_detected_position_test2->Integral()
-);
-hist_total_photon_detected_position_test2->SetStats(false);
-hist_total_photon_detected_position_test2->SetFillColor(kYellow);
-hist_total_photon_detected_position_test3->Scale(
-  1./hist_total_photon_detected_position_test3->Integral()
-);
-hist_total_photon_detected_position_test3->SetStats(false);
-hist_total_photon_detected_position_test3->SetFillColor(kYellow);
-hist_total_photon_detected_position_test4->Scale(
-  1./hist_total_photon_detected_position_test4->Integral()
-);
-hist_total_photon_detected_position_test4->SetStats(false);
-hist_total_photon_detected_position_test4->SetFillColor(kYellow);
-hist_total_photon_detected_position_test5->Scale(
-  1./hist_total_photon_detected_position_test5->Integral()
-);
-hist_total_photon_detected_position_test5->SetStats(false);
-hist_total_photon_detected_position_test5->SetFillColor(kYellow);
+  hist_total_photon_detected_position_test1->Scale(
+    1./hist_total_photon_detected_position_test1->Integral()
+  );
+  hist_total_photon_detected_position_test1->SetStats(false);
+  hist_total_photon_detected_position_test1->SetFillColor(kYellow);
+  hist_total_photon_detected_position_test2->Scale(
+    1./hist_total_photon_detected_position_test2->Integral()
+  );
+  hist_total_photon_detected_position_test2->SetStats(false);
+  hist_total_photon_detected_position_test2->SetFillColor(kYellow);
+  hist_total_photon_detected_position_test3->Scale(
+    1./hist_total_photon_detected_position_test3->Integral()
+  );
+  hist_total_photon_detected_position_test3->SetStats(false);
+  hist_total_photon_detected_position_test3->SetFillColor(kYellow);
+  hist_total_photon_detected_position_test4->Scale(
+    1./hist_total_photon_detected_position_test4->Integral()
+  );
+  hist_total_photon_detected_position_test4->SetStats(false);
+  hist_total_photon_detected_position_test4->SetFillColor(kYellow);
+  hist_total_photon_detected_position_test5->Scale(
+    1./hist_total_photon_detected_position_test5->Integral()
+  );
+  hist_total_photon_detected_position_test5->SetStats(false);
+  hist_total_photon_detected_position_test5->SetFillColor(kYellow);
 
-hist_total_photon_detected_position_test5->Draw("HIST");
-hist_total_photon_detected_position_test4->Draw("HIST SAME");
-hist_total_photon_detected_position_test3->Draw("HIST SAME");
-hist_total_photon_detected_position_test2->Draw("HIST SAME");
-hist_total_photon_detected_position_test1->Draw("HIST SAME");
-canvas->Print("Totals/total_photon__detected_position_test3.pdf");
-canvas->Clear();
+  hist_total_photon_detected_position_test5->Draw("HIST");
+  hist_total_photon_detected_position_test4->Draw("HIST SAME");
+  hist_total_photon_detected_position_test3->Draw("HIST SAME");
+  hist_total_photon_detected_position_test2->Draw("HIST SAME");
+  hist_total_photon_detected_position_test1->Draw("HIST SAME");
+  canvas->Print("angle_90-100/total_photon__detected_position_test3.pdf");
+  canvas->Clear();
 
-// Position of Detected Photons Normalized by Radius
-hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0,500e3);
-hist_total_photon_detected_position_radius->SetFillColor(kYellow);
-hist_total_photon_detected_position_radius->Draw("HIST");
-canvas->Print("total_photon_detected_position_radius_norm.pdf");
-canvas->Clear();
+  // Position of Detected Photons Normalized by Radius
+  hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0, 900e3);
+  hist_total_photon_detected_position_radius->SetFillColor(kYellow);
+  hist_total_photon_detected_position_radius->Draw("HIST");
+  canvas->Print("angle_90-100/total_photon_detected_position_radius_norm_TEST.pdf");
+  canvas->Clear();
 
 }
