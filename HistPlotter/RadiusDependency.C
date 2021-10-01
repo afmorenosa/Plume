@@ -249,11 +249,6 @@ void RadiusDependency () {
   /////////////-------------------------------------------->>>>>>>>>>>>>>>>
 
   //--------------------------------------------------------------------//
-  Double_t totalPhotonsZone0 = 0.;
-  Double_t totalPhotonsZone1 = 0.;
-  Double_t totalPhotonsZone2 = 0.;
-  Double_t totalPhotonsZone3 = 0.;
-  Double_t totalPhotonsZone4 = 0.;
 
   int nentries, nbytes;
   nentries = (Int_t)tree->GetEntries();
@@ -261,30 +256,8 @@ void RadiusDependency () {
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
 
-    for (size_t j = 0; j < nPhotonDetectedPosition->size(); j++) {
-
-      if (nPhotonDetectedPosition->at(j) < std::sqrt(5.)) {
-        totalPhotonsZone0++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(10.)) {
-        totalPhotonsZone1++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(15.)) {
-        totalPhotonsZone2++;
-      } else if (nPhotonDetectedPosition->at(j) < std::sqrt(20.)) {
-        totalPhotonsZone3++;
-      } else {
-        totalPhotonsZone4++;
-      }
-
-    }
-
-  }
-
-  for (int i = 0; i < nentries; i++) {
-    nbytes = tree->GetEntry(i);
-
     // Hit Angle
     hist_hit_angle->Fill(hitAngle / M_PI * 180);
-    // if (Zone != 4) continue;
 
     // Detected Photons Counter
     hist_total_photon_detected_counter->Fill(nPhotonDetected);
