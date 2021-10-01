@@ -35,11 +35,12 @@ void RadiusDependency () {
   std::vector<double> *nPriPhotonDetectedPosition = {};
   std::vector<double> *nSecPhotonDetectedPosition = {};
 
-  // Hit Angle
-  tree->SetBranchAddress("hitAngle", &hitAngle);
   // Positions of Primary Electron
   Double_t nPostPVxPosition = -1.0;
   Double_t nPostPVyPosition = -1.0;
+
+  // Hit Angle
+  tree->SetBranchAddress("hitAngle", &hitAngle);
 
   // Zones
   tree->SetBranchAddress("Zone", &Zone);
