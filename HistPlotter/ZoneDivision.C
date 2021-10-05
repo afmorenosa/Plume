@@ -222,25 +222,65 @@ void ZoneDivision() {
       // Positions of TOTAL Detected Photons Divided by Zones
 
       if (Zone == 0) {
-        hist_total_photon_detected_position_zone_1->Fill(
-          nPhotonDetectedPosition->at(j)
-        );
+          Int_t bin = hist_total_photon_detected_position_zone_1->FindBin(
+            nPhotonDetectedPosition->at(j)
+          );
+
+          float inv_weight = hist_total_photon_detected_position_zone_1->GetBinCenter(
+            bin
+          );
+
+          hist_total_photon_detected_position_zone_1->Fill(
+            nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+          );
       } else if (Zone == 1) {
-        hist_total_photon_detected_position_zone_2->Fill(
-          nPhotonDetectedPosition->at(j)
-        );
+          Int_t bin = hist_total_photon_detected_position_zone_2->FindBin(
+            nPhotonDetectedPosition->at(j)
+          );
+
+          float inv_weight = hist_total_photon_detected_position_zone_2->GetBinCenter(
+            bin
+          );
+
+          hist_total_photon_detected_position_zone_2->Fill(
+            nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+          );
       } else if (Zone == 2) {
-        hist_total_photon_detected_position_zone_3->Fill(
-          nPhotonDetectedPosition->at(j)
-        );
+          Int_t bin = hist_total_photon_detected_position_zone_3->FindBin(
+            nPhotonDetectedPosition->at(j)
+          );
+
+          float inv_weight = hist_total_photon_detected_position_zone_3->GetBinCenter(
+            bin
+          );
+
+          hist_total_photon_detected_position_zone_3->Fill(
+            nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+          );
       } else if (Zone == 3) {
-        hist_total_photon_detected_position_zone_4->Fill(
-          nPhotonDetectedPosition->at(j)
-        );
+          Int_t bin = hist_total_photon_detected_position_zone_4->FindBin(
+            nPhotonDetectedPosition->at(j)
+          );
+
+          float inv_weight = hist_total_photon_detected_position_zone_4->GetBinCenter(
+            bin
+          );
+
+          hist_total_photon_detected_position_zone_4->Fill(
+            nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+          );
       } else {
-        hist_total_photon_detected_position_zone_5->Fill(
-          nPhotonDetectedPosition->at(j)
-        );
+          Int_t bin = hist_total_photon_detected_position_zone_5->FindBin(
+            nPhotonDetectedPosition->at(j)
+          );
+
+          float inv_weight = hist_total_photon_detected_position_zone_5->GetBinCenter(
+            bin
+          );
+
+          hist_total_photon_detected_position_zone_5->Fill(
+            nPhotonDetectedPosition->at(j), 1.0 / inv_weight
+          );
       }
 
       // Position of TOTAL Detected Photons Normalized by Radius
@@ -371,7 +411,7 @@ void ZoneDivision() {
     hist_total_photon_detected_position_zone_5, "Zone 5", "F"
   );
 
-  hist_total_photon_detected_position_zone_1->GetYaxis()->SetRangeUser(0,410e3);
+  hist_total_photon_detected_position_zone_1->GetYaxis()->SetRangeUser(0,100e3);
   hist_total_photon_detected_position_zone_1->SetStats(false);
   hist_total_photon_detected_position_zone_1->SetFillColorAlpha(kRed, 0.5);
 
@@ -393,7 +433,7 @@ void ZoneDivision() {
   hist_total_photon_detected_position_zone_4->Draw("HIST SAME");
   hist_total_photon_detected_position_zone_5->Draw("HIST SAME");
   legend_total_photon_detected_position_zones->Draw("SAME");
-  canvas->Print("Zone Division/total_detected_photons_position_ZONES.pdf");
+  canvas->Print("Zone Division/total_detected_photons_position_ZONES_NORMALIZED.pdf");
   canvas->Clear();
 
 
