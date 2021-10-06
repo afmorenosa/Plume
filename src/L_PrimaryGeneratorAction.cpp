@@ -39,7 +39,7 @@ void L_PrimaryGeneratorAction::CheckHit (G4double &x0, G4double &y0) {
   // Check that the primary hit the module
   G4double radius = std::sqrt(x0*x0 + y0*y0);
 
-  while (radius > LConst::sphereThickness) {
+  while (radius != LConst::sphereThickness) {
     x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
     y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
     radius = std::sqrt(x0*x0 + y0*y0);
@@ -66,11 +66,19 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   G4double m = particle->GetPDGMass();
 
   // Set the random momentum direction
-  G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+  //G4double x0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
 
-  G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
+  //G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
 
-  CheckHit (x0,y0);
+  G4double phi = 2 * M_PI * G4UniformRand();
+  G4double radius = 4.8 * mm;
+
+  // Set the random momentum direction
+  G4double x0 = radius * std::cos(phi);
+
+  G4double y0 = radius * std::sin(phi);
+
+  //CheckHit (x0,y0);
 
   G4double z0 = 5. * cm;
 
