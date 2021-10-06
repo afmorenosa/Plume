@@ -94,7 +94,7 @@ void RadiusDependency () {
     "Primary Detected Photons; n Photons; Events",
     100,
     0,
-    600
+    800
   );
 
   TH1I *hist_secondary_photon_detected_counter = new TH1I(
@@ -559,7 +559,7 @@ void RadiusDependency () {
   canvas->Clear();
 
   // Position of Detected Photons Normalized by Radius
-  hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0, 900e3);
+  // hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0, 900e3);
   hist_total_photon_detected_position_radius->SetFillColor(kYellow);
   hist_total_photon_detected_position_radius->Draw("HIST");
   canvas->Print("angle_90-100/total_photon_detected_position_radius_norm_TEST.pdf");
