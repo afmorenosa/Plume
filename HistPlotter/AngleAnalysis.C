@@ -10,11 +10,19 @@ void AngleAnalysis () {
 
   std::vector<TFile *> root_files;
   root_files.push_back(TFile::Open("angle0.root"));
-  root_files.push_back(TFile::Open("angleA.root"));
-  root_files.push_back(TFile::Open("angleB.root"));
-  root_files.push_back(TFile::Open("angleC.root"));
-  root_files.push_back(TFile::Open("angleD.root"));
-  root_files.push_back(TFile::Open("angleE.root"));
+  root_files.push_back(TFile::Open("angle5.root"));
+  root_files.push_back(TFile::Open("angle10.root"));
+  root_files.push_back(TFile::Open("angle15.root"));
+  root_files.push_back(TFile::Open("angle20.root"));
+  root_files.push_back(TFile::Open("angle25.root"));
+  root_files.push_back(TFile::Open("angle30.root"));
+  root_files.push_back(TFile::Open("angle35.root"));
+  root_files.push_back(TFile::Open("angle40.root"));
+  root_files.push_back(TFile::Open("angle45.root"));
+  root_files.push_back(TFile::Open("angle50.root"));
+  root_files.push_back(TFile::Open("angle55.root"));
+  root_files.push_back(TFile::Open("angle60.root"));
+
 
   std::vector<TTree *> trees;
   for (size_t i = 0; i < root_files.size(); i++) {
@@ -278,107 +286,107 @@ void AngleAnalysis () {
       hist_total_photon_detected_counter->Fill(nPhotonDetected[i]);
       hist_total_photon_detected_counter_angle[i]->Fill(nPhotonDetected[i]);
 
-      hist_primary_photon_detected_counter->Fill(
-        nPhotonDetected[i] - nSecPhotonDetected[i]
-      );
-      hist_primary_photon_detected_counter_angle[i]->Fill(
-        nPhotonDetected[i] - nSecPhotonDetected[i]
-      );
-
-      hist_secondary_photon_detected_counter->Fill(nSecPhotonDetected[i]);
-      hist_secondary_photon_detected_counter_angle[i]->Fill(nSecPhotonDetected[i]);
-
-      // Positions of Detected Photons (Primary and secondary)
-
-      for (size_t j = 0; j < nPriPhotonDetectedPosition[i]->size(); j++) {
-        hist_primary_photon_detected_position->Fill(
-          nPriPhotonDetectedPosition[i]->at(j)
-        );
-        hist_primary_photon_detected_position_angle[i]->Fill(
-          nPriPhotonDetectedPosition[i]->at(j)
-        );
-      }
-
-      for (size_t j = 0; j < nSecPhotonDetectedPosition[i]->size(); j++) {
-        hist_secondary_photon_detected_position->Fill(
-          nSecPhotonDetectedPosition[i]->at(j)
-        );
-        hist_secondary_photon_detected_position_angle[i]->Fill(
-          nSecPhotonDetectedPosition[i]->at(j)
-        );
-      }
-
-      std::map<Int_t, Int_t> zones_counter;
-
-      zones_counter[0] = nPhotonZone0[i];
-      zones_counter[1] = nPhotonZone1[i];
-      zones_counter[2] = nPhotonZone2[i];
-      zones_counter[3] = nPhotonZone3[i];
-      zones_counter[4] = nPhotonZone4[i];
-
-      for (size_t j = 0; j < nPhotonDetectedPosition[i]->size(); j++) {
-        Int_t phtoton_zone = 0;
-
-        if (nPhotonDetectedPosition[i]->at(j) < std::sqrt(5.0)) {
-          phtoton_zone = 0;
-        } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(10.0)) {
-          phtoton_zone = 1;
-        } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(15.0)) {
-          phtoton_zone = 2;
-        } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(20.0)) {
-          phtoton_zone = 3;
-        } else {
-          phtoton_zone = 4;
-        }
-
-        hist_total_photon_detected_position_normalized->Fill(
-          nPhotonDetectedPosition[i]->at(j), 1.0/(zones_counter[phtoton_zone]*1.0)
-        );
-
-        hist_total_photon_detected_position_normalized_angle[i]->Fill(
-          nPhotonDetectedPosition[i]->at(j), 1.0/(zones_counter[phtoton_zone]*1.0)
-        );
-      }
-
-      // //////////// ------ TEST ------
-      for (size_t j = 0; j < nPhotonDetectedPosition[i]->size(); j++) {
-
-        // Positions of Detected Photons
-
-        hist_total_photon_detected_position->Fill(
-          nPhotonDetectedPosition[i]->at(j)
-        );
-        hist_total_photon_detected_position_angle[i]->Fill(
-          nPhotonDetectedPosition[i]->at(j)
-        );
-
-        // Position of Detected Photons Normalized by Radius
-
-        Int_t bin = hist_total_photon_detected_position_radius->FindBin(
-          nPhotonDetectedPosition[i]->at(j)
-        );
-
-        float inv_weight = hist_total_photon_detected_position_radius->GetBinCenter(
-          bin
-        );
-
-        hist_total_photon_detected_position_radius->Fill(
-          nPhotonDetectedPosition[i]->at(j), 1.0 / inv_weight
-        );
-
-        Int_t bin_i = hist_total_photon_detected_position_radius_angle[i]->FindBin(
-          nPhotonDetectedPosition[i]->at(j)
-        );
-
-        float inv_weight_i = hist_total_photon_detected_position_radius_angle[i]->GetBinCenter(
-          bin_i
-        );
-
-        hist_total_photon_detected_position_radius_angle[i]->Fill(
-          nPhotonDetectedPosition[i]->at(j), 1.0 / inv_weight_i
-        );
-
-      }
+      // hist_primary_photon_detected_counter->Fill(
+      //   nPhotonDetected[i] - nSecPhotonDetected[i]
+      // );
+      // hist_primary_photon_detected_counter_angle[i]->Fill(
+      //   nPhotonDetected[i] - nSecPhotonDetected[i]
+      // );
+      //
+      // hist_secondary_photon_detected_counter->Fill(nSecPhotonDetected[i]);
+      // hist_secondary_photon_detected_counter_angle[i]->Fill(nSecPhotonDetected[i]);
+      //
+      // // Positions of Detected Photons (Primary and secondary)
+      //
+      // for (size_t j = 0; j < nPriPhotonDetectedPosition[i]->size(); j++) {
+      //   hist_primary_photon_detected_position->Fill(
+      //     nPriPhotonDetectedPosition[i]->at(j)
+      //   );
+      //   hist_primary_photon_detected_position_angle[i]->Fill(
+      //     nPriPhotonDetectedPosition[i]->at(j)
+      //   );
+      // }
+      //
+      // for (size_t j = 0; j < nSecPhotonDetectedPosition[i]->size(); j++) {
+      //   hist_secondary_photon_detected_position->Fill(
+      //     nSecPhotonDetectedPosition[i]->at(j)
+      //   );
+      //   hist_secondary_photon_detected_position_angle[i]->Fill(
+      //     nSecPhotonDetectedPosition[i]->at(j)
+      //   );
+      // }
+      //
+      // std::map<Int_t, Int_t> zones_counter;
+      //
+      // zones_counter[0] = nPhotonZone0[i];
+      // zones_counter[1] = nPhotonZone1[i];
+      // zones_counter[2] = nPhotonZone2[i];
+      // zones_counter[3] = nPhotonZone3[i];
+      // zones_counter[4] = nPhotonZone4[i];
+      //
+      // for (size_t j = 0; j < nPhotonDetectedPosition[i]->size(); j++) {
+      //   Int_t phtoton_zone = 0;
+      //
+      //   if (nPhotonDetectedPosition[i]->at(j) < std::sqrt(5.0)) {
+      //     phtoton_zone = 0;
+      //   } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(10.0)) {
+      //     phtoton_zone = 1;
+      //   } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(15.0)) {
+      //     phtoton_zone = 2;
+      //   } else if (nPhotonDetectedPosition[i]->at(j)< std::sqrt(20.0)) {
+      //     phtoton_zone = 3;
+      //   } else {
+      //     phtoton_zone = 4;
+      //   }
+      //
+      //   hist_total_photon_detected_position_normalized->Fill(
+      //     nPhotonDetectedPosition[i]->at(j), 1.0/(zones_counter[phtoton_zone]*1.0)
+      //   );
+      //
+      //   hist_total_photon_detected_position_normalized_angle[i]->Fill(
+      //     nPhotonDetectedPosition[i]->at(j), 1.0/(zones_counter[phtoton_zone]*1.0)
+      //   );
+      // }
+      //
+      // // //////////// ------ TEST ------
+      // for (size_t j = 0; j < nPhotonDetectedPosition[i]->size(); j++) {
+      //
+      //   // Positions of Detected Photons
+      //
+      //   hist_total_photon_detected_position->Fill(
+      //     nPhotonDetectedPosition[i]->at(j)
+      //   );
+      //   hist_total_photon_detected_position_angle[i]->Fill(
+      //     nPhotonDetectedPosition[i]->at(j)
+      //   );
+      //
+      //   // Position of Detected Photons Normalized by Radius
+      //
+      //   Int_t bin = hist_total_photon_detected_position_radius->FindBin(
+      //     nPhotonDetectedPosition[i]->at(j)
+      //   );
+      //
+      //   float inv_weight = hist_total_photon_detected_position_radius->GetBinCenter(
+      //     bin
+      //   );
+      //
+      //   hist_total_photon_detected_position_radius->Fill(
+      //     nPhotonDetectedPosition[i]->at(j), 1.0 / inv_weight
+      //   );
+      //
+      //   Int_t bin_i = hist_total_photon_detected_position_radius_angle[i]->FindBin(
+      //     nPhotonDetectedPosition[i]->at(j)
+      //   );
+      //
+      //   float inv_weight_i = hist_total_photon_detected_position_radius_angle[i]->GetBinCenter(
+      //     bin_i
+      //   );
+      //
+      //   hist_total_photon_detected_position_radius_angle[i]->Fill(
+      //     nPhotonDetectedPosition[i]->at(j), 1.0 / inv_weight_i
+      //   );
+      //
+      // }
 
     }
 
@@ -420,42 +428,63 @@ void AngleAnalysis () {
   hist_hit_angle_angle[4]->Draw("SAME");
   hist_hit_angle_angle[5]->Draw("SAME");
   legend_hit_angle->Draw("SAME");
-  canvas->Print("Angles/hit_angle.pdf");
+  canvas->Print("Angles_2/hit_angle.pdf");
   canvas->Clear();
 
   // Detected Photons Counter
 
-  TLegend* legend_total_photon_detected_counter = new TLegend(0.55, 0.65, 0.7, 0.82);
+  TLegend* legend_total_photon_detected_counter = new TLegend(0.60, 0.65, 0.8, 0.82);
   legend_total_photon_detected_counter->SetBorderSize(0);
   legend_total_photon_detected_counter->SetFillColorAlpha(0, 0.0);
 
   // legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter, "Total", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[0], "Baseline", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[1], "[0 - 12]", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[2], "[12 - 24]", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[3], "[24 - 36]", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[4], "[36 - 48]", "F");
-  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[5], "[48 - 60]", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[0], "0", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[1], "5", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[2], "10", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[3], "15", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[4], "20", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[5], "25", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[6], "30", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[7], "35", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[8], "40", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[9], "45", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[10], "50", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[11], "55", "F");
+  legend_total_photon_detected_counter->AddEntry(hist_total_photon_detected_counter_angle[12], "60", "F");
 
-  hist_total_photon_detected_counter_angle[0]->SetStats(false);
+  hist_total_photon_detected_counter_angle[12]->SetStats(false);
 
   hist_total_photon_detected_counter_angle[0]->GetYaxis()->SetRangeUser(0, 18000);
   hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 0.0);
-  hist_total_photon_detected_counter_angle[0]->SetFillColorAlpha(kYellow, 1);
-  hist_total_photon_detected_counter_angle[1]->SetFillColorAlpha(kRed, 0.3);
+  hist_total_photon_detected_counter_angle[0]->SetFillColorAlpha(kYellow, 0.3);
+  hist_total_photon_detected_counter_angle[1]->SetFillColorAlpha(kCyan, 0.3);
   hist_total_photon_detected_counter_angle[2]->SetFillColorAlpha(kBlue, 0.3);
   hist_total_photon_detected_counter_angle[3]->SetFillColorAlpha(kMagenta, 0.3);
   hist_total_photon_detected_counter_angle[4]->SetFillColorAlpha(kGreen, 0.3);
-  hist_total_photon_detected_counter_angle[5]->SetFillColorAlpha(kCyan, 0.3);
+  hist_total_photon_detected_counter_angle[5]->SetFillColorAlpha(kRed, 0.3);
+  hist_total_photon_detected_counter_angle[6]->SetFillColorAlpha(kYellow + 1, 0.3);
+  hist_total_photon_detected_counter_angle[7]->SetFillColorAlpha(kCyan + 1, 0.3);
+  hist_total_photon_detected_counter_angle[8]->SetFillColorAlpha(kBlue + 1, 0.3);
+  hist_total_photon_detected_counter_angle[9]->SetFillColorAlpha(kMagenta + 1, 0.3);
+  hist_total_photon_detected_counter_angle[10]->SetFillColorAlpha(kGreen + 1, 0.3);
+  hist_total_photon_detected_counter_angle[11]->SetFillColorAlpha(kRed + 1, 0.3);
+  hist_total_photon_detected_counter_angle[12]->SetFillColorAlpha(kYellow + -1, 0.5);
   // hist_total_photon_detected_counter->Draw();
-  hist_total_photon_detected_counter_angle[0]->Draw();
+  hist_total_photon_detected_counter_angle[12]->Draw();
+  hist_total_photon_detected_counter_angle[0]->Draw("SAME");
   hist_total_photon_detected_counter_angle[1]->Draw("SAME");
   hist_total_photon_detected_counter_angle[2]->Draw("SAME");
   hist_total_photon_detected_counter_angle[3]->Draw("SAME");
   hist_total_photon_detected_counter_angle[4]->Draw("SAME");
   hist_total_photon_detected_counter_angle[5]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[6]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[7]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[8]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[9]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[10]->Draw("SAME");
+  hist_total_photon_detected_counter_angle[11]->Draw("SAME");
   legend_total_photon_detected_counter->Draw("SAME");
-  canvas->Print("Angles/total_photon_detected_counter.pdf");
+  canvas->Print("Angles_2/total_photon_detected_counter.pdf");
   canvas->Clear();
 
 
@@ -489,7 +518,7 @@ void AngleAnalysis () {
   hist_primary_photon_detected_counter_angle[4]->Draw("SAME");
   hist_primary_photon_detected_counter_angle[5]->Draw("SAME");
   legend_primary_photon_detected_counter->Draw("SAME");
-  canvas->Print("Angles/primary_photon_detected_counter.pdf");
+  canvas->Print("Angles_2/primary_photon_detected_counter.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
@@ -525,7 +554,7 @@ void AngleAnalysis () {
   hist_secondary_photon_detected_counter_angle[4]->Draw("SAME");
   hist_secondary_photon_detected_counter_angle[5]->Draw("SAME");
   legend_secondary_photon_detected_counter->Draw("SAME");
-  canvas->Print("Angles/secondary_photon_detected_counter.pdf");
+  canvas->Print("Angles_2/secondary_photon_detected_counter.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -562,7 +591,7 @@ void AngleAnalysis () {
   hist_total_photon_detected_position_angle[4]->Draw("SAME");
   hist_total_photon_detected_position_angle[5]->Draw("SAME");
   legend_total_photon_detected_position->Draw("SAME");
-  canvas->Print("Angles/total_photon_detected_position.pdf");
+  canvas->Print("Angles_2/total_photon_detected_position.pdf");
   canvas->Clear();
 
 
@@ -597,7 +626,7 @@ void AngleAnalysis () {
   hist_primary_photon_detected_position_angle[4]->Draw("SAME");
   hist_primary_photon_detected_position_angle[5]->Draw("SAME");
   legend_primary_photon_detected_position->Draw("SAME");
-  canvas->Print("Angles/primary_photon_detected_position.pdf");
+  canvas->Print("Angles_2/primary_photon_detected_position.pdf");
   canvas->Clear();
 
 
@@ -632,7 +661,7 @@ void AngleAnalysis () {
   hist_secondary_photon_detected_position_angle[4]->Draw("SAME");
   hist_secondary_photon_detected_position_angle[5]->Draw("SAME");
   legend_secondary_photon_detected_position->Draw("SAME");
-  canvas->Print("Angles/secondary_photon_detected_position.pdf");
+  canvas->Print("Angles_2/secondary_photon_detected_position.pdf");
   canvas->Clear();
 
   // -------------------------------------------------------------- //
@@ -669,7 +698,7 @@ void AngleAnalysis () {
   hist_total_photon_detected_position_normalized_angle[4]->Draw("HIST SAME");
   hist_total_photon_detected_position_normalized_angle[5]->Draw("HIST SAME");
   legend_total_photon_detected_position_normalized->Draw("SAME");
-  canvas->Print("Angles/total_photon_detected_position_normalized.pdf");
+  canvas->Print("Angles_2/total_photon_detected_position_normalized.pdf");
   canvas->Clear();
 
   //// Test 3 ////
@@ -708,7 +737,7 @@ void AngleAnalysis () {
   hist_total_photon_detected_position_radius_angle[4]->Draw("HIST SAME");
   hist_total_photon_detected_position_radius_angle[5]->Draw("HIST SAME");
   legend_total_photon_detected_position_radius->Draw("SAME");
-  canvas->Print("Angles/total_photon_detected_position_radius_norm_TEST.pdf");
+  canvas->Print("Angles_2/total_photon_detected_position_radius_norm_TEST.pdf");
   canvas->Clear();
 
   //---------------------------------------------------------------------//

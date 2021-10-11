@@ -9,19 +9,11 @@ void AngleDependency () {
   );
 
   std::vector<TFile *> root_files;
-  root_files.push_back(TFile::Open("angle0.root"));
-  root_files.push_back(TFile::Open("angle5.root"));
-  root_files.push_back(TFile::Open("angle10.root"));
-  root_files.push_back(TFile::Open("angle15.root"));
-  root_files.push_back(TFile::Open("angle20.root"));
-  root_files.push_back(TFile::Open("angle25.root"));
-  root_files.push_back(TFile::Open("angle30.root"));
-  root_files.push_back(TFile::Open("angle35.root"));
-  root_files.push_back(TFile::Open("angle40.root"));
-  root_files.push_back(TFile::Open("angle45.root"));
-  root_files.push_back(TFile::Open("angle50.root"));
-  root_files.push_back(TFile::Open("angle55.root"));
-  root_files.push_back(TFile::Open("angle60.root"));
+  root_files.push_back(TFile::Open("angleA.root"));
+  root_files.push_back(TFile::Open("angleB.root"));
+  root_files.push_back(TFile::Open("angleC.root"));
+  root_files.push_back(TFile::Open("angleD.root"));
+  root_files.push_back(TFile::Open("angleE.root"));
 
   std::vector<TTree *> trees;
   for (size_t i = 0; i < root_files.size(); i++) {
@@ -93,10 +85,11 @@ void AngleDependency () {
 
   //-------------------------- Draw Histograms --------------------------//
 
-  const Int_t n_Angles = 13;
+  const Int_t n_Angles = 5;
 
   // Detected Photons Counter
-  double Angles[n_Angles] = {0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60};
+  double Angles[n_Angles] = {6, 18, 30, 42, 54};
+  double Angles_err[n_Angles] = {6, 6, 6, 6, 6};
   double total_photon_detected_mean[n_Angles];
   double total_photon_detected_rms[n_Angles];
 
@@ -120,13 +113,13 @@ void AngleDependency () {
   graph_total_photon_detected_mean->SetMarkerSize(1);
   graph_total_photon_detected_mean->SetMarkerStyle(21);
   graph_total_photon_detected_mean->Draw("AP");
-  canvas->Print("Graph/graph_total_photon_detected_mean.pdf");
+  canvas->Print("Graph_2/graph_total_photon_detected_mean.pdf");
   canvas->Clear();
 
   TGraphAsymmErrors *graph_total_photon_detected_mean_error =
   new TGraphAsymmErrors(
     n_Angles, Angles, total_photon_detected_mean,
-    0, 0, total_photon_detected_rms, total_photon_detected_rms
+    Angles_err, Angles_err, total_photon_detected_rms, total_photon_detected_rms
   );
   graph_total_photon_detected_mean_error->GetXaxis()->SetTitle("Angle [degrees]");
   graph_total_photon_detected_mean_error->GetYaxis()->SetTitle("Events");
@@ -136,7 +129,7 @@ void AngleDependency () {
   graph_total_photon_detected_mean_error->SetMarkerSize(1);
   graph_total_photon_detected_mean_error->SetMarkerStyle(21);
   graph_total_photon_detected_mean_error->Draw("AP");
-  canvas->Print("Graph/graph_total_photon_detected_mean_errors.pdf");
+  canvas->Print("Graph_2/graph_total_photon_detected_mean_errors.pdf");
   canvas->Clear();
 
   TGraph *graph_total_photon_detected_rms =
@@ -150,7 +143,7 @@ void AngleDependency () {
   graph_total_photon_detected_rms->SetMarkerSize(1);
   graph_total_photon_detected_rms->SetMarkerStyle(21);
   graph_total_photon_detected_rms->Draw("AP");
-  canvas->Print("Graph/graph_total_photon_detected_rms.pdf");
+  canvas->Print("Graph_2/graph_total_photon_detected_rms.pdf");
   canvas->Clear();
 
   //---------------------------------------------------------------------//
