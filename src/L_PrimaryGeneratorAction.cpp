@@ -71,7 +71,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   //G4double y0 = 2. * LConst::sphereThickness * (G4UniformRand()-0.5) * mm;
 
   G4double phi = 2 * M_PI * G4UniformRand();
-  G4double radius = 4.8 * mm;
+  G4double radius = 0.4 * G4UniformRand() * mm;
 
   // Set the random momentum direction
   G4double x0 = radius * std::cos(phi);
