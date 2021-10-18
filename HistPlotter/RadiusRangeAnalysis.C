@@ -92,11 +92,13 @@ void RadiusRangeAnalysis () {
 
   //-------------------------- Draw Histograms --------------------------//
 
-  const Int_t n_Radius = 25;
+  const Int_t n_Radius = 12;
 
   // Detected Photons Counter
-  double Radius[n_Radius] = {0.4, 0.8, 1.2, 1.6, 2.0, 2.4, 2.8, 3.2, 3.6, 4.0,
-    4.4, 4.8};
+  double Radius[n_Radius] = {0.2, 0.6, 1., 1.4, 1.8, 2.2, 2.6, 3., 3.4, 3.8,
+    4.2, 4.6};
+  double Radius_RMS[n_Radius] = {0.2, 0.2,0.2, 0.2, 0.2, 0.2, 0.2, 0.2, 0.2,
+    0.2, 0.2, 0.2};
   double total_photon_detected_mean[n_Radius];
   double total_photon_detected_rms[n_Radius];
 
@@ -128,7 +130,7 @@ void RadiusRangeAnalysis () {
   TGraphAsymmErrors *graph_total_photon_detected_mean_errors =
   new TGraphAsymmErrors(
     n_Radius, Radius, total_photon_detected_mean,
-    0, 0, total_photon_detected_rms, total_photon_detected_rms
+    Radius_RMS, Radius_RMS, total_photon_detected_rms, total_photon_detected_rms
   );
   graph_total_photon_detected_mean_errors->GetXaxis()->SetTitle("Radius [mm]");
   graph_total_photon_detected_mean_errors->GetYaxis()->SetTitle("Events");
