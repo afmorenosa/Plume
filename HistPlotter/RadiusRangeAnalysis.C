@@ -115,7 +115,7 @@ void RadiusRangeAnalysis () {
   TGraph *graph_total_photon_detected_mean =
   new TGraph(n_Radius, Radius, total_photon_detected_mean);
   graph_total_photon_detected_mean->GetXaxis()->SetTitle("Radius [mm]");
-  graph_total_photon_detected_mean->GetYaxis()->SetTitle("Events");
+  graph_total_photon_detected_mean->GetYaxis()->SetTitle("Photons");
   graph_total_photon_detected_mean->SetTitle("Mean of Total Detected Photons");
   graph_total_photon_detected_mean->GetXaxis()->SetRangeUser(0, 5);
   graph_total_photon_detected_mean->GetYaxis()->SetRangeUser(300, 700);
@@ -133,7 +133,7 @@ void RadiusRangeAnalysis () {
     Radius_RMS, Radius_RMS, total_photon_detected_rms, total_photon_detected_rms
   );
   graph_total_photon_detected_mean_errors->GetXaxis()->SetTitle("Radius [mm]");
-  graph_total_photon_detected_mean_errors->GetYaxis()->SetTitle("Events");
+  graph_total_photon_detected_mean_errors->GetYaxis()->SetTitle("Photons");
   graph_total_photon_detected_mean_errors->SetTitle("Mean of Total Detected Photons");
   graph_total_photon_detected_mean_errors->GetXaxis()->SetRangeUser(0, 5);
   graph_total_photon_detected_mean_errors->GetYaxis()->SetRangeUser(300, 700);
@@ -148,7 +148,7 @@ void RadiusRangeAnalysis () {
   TGraph *graph_total_photon_detected_rms =
   new TGraph(n_Radius, Radius, total_photon_detected_rms);
   graph_total_photon_detected_rms->GetXaxis()->SetTitle("Radius [mm]");
-  graph_total_photon_detected_rms->GetYaxis()->SetTitle("Events");
+  graph_total_photon_detected_rms->GetYaxis()->SetTitle("Photons");
   graph_total_photon_detected_rms->SetTitle("RMS of Total Detected Photons");
   graph_total_photon_detected_rms->GetYaxis()->SetRangeUser(20, 90);
   graph_total_photon_detected_rms->GetXaxis()->SetRangeUser(0, 5);
