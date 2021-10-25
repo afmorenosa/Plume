@@ -65,7 +65,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   G4ParticleDefinition* particle = particleTable->FindParticle("e-");
   G4double mass = particle->GetPDGMass();
 
-  G4double theta = M_PI/3 * G4UniformRand();
+  G4double theta = M_PI/3/25 * (24 + G4UniformRand());
   G4double phi = 2 * M_PI * G4UniformRand();
 
   // Set the random momentum direction

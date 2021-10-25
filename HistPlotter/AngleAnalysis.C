@@ -433,7 +433,7 @@ void AngleAnalysis () {
 
   // Detected Photons Counter
 
-  TLegend* legend_total_photon_detected_counter = new TLegend(0.60, 0.65, 0.8, 0.82);
+  TLegend* legend_total_photon_detected_counter = new TLegend(0.60, 0.50, 0.8, 0.82);
   legend_total_photon_detected_counter->SetBorderSize(0);
   legend_total_photon_detected_counter->SetFillColorAlpha(0, 0.0);
 
