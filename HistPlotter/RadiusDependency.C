@@ -8,7 +8,7 @@ void RadiusDependency () {
     600
   );
 
-  TFile *root_file = TFile::Open("quartz.root");
+  TFile *root_file = TFile::Open("Angle.root");
 
   TTree *tree = (TTree *) root_file->Get("T");
 
@@ -29,6 +29,10 @@ void RadiusDependency () {
   // Detected Photons Counter
   Int_t nPhotonDetected = -1;
   Int_t nSecPhotonDetected = -1;
+
+  // Photons Path
+  Int_t nPhotonStraight = -1;
+  Int_t nPhotReflected = -1;
 
   // Positions of Detected Photons
   std::vector<double> *nPhotonDetectedPosition = {};
@@ -55,6 +59,10 @@ void RadiusDependency () {
   // Detected Photons Counter
   tree->SetBranchAddress("nPhotonDetected", &nPhotonDetected);
   tree->SetBranchAddress("nSecPhotonDetected", &nSecPhotonDetected);
+
+  // Photons Path
+  tree->SetBranchAddress("nPhotonStraight", &nPhotonStraight);
+  tree->SetBranchAddress("nPhotReflected", &nPhotReflected);
 
   // Positions of Detected Photons
   tree->SetBranchAddress("nPhotonDetectedPosition", &nPhotonDetectedPosition);
@@ -145,6 +153,31 @@ void RadiusDependency () {
     0,
     1000
   );
+
+  // Photons Path
+  std::map<int, TH1I *> hist_photon_straight_counter;
+  std::map<int, TH1I *> hist_photon_reflected_counter;
+
+  for (size_t i = 0; i < 6; i++) {
+    hist_photon_straight_counter[i] = new TH1I(
+      "Straight Photons -" +
+      TString(std::to_string(i).c_str()),
+      "Straight Photons; n Photons; Events",
+      100,
+      0,
+      800
+    );
+
+
+    hist_photon_reflected_counter[i] = new TH1I(
+      "Reflected Photons -" +
+      TString(std::to_string(i).c_str()),
+      "Reflected Photons; n Photons; Events",
+      100,
+      0,
+      200
+    );
+  }
 
   // Counter of Positions of Detected Photons
 
@@ -259,6 +292,9 @@ void RadiusDependency () {
 
     // Hit Angle
     hist_hit_angle->Fill(hitAngle / M_PI * 180);
+
+    hist_photon_straight_counter[int(hitAngle / M_PI * 180 /10.)]->Fill(nPhotonStraight);
+    hist_photon_reflected_counter[int(hitAngle / M_PI * 180 /10.)]->Fill(nPhotReflected);
 
     // Detected Photons Counter
     hist_total_photon_detected_counter->Fill(nPhotonDetected);
@@ -387,43 +423,43 @@ void RadiusDependency () {
 
   hist_hit_angle->SetFillColor(kYellow);
   hist_hit_angle->Draw();
-  canvas->Print("angle_90-100/hit_angle.pdf");
+  canvas->Print("Angle/hit_angle.pdf");
   canvas->Clear();
 
   // Detected Photons Counter
 
   hist_total_photon_detected_counter->SetFillColor(kYellow);
   hist_total_photon_detected_counter->Draw();
-  canvas->Print("angle_90-100/total_photon_detected_counter.pdf");
+  canvas->Print("Angle/total_photon_detected_counter.pdf");
   canvas->Clear();
 
   hist_primary_photon_detected_counter->SetFillColor(kYellow);
   hist_primary_photon_detected_counter->Draw();
-  canvas->Print("angle_90-100/primary_photon_detected_counter.pdf");
+  canvas->Print("Angle/primary_photon_detected_counter.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_photon_detected_counter->SetFillColor(kYellow);
   hist_secondary_photon_detected_counter->Draw();
-  canvas->Print("angle_90-100/secondary_photon_detected_counter.pdf");
+  canvas->Print("Angle/secondary_photon_detected_counter.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
 
   hist_total_photon_detected_angle_counter->Draw("COLZ");
   hist_total_photon_detected_angle_counter->SetStats(kFALSE);
-  canvas->Print("angle_90-100/total_photon_detected_angle_counter.pdf");
+  canvas->Print("Angle/total_photon_detected_angle_counter.pdf");
   canvas->Clear();
 
   hist_primary_photon_detected_angle_counter->Draw("COLZ");
   hist_primary_photon_detected_angle_counter->SetStats(kFALSE);
-  canvas->Print("angle_90-100/primary_photon_detected_angle_counter.pdf");
+  canvas->Print("Angle/primary_photon_detected_angle_counter.pdf");
   canvas->Clear();
 
   hist_secondary_photon_detected_angle_counter->Draw("COLZ");
   hist_secondary_photon_detected_angle_counter->SetStats(kFALSE);
-  canvas->Print("angle_90-100/secondary_photon_detected_angle_counter.pdf");
+  canvas->Print("Angle/secondary_photon_detected_angle_counter.pdf");
   canvas->Clear();
 
   // Positions of Detected Photons
@@ -431,26 +467,26 @@ void RadiusDependency () {
   hist_total_photon_detected_position->SetStats(false);
   hist_total_photon_detected_position->SetFillColor(kYellow);
   hist_total_photon_detected_position->Draw();
-  canvas->Print("angle_90-100/total_photon_detected_position.pdf");
+  canvas->Print("Angle/total_photon_detected_position.pdf");
   canvas->Clear();
 
   hist_primary_photon_detected_position->SetStats(false);
   hist_primary_photon_detected_position->SetFillColor(kYellow);
   hist_primary_photon_detected_position->Draw();
-  canvas->Print("angle_90-100/primary_photon_detected_position.pdf");
+  canvas->Print("Angle/primary_photon_detected_position.pdf");
   canvas->Clear();
 
   hist_secondary_photon_detected_position->SetStats(false);
   hist_secondary_photon_detected_position->SetFillColor(kYellow);
   hist_secondary_photon_detected_position->Draw();
-  canvas->Print("angle_90-100/secondary_photon_detected_position.pdf");
+  canvas->Print("Angle/secondary_photon_detected_position.pdf");
   canvas->Clear();
 
   hist_total_photon_detected_counter->SetFillColorAlpha(kYellow, 1.0);
   hist_secondary_photon_detected_counter_tail->SetFillColorAlpha(kRed, 0.5);
   hist_total_photon_detected_counter->Draw();
   hist_secondary_photon_detected_counter_tail->Draw("SAME");
-  canvas->Print("angle_90-100/total_photons_detected_counter_tail.pdf");
+  canvas->Print("Angle/total_photons_detected_counter_tail.pdf");
   canvas->Clear();
 
   // -------------------------------------------------------------- //
@@ -519,7 +555,7 @@ void RadiusDependency () {
 
   hist_total_photon_detected_position_normalized->SetFillColor(kYellow);
   hist_total_photon_detected_position_normalized->Draw("hist");
-  canvas->Print("angle_90-100/total_photon_detected_position_normalized.pdf");
+  canvas->Print("Angle/total_photon_detected_position_normalized.pdf");
   canvas->Clear();
 
   //// Test 3 ////
@@ -555,14 +591,76 @@ void RadiusDependency () {
   hist_total_photon_detected_position_test3->Draw("HIST SAME");
   hist_total_photon_detected_position_test2->Draw("HIST SAME");
   hist_total_photon_detected_position_test1->Draw("HIST SAME");
-  canvas->Print("angle_90-100/total_photon__detected_position_test3.pdf");
+  canvas->Print("Angle/total_photon_detected_position_test3.pdf");
   canvas->Clear();
 
   // Position of Detected Photons Normalized by Radius
   // hist_total_photon_detected_position_radius->GetYaxis()->SetRangeUser(0, 900e3);
   hist_total_photon_detected_position_radius->SetFillColor(kYellow);
   hist_total_photon_detected_position_radius->Draw("HIST");
-  canvas->Print("angle_90-100/total_photon_detected_position_radius_norm_TEST.pdf");
+  canvas->Print("Angle/total_photon_detected_position_radius_norm_TEST.pdf");
+  canvas->Clear();
+
+  // Paths
+  hist_photon_straight_counter[0]->SetFillColor(kBlue);
+  hist_photon_straight_counter[1]->SetFillColor(kRed);
+  hist_photon_straight_counter[2]->SetFillColor(kGreen);
+  hist_photon_straight_counter[3]->SetFillColor(kYellow);
+  hist_photon_straight_counter[4]->SetFillColor(kMagenta);
+  hist_photon_straight_counter[5]->SetFillColor(kCyan);
+
+  TLegend* legend_straight = new TLegend(0.55, 0.68, 0.7, 0.85);
+  legend_straight->SetBorderSize(0);
+  legend_straight->SetFillColorAlpha(0, 0.0);
+  legend_straight->AddEntry(hist_photon_straight_counter[0], "[0 - 10]", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter[1], "[10  - 20]", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter[2], "[20  - 30]", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter[3], "[30  - 40]", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter[4], "[40  - 50]", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter[5], "[50  - 60]", "F");
+
+  THStack *hs_straight = new THStack("Stack Straight Photons", "Straight Photons; n Photons; Events");
+  hs_straight->Add(hist_photon_straight_counter[0]);
+  hs_straight->Add(hist_photon_straight_counter[1]);
+  hs_straight->Add(hist_photon_straight_counter[2]);
+  hs_straight->Add(hist_photon_straight_counter[3]);
+  hs_straight->Add(hist_photon_straight_counter[4]);
+  hs_straight->Add(hist_photon_straight_counter[5]);
+
+  hs_straight->Draw();
+  legend_straight->Draw("SAME");
+  canvas->Print("Angle/Straight.pdf");
+  canvas->Clear();
+
+  // Paths
+  hist_photon_reflected_counter[0]->SetFillColor(kBlue);
+  hist_photon_reflected_counter[1]->SetFillColor(kRed);
+  hist_photon_reflected_counter[2]->SetFillColor(kGreen);
+  hist_photon_reflected_counter[3]->SetFillColor(kYellow);
+  hist_photon_reflected_counter[4]->SetFillColor(kMagenta);
+  hist_photon_reflected_counter[5]->SetFillColor(kCyan);
+
+  TLegend* legend_reflected = new TLegend(0.55, 0.68, 0.7, 0.85);
+  legend_reflected->SetBorderSize(0);
+  legend_reflected->SetFillColorAlpha(0, 0.0);
+  legend_reflected->AddEntry(hist_photon_reflected_counter[0], "[0 - 10]", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter[1], "[10  - 20]", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter[2], "[20  - 30]", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter[3], "[30  - 40]", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter[4], "[40  - 50]", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter[5], "[50  - 60]", "F");
+
+  THStack *hs_reflected = new THStack("Stack Reflected Photons", "Reflected Photons; n Photons; Events");
+  hs_reflected->Add(hist_photon_reflected_counter[0]);
+  hs_reflected->Add(hist_photon_reflected_counter[1]);
+  hs_reflected->Add(hist_photon_reflected_counter[2]);
+  hs_reflected->Add(hist_photon_reflected_counter[3]);
+  hs_reflected->Add(hist_photon_reflected_counter[4]);
+  hs_reflected->Add(hist_photon_reflected_counter[5]);
+
+  hs_reflected->Draw();
+  legend_reflected->Draw("SAME");
+  canvas->Print("Angle/Reflected.pdf");
   canvas->Clear();
 
 }
