@@ -131,10 +131,10 @@ void PhotonCounter() {
 
   TH1F *hist_nPostPVAngle = new TH1F(
     "Angle",
-    "Angle; angle [rad]; Events",
+    "Hit Angle; Angle [degrees]; Events",
     100,
     0,
-    0.025
+    0.025*180/M_PI
   );
 
   // ------------------------------------------------------------------- //
@@ -222,7 +222,7 @@ void PhotonCounter() {
     hist_nPrePVyPosition->Fill(nPrePVyPosition);
     hist_nPrePVElecEnergy->Fill(nPrePVElecEnergy/1000);
 
-    hist_nPostPVAngle->Fill(nPostPVAngle);
+    hist_nPostPVAngle->Fill(nPostPVAngle*180/M_PI);
 
     hist_photon_counter_first_primary->Fill(nPhotCreated1);
     hist_photon_counter_second_primary->Fill(nPhotCreated2);
@@ -286,6 +286,7 @@ void PhotonCounter() {
   canvas->Print("pre_PVPosition.pdf");
   canvas->Clear();
 
+  hist_pos_PVPosition->SetStats(false);
   hist_pos_PVPosition->Draw("COLZ");
   canvas->Print("pos_PVPosition.pdf");
   canvas->Clear();
@@ -294,6 +295,7 @@ void PhotonCounter() {
   canvas->Print("photon_counter_2d_primary.pdf");
   canvas->Clear();
 
+  hist_photon_counter_2d_totals->SetStats(false);
   hist_photon_counter_2d_totals->Draw("COLZ");
   canvas->Print("photon_counter_2d_totals.pdf");
   canvas->Clear();
