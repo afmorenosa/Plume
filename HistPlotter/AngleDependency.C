@@ -158,6 +158,7 @@ void AngleDependency () {
   graph_total_photon_detected_mean_error->GetXaxis()->SetTitle("Angle [degrees]");
   graph_total_photon_detected_mean_error->GetYaxis()->SetTitle("Photons");
   graph_total_photon_detected_mean_error->SetTitle("Total Photons Count [RMS errors]");
+  graph_total_photon_detected_mean_error->GetYaxis()->SetRangeUser(0, 700);
   graph_total_photon_detected_mean_error->SetMarkerColor(kRed);
   graph_total_photon_detected_mean_error->SetMarkerSize(10);
   graph_total_photon_detected_mean_error->SetMarkerSize(1);
