@@ -43,7 +43,7 @@ void PhotonCounter() {
 
 
   // Zones
-  tree->SetBranchAddress("Zone", &Zone);
+  tree->SetBranchAddress("Zone", &Zones);
 
   // Photon Counter
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
@@ -86,9 +86,9 @@ void PhotonCounter() {
   TH1I *hist_photon_counter_totals = new TH1I(
     "Photon Counter Totals",
     "Photon Counter Totals; n Photon; Events",
-    175,
-    350,
-    700
+    100,
+    0,
+    1000
   );
 
   TH1I *hist_secondary_photon_counter = new TH1I(
@@ -102,9 +102,9 @@ void PhotonCounter() {
   TH1I *hist_secondary_photon_counter_tail = new TH1I(
     "Secondary Photon Counter tail",
     "Secondary Photon Counter tail; n Photons; Events",
-    175,
-    350,
-    700
+    100,
+    0,
+    1000
   );
 
   // Reflections
@@ -238,11 +238,11 @@ void PhotonCounter() {
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
 
-    if (Zone == -1) continue;
+    // if (Zone == -1) continue;
 
     // Photon Counter
-    hist_photon_counter_totals->Fill(nSecondaryPhotCreated + nPhotCreated);
-    hist_primary_photon_counter->Fill(nPhotCreated);
+    hist_photon_counter_totals->Fill(nPhotCreated);
+    hist_primary_photon_counter->Fill(nPhotCreated - nSecondaryPhotCreated);
     hist_secondary_photon_counter->Fill(nSecondaryPhotCreated);
 
     if (nSecondaryPhotCreated > 0) {
@@ -291,7 +291,7 @@ void PhotonCounter() {
   canvas->Print("quartz.pdf");
   canvas->Clear();
 
-  canvas->SetLogy(true);|
+  canvas->SetLogy(true);
 
   hist_secondary_photon_counter->SetFillColor(kYellow);
   hist_secondary_photon_counter->Draw();
