@@ -163,7 +163,7 @@ void RadiusDivision () {
 
   //>>>>>>>>>>>>>>>>>>> Zones
 
-  const int n_Zones = 10;
+  const int n_Zones = 5;
 
   // Photon Counter
   std::map<int, TH1I *> hist_total_photon_counter_zones;
@@ -186,7 +186,30 @@ void RadiusDivision () {
   // Electron Counter
   std::map<int, TH1I *> hist_reflections_per_photon_counter_zones;
 
+  // Photons Path
+  std::map<int, TH1I *> hist_photon_straight_counter_stack;
+  std::map<int, TH1I *> hist_photon_reflected_counter_stack;
+
   for (size_t zone_i = 0; zone_i < n_Zones; zone_i++) {
+
+    hist_photon_straight_counter_stack[zone_i] = new TH1I(
+      "Straight Photons -" +
+      TString(std::to_string(zone_i).c_str()),
+      "Straight Photons; n Photons; Events",
+      100,
+      0,
+      800
+    );
+
+
+    hist_photon_reflected_counter_stack[zone_i] = new TH1I(
+      "Reflected Photons -" +
+      TString(std::to_string(zone_i).c_str()),
+      "Reflected Photons; n Photons; Events",
+      100,
+      0,
+      800
+    );
 
     // Photon Counter
 
@@ -310,6 +333,9 @@ void RadiusDivision () {
     nbytes = tree->GetEntry(i);
 
     if (Zone == -1) continue;
+
+    hist_photon_straight_counter_stack[Zone]->Fill(nPhotonStraight);
+    hist_photon_reflected_counter_stack[Zone]->Fill(nPhotReflected);
 
     //>>>>>>>>>>>>>>>>>>> Fill histograms.
 
@@ -480,7 +506,63 @@ void RadiusDivision () {
 
   canvas->SetLogy(false);
 
+  // Paths
+  hist_photon_straight_counter_stack[0]->SetFillColor(kBlue);
+  hist_photon_straight_counter_stack[1]->SetFillColor(kRed);
+  hist_photon_straight_counter_stack[2]->SetFillColor(kGreen);
+  hist_photon_straight_counter_stack[3]->SetFillColor(kYellow);
+  hist_photon_straight_counter_stack[4]->SetFillColor(kMagenta);
 
+  TLegend* legend_straight = new TLegend(0.55, 0.68, 0.7, 0.85);
+  legend_straight->SetBorderSize(0);
+  legend_straight->SetFillColorAlpha(0, 0.0);
+  legend_straight->AddEntry(hist_photon_straight_counter_stack[0], "Zone 1", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter_stack[1], "Zone 2", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter_stack[2], "Zone 3", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter_stack[3], "Zone 4", "F");
+  legend_straight->AddEntry(hist_photon_straight_counter_stack[4], "Zone 5", "F");
+
+  THStack *hs_straight = new THStack("Stack Straight Photons", "Straight Photons; n Photons; Events");
+  hs_straight->Add(hist_photon_straight_counter_stack[0]);
+  hs_straight->Add(hist_photon_straight_counter_stack[1]);
+  hs_straight->Add(hist_photon_straight_counter_stack[2]);
+  hs_straight->Add(hist_photon_straight_counter_stack[3]);
+  hs_straight->Add(hist_photon_straight_counter_stack[4]);
+
+  hs_straight->Draw();
+  legend_straight->Draw("SAME");
+  canvas->Print("Totals/Straight.pdf");
+  canvas->Clear();
+
+  // Paths
+  hist_photon_reflected_counter_stack[0]->SetFillColor(kBlue);
+  hist_photon_reflected_counter_stack[1]->SetFillColor(kRed);
+  hist_photon_reflected_counter_stack[2]->SetFillColor(kGreen);
+  hist_photon_reflected_counter_stack[3]->SetFillColor(kYellow);
+  hist_photon_reflected_counter_stack[4]->SetFillColor(kMagenta);
+
+  TLegend* legend_reflected = new TLegend(0.55, 0.68, 0.7, 0.85);
+  legend_reflected->SetBorderSize(0);
+  legend_reflected->SetFillColorAlpha(0, 0.0);
+  legend_reflected->AddEntry(hist_photon_reflected_counter_stack[0], "Zone 1", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter_stack[1], "Zone 2", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter_stack[2], "Zone 3", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter_stack[3], "Zone 4", "F");
+  legend_reflected->AddEntry(hist_photon_reflected_counter_stack[4], "Zone 5", "F");
+
+  THStack *hs_reflected = new THStack("Stack Reflected Photons", "Reflected Photons; n Photons; Events");
+  hs_reflected->Add(hist_photon_reflected_counter_stack[0]);
+  hs_reflected->Add(hist_photon_reflected_counter_stack[1]);
+  hs_reflected->Add(hist_photon_reflected_counter_stack[2]);
+  hs_reflected->Add(hist_photon_reflected_counter_stack[3]);
+  hs_reflected->Add(hist_photon_reflected_counter_stack[4]);
+
+  hs_reflected->Draw();
+  legend_reflected->Draw("SAME");
+  canvas->Print("Totals/Reflected.pdf");
+  canvas->Clear();
+
+  return;
   //>>>>>>>>>>>>>>>>>>> Zones
 
   // Photon Counter
@@ -534,7 +616,7 @@ void RadiusDivision () {
 
 
   // Zones
-  double zones_pos[n_Zones] = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+  double zones_pos[n_Zones] = {0, 1, 2, 3, 4};
 
   for (size_t zone_i = 0; zone_i < n_Zones; zone_i++) {
 
