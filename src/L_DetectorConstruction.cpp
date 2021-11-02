@@ -45,6 +45,8 @@ void L_DetectorConstruction::DefineMaterials() {
 
   G4NistManager* man = G4NistManager::Instance();
 
+  G4Element* H =
+  new G4Element("Hydrogen", symbol = "H", z = 1., a = 1.01*g/mole);
   G4Element* C =
   new G4Element("Carbon", symbol = "C", z = 6., a = 12.01*g/mole);
   G4Element* N =
@@ -83,6 +85,13 @@ void L_DetectorConstruction::DefineMaterials() {
   SiO2->AddElement(Si, natoms = 1);
   SiO2->AddElement(O , natoms = 2);
 
+  // PolyEtherEtherKetone - Coating Material (C19H13O3)
+  Peek =
+  new G4Material("PEEK", density = 1.32*g/cm3, ncomponents = 3);
+  Peek->AddElement(H, natoms = 13);
+  Peek->AddElement(C, natoms = 19);
+  Peek->AddElement(O, natoms = 3);
+
   //
   // Generate and Add Material Properties Table
   //
@@ -93,6 +102,10 @@ void L_DetectorConstruction::DefineMaterials() {
   G4double AirAbsorption[num];
   G4double AirRefractiveIndex[num];
   G4double PhotonEnergy[num];
+
+  // Absorption of Peek
+  G4double PeekAbsorption[num];
+  G4double PeekRefractiveIndex[num];
 
   // Absorption of quartz per 1m
   G4double QuartzAbsorption[num] =
@@ -123,6 +136,8 @@ void L_DetectorConstruction::DefineMaterials() {
     QuartzAbsorption[i] = (-1)/log(QuartzAbsorption[i])*100*cm;
     // QuartzAbsorption[i] = 10*cm;
 
+    PeekAbsorption[i] = 0.*m; // If photon hits peek, kill it
+
   }
 
   G4double QuartzRefractiveIndex[num] =
@@ -136,6 +151,20 @@ void L_DetectorConstruction::DefineMaterials() {
     1.480592, 1.482739, 1.485127, 1.487793, 1.490786, 1.494164,
     1.498000, 1.502388, 1.507446, 1.513328, 1.520237, 1.528452,
     1.538358, 1.550506
+  };
+
+  G4double PeekRefractiveIndex[num] =
+  {
+    2.522612251, 2.340513622, 2.22644993, 2.147598081, 2.089593646,
+    2.045054001, 2.009759064, 1.981106048, 1.957395212, 1.937465894,
+    1.920496644, 1.905888744, 1.893194965, 1.882074202, 1.872261595,
+    1.863548263, 1.855767211, 1.848783311, 1.842486044, 1.836784141,
+    1.831601573, 1.826874508, 1.822548964, 1.818578995, 1.814925252,
+    1.811553852, 1.808435466, 1.805544586, 1.802858928, 1.800358946,
+    1.798027425, 1.79584915, 1.793810627, 1.79189985, 1.790106105,
+    1.788419801, 1.786832332, 1.785335953, 1.783923679, 1.782589194,
+    1.781326776, 1.780131229, 1.778997823, 1.777922249, 1.77690057,
+    1.775929183, 1.775004787, 1.774124352, 1.773285089, 1.772484434
   };
 
   // Assign absorption and refraction to materials
@@ -156,6 +185,13 @@ void L_DetectorConstruction::DefineMaterials() {
   Air->SetMaterialPropertiesTable(AirMPT);
   // In our rough assumption
   Vacuum->SetMaterialPropertiesTable(AirMPT);
+
+  // Peek
+  G4MaterialPropertiesTable* PeekMPT = new G4MaterialPropertiesTable();
+  PeekMPT->AddProperty("RINDEX", PhotonEnergy, PeekRefractiveIndex, num);
+  PeekMPT->AddProperty("ABSLENGTH", PhotonEnergy, PeekAbsorption, num);
+
+  Peek->SetMaterialPropertiesTable(PeekMPT);
 }
 
 G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
@@ -218,9 +254,26 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
 
   ////////////////////////////////////////////////////////////
 
+  ////////////////////////////////////////////////////////////
+
+  ///////////// Coating Solid ///////////////
+
+  G4VSolid *coating_solid = new G4Tubs(
+    "sector",
+    coating.innerRadius,
+    coating.outerRadius,
+    coating.thickness / 2.,
+    0.,
+    twopi
+  );
+
+  ////////////////////////////////////////////////////////////
+
+
   tabletLogical   =  new G4LogicalVolume(bar_solid, SiO2, "tablet");
   windowLogical   =  new G4LogicalVolume(pmt_win_solid, SiO2, "window");
   detectorLogical =  new G4LogicalVolume(photon_detector_solid, SiO2, "detector");
+  coatingLogical =  new G4LogicalVolume(coating_solid, Peek, "coating");
   // detectorLogical->SetSensitiveDetector(LSD);
   // windowLogical->SetSensitiveDetector(LSD);
 
@@ -256,6 +309,16 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     0
   );
 
+  G4VPhysicalVolume *coatingPhysical = new G4PVPlacement(
+    0,
+    G4ThreeVector(0.,0., - (tablet.thickness + coating.thickness) / 2.),
+    coatingLogical,
+    "coating1",
+    worldLogical,
+    false,
+    0
+  );
+
   /*
   //---------------- Second Module ------------------------------------------/
 
@@ -282,13 +345,24 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
 
   G4VPhysicalVolume *detectorPhysical_2 = new G4PVPlacement(
     0,
-    G4ThreeVector(0.,0., -220.*mm - pmt_window.thickness - (tablet.thickness + pmt_detector.thickness) / 2.),
+    G4ThreeVector(0.,0., - 220.*mm - pmt_window.thickness - (tablet.thickness + pmt_detector.thickness) / 2.),
     detectorLogical,
     "detector2",
     worldLogical,
     false,
     0
   );
+
+  G4VPhysicalVolume *coatingPhysical = new G4PVPlacement(
+    0,
+    G4ThreeVector(0.,0., - 220.*mm  - (tablet.thickness + coating.thickness) / 2.),
+    coatingLogical,
+    "coating2",
+    worldLogical,
+    false,
+    0
+  );
+
   */
 
 
@@ -324,6 +398,10 @@ void L_DetectorConstruction::DefineOpticalBorders()
   quartzSurface->SetFinish(polished);
   quartzSurface->SetType(dielectric_dielectric);
 
+  G4OpticalSurface* peekSurface = new G4OpticalSurface("peekBorder");
+  peekSurface->SetFinish(polished);
+  //peekSurface->SetType(dielectric_dielectric);
+
   new G4LogicalSkinSurface(
     "DetectorAbsSurface",
     detectorLogical, OpVolumeKillSurface
@@ -335,6 +413,10 @@ void L_DetectorConstruction::DefineOpticalBorders()
   new G4LogicalSkinSurface(
     "tabletSurface",
     tabletLogical, quartzSurface
+  );
+  new G4LogicalSkinSurface(
+    "coatingSurface",
+    coatingLogical, peekSurface
   );
 
 

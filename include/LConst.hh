@@ -177,6 +177,12 @@ const G4double VertexSigmaZ = 0.*cm;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+// Coating Volume Constants
 
+const G4double coating_inner_radius = 5. *mm;
+const G4double coating_outer_radius = 5.1 *mm;
+const G4double coating_thickness = 6.3 *mm;
+
+const G4double coating_pos_z = (coating_thickness - tablet_thickness)/2. *mm;
 
 }

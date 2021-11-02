@@ -145,3 +145,13 @@ struct PMT_detector: VolumeStruct {
     {;}
 };
 
+struct PMT_coating: VolumeStruct {
+    const G4double innerRadius;
+    const G4double outerRadius;
+    const G4double thickness;
+    PMT_coating():
+        innerRadius(LConst::coating_inner_radius),
+        outerRadius(LConst::coating_outer_radius),
+        thickness(LConst::coating_thickness)
+    {;}
+};
