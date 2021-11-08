@@ -145,13 +145,41 @@ struct PMT_detector: VolumeStruct {
     {;}
 };
 
-struct PMT_coating: VolumeStruct {
+struct PMT_envelope: VolumeStruct {
     const G4double innerRadius;
     const G4double outerRadius;
     const G4double thickness;
-    PMT_coating():
-        innerRadius(LConst::coating_inner_radius),
-        outerRadius(LConst::coating_outer_radius),
-        thickness(LConst::coating_thickness)
+    const G4double z_pos;
+    PMT_envelope():
+        innerRadius(LConst::envelope_inner_radius),
+        outerRadius(LConst::envelope_outer_radius),
+        thickness(LConst::envelope_thickness),
+        z_pos(LConst::envelope_pos_z)
     {;}
+};
+
+struct PMT_shield: VolumeStruct {
+  const G4double innerRadius;
+  const G4double outerRadius;
+  const G4double thickness;
+  const G4double z_pos;
+  PMT_shield():
+      innerRadius(LConst::shield_inner_radius),
+      outerRadius(LConst::shield_outer_radius),
+      thickness(LConst::shield_thickness),
+      z_pos(LConst::shield_pos_z)
+  {;}
+};
+
+struct PMT_socket: VolumeStruct {
+  const G4double innerRadius;
+  const G4double outerRadius;
+  const G4double thickness;
+  const G4double z_pos;
+  PMT_socket():
+      innerRadius(LConst::socket_inner_radius),
+      outerRadius(LConst::socket_outer_radius),
+      thickness(LConst::socket_thickness),
+      z_pos(LConst::socket_pos_z)
+  {;}
 };

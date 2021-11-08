@@ -62,7 +62,9 @@ public:
   PMT_window pmt_window;
   PMT_detector pmt_detector;
 
-  PMT_coating coating;
+  PMT_envelope light_envelope;
+  PMT_shield magnetic_shield;
+  PMT_socket cylindrical_socket;
 
   G4LogicalVolume *LWindowOut[LConst::pmt_n_channels*2];
   G4LogicalVolume *LBarOut[LConst::pmt_n_channels*2];
@@ -73,7 +75,9 @@ public:
   G4LogicalVolume *detectorLogical;
   G4LogicalVolume *tabletLogical;
   G4LogicalVolume *windowLogical;
-  G4LogicalVolume *coatingLogical;
+  G4LogicalVolume *envelopeLogical;
+  G4LogicalVolume *shieldLogical;
+  G4LogicalVolume *socketLogical;
 
   inline void SetEventAction(L_EventAction* evAct){ _eventAction = evAct; };
 
@@ -89,6 +93,9 @@ private:
   G4Material *Peek;
 
   G4Material *Air;
+  G4Material *Al;
+  G4Material *Steel;
+  G4Material *Permalloy;
 
   L_EventAction *_eventAction;
 

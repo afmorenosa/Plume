@@ -177,12 +177,28 @@ const G4double VertexSigmaZ = 0.*cm;
 //////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-// Coating Volume Constants
+// Light Envelope Volume Constants
 
-const G4double coating_inner_radius = 5. *mm;
-const G4double coating_outer_radius = 5.1 *mm;
-const G4double coating_thickness = 6.3 *mm;
+const G4double envelope_inner_radius = 10. *mm;
+const G4double envelope_outer_radius = 12. *mm;
+const G4double envelope_thickness = 102. *mm;
 
-const G4double coating_pos_z = (coating_thickness - tablet_thickness)/2. *mm;
+const G4double envelope_pos_z = 43.*mm;
+
+// Magnetic Shield Volume Constants
+
+const G4double shield_inner_radius = 8 *mm;
+const G4double shield_outer_radius = 9.5 *mm;
+const G4double shield_thickness = 76.5 *mm;
+
+const G4double shield_pos_z = 36.75*mm;
+
+// Cylindrical Socket Volume Constants
+
+const G4double socket_inner_radius = 7. *mm;
+const G4double socket_outer_radius = 7.5 *mm;
+const G4double socket_thickness = 25. *mm;
+
+const G4double socket_pos_z = -10.*mm;
 
 }
