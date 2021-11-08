@@ -65,19 +65,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   G4ParticleDefinition* particle = particleTable->FindParticle("e-");
   G4double mass = particle->GetPDGMass();
 
-  G4double theta = M_PI/3/25 * (24 + G4UniformRand());
-  G4double phi = 2 * M_PI * G4UniformRand();
-
-  // Set the random momentum direction
-  G4double x0 = std::sin(theta) * std::cos(phi);
-
-  G4double y0 = std::sin(theta) * std::sin(phi);
-
-  CheckHit (x0, y0);
-
-  G4double z0 = -std::cos(theta);
-
-  G4ThreeVector dir = G4ThreeVector(x0, y0, z0);
+  G4ThreeVector dir = G4ThreeVector(0, 0, -1);
 
   // Set the Kinetic energy
   G4double momentum = 6 * GeV;
@@ -89,7 +77,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
   _particleGun->SetParticleEnergy(Ekin);
   _particleGun->SetParticleTime(0);
   _particleGun->SetParticlePosition(
-    G4ThreeVector(0.0, 0.0, tablet.thickness / 2.)
+    G4ThreeVector(0.0, 0.0, 5.*cm)
   );
 
   // Generate the primary
