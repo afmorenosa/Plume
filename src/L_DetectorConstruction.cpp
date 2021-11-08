@@ -105,7 +105,6 @@ void L_DetectorConstruction::DefineMaterials() {
 
   // Absorption of Peek
   G4double PeekAbsorption[num];
-  G4double PeekRefractiveIndex[num];
 
   // Absorption of quartz per 1m
   G4double QuartzAbsorption[num] =
@@ -136,7 +135,7 @@ void L_DetectorConstruction::DefineMaterials() {
     QuartzAbsorption[i] = (-1)/log(QuartzAbsorption[i])*100*cm;
     // QuartzAbsorption[i] = 10*cm;
 
-    PeekAbsorption[i] = 0.*m; // If photon hits peek, kill it
+    PeekAbsorption[i] = 10*cm;
 
   }
 
@@ -311,7 +310,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
 
   G4VPhysicalVolume *coatingPhysical = new G4PVPlacement(
     0,
-    G4ThreeVector(0.,0., - (tablet.thickness + coating.thickness) / 2.),
+    G4ThreeVector(0.,0., - (-tablet.thickness + coating.thickness) / 2.),
     coatingLogical,
     "coating1",
     worldLogical,
