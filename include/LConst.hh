@@ -195,10 +195,36 @@ const G4double shield_pos_z = 36.75*mm;
 
 // Cylindrical Socket Volume Constants
 
-const G4double socket_inner_radius = 7. *mm;
-const G4double socket_outer_radius = 7.5 *mm;
-const G4double socket_thickness = 25. *mm;
+// Socket Volume 1
 
-const G4double socket_pos_z = -10.*mm;
+const G4double socket_inner_radius_1 = 7. *mm;
+const G4double socket_outer_radius_1 = 7.5 *mm;
+const G4double socket_thickness_1 = (4.1 + .71 + 1.43 + 2.38 + 1.5) *mm;
+
+// Socket Volume 2
+
+const G4double socket_inner_radius_2 = 7. *mm;
+const G4double socket_outer_radius_2 = 9.5 *mm;
+const G4double socket_thickness_2 = (.71 + 1.43 + 2.38 + 1.5) *mm;
+
+// Socket Volume 3
+
+const G4double socket_inner_radius_3 = 5. *mm;
+const G4double socket_outer_radius_3 = 9.5 *mm;
+const G4double socket_thickness_3 = (1.43 + 2.38 + 1.5) *mm;
+
+// Socket Volume 4
+
+const G4double socket_inner_radius_4 = 3. *mm;
+const G4double socket_outer_radius_4 = 9.5 *mm;
+const G4double socket_thickness_4 = (2.38 + 1.5) *mm;
+
+// Socket Volume 5
+
+const G4double socket_inner_radius_5 = 1.5 *mm;
+const G4double socket_outer_radius_5 = 12. *mm;
+const G4double socket_thickness_5 = 1.5 *mm;
+
+const G4double socket_pos_z = -2.39*mm;
 
 }

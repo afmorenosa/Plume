@@ -172,14 +172,50 @@ struct PMT_shield: VolumeStruct {
 };
 
 struct PMT_socket: VolumeStruct {
-  const G4double innerRadius;
-  const G4double outerRadius;
-  const G4double thickness;
+  // ------------------------------------ //
+  const G4double innerRadius_1;
+  const G4double outerRadius_1;
+  const G4double thickness_1;
+  // ------------------------------------ //
+  const G4double innerRadius_2;
+  const G4double outerRadius_2;
+  const G4double thickness_2;
+  // ------------------------------------ //
+  const G4double innerRadius_3;
+  const G4double outerRadius_3;
+  const G4double thickness_3;
+  // ------------------------------------ //
+  const G4double innerRadius_4;
+  const G4double outerRadius_4;
+  const G4double thickness_4;
+  // ------------------------------------ //
+  const G4double innerRadius_5;
+  const G4double outerRadius_5;
+  const G4double thickness_5;
+  // ------------------------------------ //
   const G4double z_pos;
   PMT_socket():
-      innerRadius(LConst::socket_inner_radius),
-      outerRadius(LConst::socket_outer_radius),
-      thickness(LConst::socket_thickness),
+      // ------------------------------------ //
+      innerRadius_1(LConst::socket_inner_radius_1),
+      outerRadius_1(LConst::socket_outer_radius_1),
+      thickness_1(LConst::socket_thickness_1),
+      // ------------------------------------ //
+      innerRadius_2(LConst::socket_inner_radius_2),
+      outerRadius_2(LConst::socket_outer_radius_2),
+      thickness_2(LConst::socket_thickness_2),
+      // ------------------------------------ //
+      innerRadius_3(LConst::socket_inner_radius_3),
+      outerRadius_3(LConst::socket_outer_radius_3),
+      thickness_3(LConst::socket_thickness_3),
+      // ------------------------------------ //
+      innerRadius_4(LConst::socket_inner_radius_4),
+      outerRadius_4(LConst::socket_outer_radius_4),
+      thickness_4(LConst::socket_thickness_4),
+      // ------------------------------------ //
+      innerRadius_5(LConst::socket_inner_radius_5),
+      outerRadius_5(LConst::socket_outer_radius_5),
+      thickness_5(LConst::socket_thickness_5),
+      // ------------------------------------ //
       z_pos(LConst::socket_pos_z)
   {;}
 };

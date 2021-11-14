@@ -292,7 +292,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     pmt_window.radius,
     pmt_window.thickness / 2.,
     0.,
-    twopi
+    twopi/2
   );
 
   G4VSolid *bar_solid = new G4Tubs(
@@ -301,7 +301,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     tablet.radius,
     tablet.thickness / 2.,
     0.,
-    twopi
+    twopi/2
   );
 
   ////////////////////////////////////////////////////////////
@@ -314,7 +314,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     pmt_detector.radius,
     pmt_detector.thickness / 2.,
     0.,
-    twopi
+    twopi/2
   );
 
   ////////////////////////////////////////////////////////////
@@ -329,7 +329,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     light_envelope.outerRadius,
     light_envelope.thickness / 2.,
     0.,
-    twopi
+    twopi/2
   );
 
   G4VSolid *shield_solid = new G4Tubs(
@@ -338,16 +338,104 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     magnetic_shield.outerRadius,
     magnetic_shield.thickness / 2.,
     0.,
-    twopi
+    twopi/2
   );
 
-  G4VSolid *socket_solid = new G4Tubs(
+  ///////////// Socket Solids Construction ///////////////
+
+  G4VSolid *socket_tube_1 = new G4Tubs(
     "sector",
-    cylindrical_socket.innerRadius,
-    cylindrical_socket.outerRadius,
-    cylindrical_socket.thickness / 2.,
+    cylindrical_socket.innerRadius_1,
+    cylindrical_socket.outerRadius_1,
+    cylindrical_socket.thickness_1 / 2.,
     0.,
-    twopi
+    twopi/2
+  );
+
+  G4VSolid *socket_tube_2 = new G4Tubs(
+    "sector",
+    cylindrical_socket.innerRadius_2,
+    cylindrical_socket.outerRadius_2,
+    cylindrical_socket.thickness_2 / 2.,
+    0.,
+    twopi/2
+  );
+
+  G4VSolid *socket_tube_3 = new G4Tubs(
+    "sector",
+    cylindrical_socket.innerRadius_3,
+    cylindrical_socket.outerRadius_3,
+    cylindrical_socket.thickness_3 / 2.,
+    0.,
+    twopi/2
+  );
+
+  G4VSolid *socket_tube_4 = new G4Tubs(
+    "sector",
+    cylindrical_socket.innerRadius_4,
+    cylindrical_socket.outerRadius_4,
+    cylindrical_socket.thickness_4 / 2.,
+    0.,
+    twopi/2
+  );
+
+  G4VSolid *socket_tube_5 = new G4Tubs(
+    "sector",
+    cylindrical_socket.innerRadius_5,
+    cylindrical_socket.outerRadius_5,
+    cylindrical_socket.thickness_5 / 2.,
+    0.,
+    twopi/2
+  );
+
+  //--------------------------------------------------------//
+
+  G4VSolid *socket_solid_1 = new G4UnionSolid(
+    "Union Solid 1",
+    socket_tube_1,
+    socket_tube_2,
+    0,
+    G4ThreeVector(
+      0,
+      0,
+      (cylindrical_socket.thickness_1 - cylindrical_socket.thickness_2)/2
+    )
+  );
+
+  G4VSolid *socket_solid_2 = new G4UnionSolid(
+    "Union Solid 2",
+    socket_solid_1,
+    socket_tube_3,
+    0,
+    G4ThreeVector(
+      0,
+      0,
+      (cylindrical_socket.thickness_1 - cylindrical_socket.thickness_3)/2
+    )
+  );
+
+  G4VSolid *socket_solid_3 = new G4UnionSolid(
+    "Union Solid 3",
+    socket_solid_2,
+    socket_tube_4,
+    0,
+    G4ThreeVector(
+      0,
+      0,
+      (cylindrical_socket.thickness_1 - cylindrical_socket.thickness_4)/2
+    )
+  );
+
+  G4VSolid *socket_solid = new G4UnionSolid(
+    "Union Solid",
+    socket_solid_3,
+    socket_tube_5,
+    0,
+    G4ThreeVector(
+      0,
+      0,
+      (cylindrical_socket.thickness_1 - cylindrical_socket.thickness_5)/2
+    )
   );
 
   ////////////////////////////////////////////////////////////
