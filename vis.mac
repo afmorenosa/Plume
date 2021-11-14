@@ -23,9 +23,12 @@
 /vis/scene/add/hits
 
 /vis/geometry/set/colour World 0 0.6 0.6 1.0 .1
-/vis/geometry/set/colour tablet 0 1.0 0.5 0.5 1
-/vis/geometry/set/colour window 0 0.5 1.0 0.5 1
+/vis/geometry/set/colour tablet 0 0.0 1.0 1.0 1
+/vis/geometry/set/colour window 0 1.0 0.0 0.98 1
 /vis/geometry/set/colour detector 0 0.5 0.6 1.0 1
+/vis/geometry/set/colour envelope 0 .5 0.25 0.25 1
+/vis/geometry/set/colour shield 0 0.85 0.85 1.0 1
+/vis/geometry/set/colour socket 0 0.5 1.0 0.5 1
 
 
 /vis/viewer/set/viewpointThetaPhi -90 0 deg
