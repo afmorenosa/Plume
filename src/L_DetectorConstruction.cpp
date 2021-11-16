@@ -160,9 +160,9 @@ void L_DetectorConstruction::DefineMaterials() {
     QuartzAbsorption[i] = (-1)/log(QuartzAbsorption[i])*100*cm;
     // QuartzAbsorption[i] = 10*cm;
 
-    PeekAbsorption[i] = 0.1*mm;
-    AluminiumAbsorption[i] = 0.1*mm;
-    PermalloyAbsorption[i] = 0.1*mm;
+    PeekAbsorption[i] = 0.01*mm;
+    AluminiumAbsorption[i] = 0.01*mm;
+    PermalloyAbsorption[i] = 0.01*mm;
   }
 
   G4double QuartzRefractiveIndex[num] =
@@ -292,7 +292,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     pmt_window.radius,
     pmt_window.thickness / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *bar_solid = new G4Tubs(
@@ -301,7 +301,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     tablet.radius,
     tablet.thickness / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   ////////////////////////////////////////////////////////////
@@ -314,7 +314,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     pmt_detector.radius,
     pmt_detector.thickness / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   ////////////////////////////////////////////////////////////
@@ -329,7 +329,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     light_envelope.outerRadius,
     light_envelope.thickness / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *shield_solid = new G4Tubs(
@@ -338,7 +338,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     magnetic_shield.outerRadius,
     magnetic_shield.thickness / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   ///////////// Socket Solids Construction ///////////////
@@ -349,7 +349,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     cylindrical_socket.outerRadius_1,
     cylindrical_socket.thickness_1 / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *socket_tube_2 = new G4Tubs(
@@ -358,7 +358,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     cylindrical_socket.outerRadius_2,
     cylindrical_socket.thickness_2 / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *socket_tube_3 = new G4Tubs(
@@ -367,7 +367,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     cylindrical_socket.outerRadius_3,
     cylindrical_socket.thickness_3 / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *socket_tube_4 = new G4Tubs(
@@ -376,7 +376,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     cylindrical_socket.outerRadius_4,
     cylindrical_socket.thickness_4 / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   G4VSolid *socket_tube_5 = new G4Tubs(
@@ -385,7 +385,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
     cylindrical_socket.outerRadius_5,
     cylindrical_socket.thickness_5 / 2.,
     0.,
-    twopi/2
+    twopi
   );
 
   //--------------------------------------------------------//

@@ -181,9 +181,9 @@ const G4double VertexSigmaZ = 0.*cm;
 
 const G4double envelope_inner_radius = 10. *mm;
 const G4double envelope_outer_radius = 12. *mm;
-const G4double envelope_thickness = 102. *mm;
+const G4double envelope_thickness = 100. *mm;
 
-const G4double envelope_pos_z = 43.*mm;
+const G4double envelope_pos_z = 44.5 *mm;
 
 // Magnetic Shield Volume Constants
 
