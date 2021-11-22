@@ -446,7 +446,7 @@ G4VPhysicalVolume* L_DetectorConstruction::DefineVolumes(){
   detectorLogical =  new G4LogicalVolume(photon_detector_solid, SiO2, "detector");
   envelopeLogical =  new G4LogicalVolume(envelope_solid, Peek, "envelope");
   shieldLogical =  new G4LogicalVolume(shield_solid, Permalloy, "shield");
-  socketLogical =  new G4LogicalVolume(socket_solid, Al, "socket");
+  socketLogical =  new G4LogicalVolume(socket_solid, Peek, "socket");
   // detectorLogical->SetSensitiveDetector(LSD);
   // windowLogical->SetSensitiveDetector(LSD);
 
