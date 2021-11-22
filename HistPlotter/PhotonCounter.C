@@ -7,7 +7,7 @@ void PhotonCounter() {
     600
   );
 
-  TFile *plume_file = TFile::Open("noise.root");
+  TFile *plume_file = TFile::Open("con_coating.root");
 
   TTree *tree = (TTree *) plume_file->Get("T");
 
@@ -87,7 +87,7 @@ void PhotonCounter() {
     "Primary Detected Photons; Number of Photon; Number of Events",
     100,
     0,
-    10001000
+    1000
   );
 
   TH1I *hist_secondary_detected_photons = new TH1I(
@@ -155,14 +155,14 @@ void PhotonCounter() {
 
   hist_primary_photon_counter->SetFillColor(kYellow);
   hist_primary_photon_counter->Draw();
-  canvas->Print("PrimaryCreatedPhotons.pdf");
+  canvas->Print("PrimaryCreatedPhotons_CON.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_photon_counter->SetFillColor(kYellow);
   hist_secondary_photon_counter->Draw();
-  canvas->Print("SecondaryCreatedPhotons.pdf");
+  canvas->Print("SecondaryCreatedPhotons_CON.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -173,21 +173,21 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
-  canvas->Print("TotalCreatedPhotons.pdf");
+  canvas->Print("TotalCreatedPhotons_CON.pdf");
   canvas->Clear();
 
   // Detected Photons
 
   hist_primary_detected_photons->SetFillColor(kYellow);
   hist_primary_detected_photons->Draw();
-  canvas->Print("PrimaryDetectedPhotons.pdf");
+  canvas->Print("PrimaryDetectedPhotons_CON.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_detected_photons->SetFillColor(kYellow);
   hist_secondary_detected_photons->Draw();
-  canvas->Print("SecondaryDetectedPhotons.pdf");
+  canvas->Print("SecondaryDetectedPhotons_CON.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -198,7 +198,7 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_total_detected_photons->Draw();
   hist_total_detected_photons_tail->Draw("SAME");
-  canvas->Print("TotalDetectedPhotons.pdf");
+  canvas->Print("TotalDetectedPhotons_CON.pdf");
   canvas->Clear();
 
 
@@ -207,7 +207,7 @@ void PhotonCounter() {
 
   hist_photon_reflection->SetFillColor(kYellow);
   hist_photon_reflection->Draw();
-  canvas->Print("ReflectedPhotons.pdf");
+  canvas->Print("ReflectedPhotons_CON.pdf");
   canvas->Clear();
 
 }
