@@ -197,7 +197,7 @@ const G4double shield_pos_z = 36.75*mm;
 
 // Socket Volume 1
 
-const G4double socket_inner_radius_1 = 7. *mm;
+const G4double socket_inner_radius_1 = 6. *mm;
 const G4double socket_outer_radius_1 = 7.5 *mm;
 const G4double socket_thickness_1 = (4.1 + .71 + 1.43 + 2.38 + 1.5) *mm;
 
