@@ -187,8 +187,8 @@ const G4double envelope_pos_z = 44.5 *mm;
 
 // Magnetic Shield Volume Constants
 
-const G4double shield_inner_radius = 8 *mm;
-const G4double shield_outer_radius = 9.5 *mm;
+const G4double shield_inner_radius = 7.5 *mm;
+const G4double shield_outer_radius = 10. *mm;
 const G4double shield_thickness = 76.5 *mm;
 
 const G4double shield_pos_z = 36.75*mm;
