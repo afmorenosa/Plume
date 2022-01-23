@@ -45,6 +45,15 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
   G4StepPoint* aPostPoint = aStep->GetPostStepPoint();
   G4VPhysicalVolume* aPostPV = aPostPoint->GetPhysicalVolume();
 
+  if (
+    aTrack->GetCurrentStepNumber() > 100000
+  ) {
+
+    aTrack->SetTrackStatus(fStopAndKill);
+    std::cout << "kill stuck..." << '\n';
+    return;
+
+  };
 
   // Further operations are only for optical photons
   G4ParticleDefinition* particleType = aTrack->GetDefinition();
