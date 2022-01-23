@@ -211,6 +211,12 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   runAction->_nPhotCreated = _nPhotCreated;
   runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
 
+  if (800 <= _nSecondaryPhotCreated && _nSecondaryPhotCreated <= 1000) {
+    std::cout << "Created peak 1 ---->>> Event: " << eventNum << '\n';
+  } else if (1700 <= _nSecondaryPhotCreated && _nSecondaryPhotCreated <= 1900) {
+    std::cout << "Created peak 2 ---->>> Event: " << eventNum << '\n';
+  }
+
   runAction->_nPhotCreated1 = _nPhotCreated1;
   runAction->_nSecondaryPhotCreated1 = _nSecondaryPhotCreated1;
   runAction->_nPhotCreated2 = _nPhotCreated2;
@@ -219,6 +225,10 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   // Detected Photons
   runAction->_nPhotonDetected = _nPhotonDetected;
   runAction->_nSecPhotonDetected = _nSecPhotonDetected;
+
+  if (700 <= _nSecPhotonDetected && _nSecPhotonDetected <= 1000) {
+    std::cout << "Detected peak 1 ---->>> Event: " << eventNum << '\n';
+  }
 
   // Photon Paths
   runAction->_nPhotonStraight = _nPhotonStraight;
