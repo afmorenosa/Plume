@@ -7,11 +7,25 @@ void PhotonCounter() {
     600
   );
 
-  // TFile *plume_file = TFile::Open("wo_coating.root");
-  // TFile *plume_file = TFile::Open("w_coating.root");
 
-  TFile *plume_file = TFile::Open("sin_coating.root");
-  // TFile *plume_file = TFile::Open("con_coating.root");
+  TFile *plume_file = TFile::Open("conf_1_e-_1GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_e-_5GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_e-_10GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_e-_15GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_e-_20GeV.root");
+  //
+  // TFile *plume_file = TFile::Open("conf_1_p_1GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_p_5GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_p_10GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_p_15GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_p_20GeV.root");
+  //
+  // TFile *plume_file = TFile::Open("conf_1_pi+_1GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_pi+_5GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_pi+_10GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_pi+_15GeV.root");
+  // TFile *plume_file = TFile::Open("conf_1_pi+_20GeV.root");
+
 
   TTree *tree = (TTree *) plume_file->Get("T");
 
@@ -186,14 +200,14 @@ void PhotonCounter() {
 
   hist_primary_photon_counter->SetFillColor(kYellow);
   hist_primary_photon_counter->Draw();
-  canvas->Print("PrimaryCreatedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/PrimaryCreatedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_photon_counter->SetFillColor(kYellow);
   hist_secondary_photon_counter->Draw();
-  canvas->Print("SecondaryCreatedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/SecondaryCreatedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -204,21 +218,21 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
-  canvas->Print("TotalCreatedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/TotalCreatedPhotons.pdf");
   canvas->Clear();
 
   // Detected Photons
 
   hist_primary_detected_photons->SetFillColor(kYellow);
   hist_primary_detected_photons->Draw();
-  canvas->Print("PrimaryDetectedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/PrimaryDetectedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_detected_photons->SetFillColor(kYellow);
   hist_secondary_detected_photons->Draw();
-  canvas->Print("SecondaryDetectedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/SecondaryDetectedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -229,7 +243,7 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_total_detected_photons->Draw();
   hist_total_detected_photons_tail->Draw("SAME");
-  canvas->Print("TotalDetectedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/TotalDetectedPhotons.pdf");
   canvas->Clear();
 
 
@@ -238,17 +252,17 @@ void PhotonCounter() {
 
   hist_photon_reflection->SetFillColor(kYellow);
   hist_photon_reflection->Draw();
-  canvas->Print("ReflectedPhotons_SIN.pdf");
+  canvas->Print("Configuration 1/Electron/1 GeV/ReflectedPhotons.pdf");
   canvas->Clear();
 
   // hist_inside_photons->SetFillColor(kYellow);
   // hist_inside_photons->Draw();
-  // canvas->Print("InsidePhotons_SIN.pdf");
+  // canvas->Print("Configuration 1/Electron/1 GeV/InsidePhotons.pdf");
   // canvas->Clear();
   //
   // hist_outside_photons->SetFillColor(kYellow);
   // hist_outside_photons->Draw();
-  // canvas->Print("OutsidePhotons_SIN.pdf");
+  // canvas->Print("Configuration 1/Electron/1 GeV/OutsidePhotons.pdf");
   // canvas->Clear();
 
 }
