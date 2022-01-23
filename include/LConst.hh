@@ -180,7 +180,7 @@ const G4double VertexSigmaZ = 0.*cm;
 // Light Envelope Volume Constants
 
 const G4double envelope_inner_radius = 10. *mm;
-const G4double envelope_outer_radius = 12. *mm;
+const G4double envelope_outer_radius = 13. *mm;
 const G4double envelope_thickness = 100. *mm;
 
 const G4double envelope_pos_z = 44.5 *mm;
