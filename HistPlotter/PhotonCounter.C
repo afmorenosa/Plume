@@ -8,7 +8,10 @@ void PhotonCounter() {
   );
 
   // TFile *plume_file = TFile::Open("wo_coating.root");
-  TFile *plume_file = TFile::Open("w_coating.root");
+  // TFile *plume_file = TFile::Open("w_coating.root");
+
+  TFile *plume_file = TFile::Open("sin_coating.root");
+  // TFile *plume_file = TFile::Open("con_coating.root");
 
   TTree *tree = (TTree *) plume_file->Get("T");
 
@@ -27,8 +30,8 @@ void PhotonCounter() {
   Int_t nSecPhotonDetected = -1;
 
   // Photons Inside and Outside
-  Int_t nPhotonInside = -1;
-  Int_t nPhotonOutside = -1;
+  // Int_t nPhotonInside = -1;
+  // Int_t nPhotonOutside = -1;
 
   // Photon Counter
   tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
@@ -42,8 +45,8 @@ void PhotonCounter() {
   tree->SetBranchAddress("nSecPhotonDetected", &nSecPhotonDetected);
 
   // Photons Inside and Outside
-  tree->SetBranchAddress("nPhotonInside", &nPhotonInside);
-  tree->SetBranchAddress("nPhotonOutside", &nPhotonOutside);
+  // tree->SetBranchAddress("nPhotonInside", &nPhotonInside);
+  // tree->SetBranchAddress("nPhotonOutside", &nPhotonOutside);
 
   // Photon Counter
 
@@ -51,15 +54,15 @@ void PhotonCounter() {
     "Primary Created Photons",
     "Primary Created Photons; Number of Photons; Number of Events",
     180,
-    0,
-    2000
+    600,
+    1200
   );
 
   TH1I *hist_photon_counter_totals = new TH1I(
     "Total Created Photons",
     "Total Created Photons; Number of Photons; Number of Events",
     100,
-    0,
+    600,
     2000
   );
 
@@ -68,14 +71,14 @@ void PhotonCounter() {
     "Secondary Created Photons; Number of Photons; Number of Events",
     140,
     0,
-    1400
+    4000
   );
 
   TH1I *hist_secondary_photon_counter_tail = new TH1I(
     "Total Created Photons Tail",
-    "Total Created Photons; Number of Photons; Number of Events",
+    "Total Created Photons Tail; Number of Photons; Number of Events",
     100,
-    0,
+    600,
     2000
   );
 
@@ -95,8 +98,8 @@ void PhotonCounter() {
     "Primary Detected Photons",
     "Primary Detected Photons; Number of Photons; Number of Events",
     100,
-    0,
-    1000
+    300,
+    600
   );
 
   TH1I *hist_secondary_detected_photons = new TH1I(
@@ -104,40 +107,40 @@ void PhotonCounter() {
     "Secondary Detected Photons; Number of Photons; Number of Events",
     100,
     0,
-    1000
+    4000
   );
 
   TH1I *hist_total_detected_photons = new TH1I(
     "Total Detected Photons",
     "Total Detected Photons; Number of Photons; Number of Events",
     100,
-    0,
-    1000
+    300,
+    1700
   );
 
   TH1I *hist_total_detected_photons_tail = new TH1I(
-    "Total Detected Photons",
-    "Total Detected Photons; Number of Photons; Number of Events",
+    "Total Detected Photons Tail",
+    "Total Detected Photons Tail; Number of Photons; Number of Events",
     100,
-    0,
-    1000
+    300,
+    1700
   );
 
-  TH1I *hist_inside_photons = new TH1I(
-    "Inside Photons",
-    "Inside Photons; Number of Photons; Number of Events",
-    100,
-    0,
-    3000
-  );
-
-  TH1I *hist_outside_photons = new TH1I(
-    "Outside Photons",
-    "Outside Photons; Number of Photons; Number of Events",
-    100,
-    0,
-    3000
-  );
+  // TH1I *hist_inside_photons = new TH1I(
+  //   "Inside Photons",
+  //   "Inside Photons; Number of Photons; Number of Events",
+  //   100,
+  //   0,
+  //   3000
+  // );
+  //
+  // TH1I *hist_outside_photons = new TH1I(
+  //   "Outside Photons",
+  //   "Outside Photons; Number of Photons; Number of Events",
+  //   100,
+  //   0,
+  //   3000
+  // );
 
   //>>>>>>>>>>>>>> Fill Histograms
 
@@ -172,8 +175,8 @@ void PhotonCounter() {
       );
     }
 
-    hist_inside_photons->Fill(nPhotonInside);
-    hist_outside_photons->Fill(nPhotonOutside);
+    // hist_inside_photons->Fill(nPhotonInside);
+    // hist_outside_photons->Fill(nPhotonOutside);
 
   }
 
@@ -238,14 +241,14 @@ void PhotonCounter() {
   canvas->Print("ReflectedPhotons_SIN.pdf");
   canvas->Clear();
 
-  hist_inside_photons->SetFillColor(kYellow);
-  hist_inside_photons->Draw();
-  canvas->Print("InsidePhotons_SIN.pdf");
-  canvas->Clear();
-
-  hist_outside_photons->SetFillColor(kYellow);
-  hist_outside_photons->Draw();
-  canvas->Print("OutsidePhotons_SIN.pdf");
-  canvas->Clear();
+  // hist_inside_photons->SetFillColor(kYellow);
+  // hist_inside_photons->Draw();
+  // canvas->Print("InsidePhotons_SIN.pdf");
+  // canvas->Clear();
+  //
+  // hist_outside_photons->SetFillColor(kYellow);
+  // hist_outside_photons->Draw();
+  // canvas->Print("OutsidePhotons_SIN.pdf");
+  // canvas->Clear();
 
 }
