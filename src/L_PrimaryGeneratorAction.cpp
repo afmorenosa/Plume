@@ -80,7 +80,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
    G4ThreeVector dir = G4ThreeVector(0.0, -1.0, 0.0);
 
   // Set the Kinetic energy
-  G4double momentum = 6 * GeV;
+  G4double momentum = 1 * GeV;
   G4double Ekin = (TMath::Sqrt(momentum*momentum + mass*mass) - mass);
 
   // Set the properties for the particle gun
