@@ -198,14 +198,14 @@ void PhotonCounter() {
 
   hist_primary_photon_counter->SetFillColor(kYellow);
   hist_primary_photon_counter->Draw();
-  canvas->Print("Configuration 2/Electron/1 GeV/PrimaryCreatedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/PrimaryCreatedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_photon_counter->SetFillColor(kYellow);
   hist_secondary_photon_counter->Draw();
-  canvas->Print("Configuration 2/Electron/1 GeV/SecondaryCreatedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/SecondaryCreatedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -216,21 +216,21 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
-  canvas->Print("Configuration 2/Electron/1 GeV/TotalCreatedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/TotalCreatedPhotons.pdf");
   canvas->Clear();
 
   // Detected Photons
 
   hist_primary_detected_photons->SetFillColor(kYellow);
   hist_primary_detected_photons->Draw();
-  canvas->Print("Configuration 2/Electron/1 GeV/PrimaryDetectedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/PrimaryDetectedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(true);
 
   hist_secondary_detected_photons->SetFillColor(kYellow);
   hist_secondary_detected_photons->Draw();
-  canvas->Print("Configuration 2/Electron/1 GeV/SecondaryDetectedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/SecondaryDetectedPhotons.pdf");
   canvas->Clear();
 
   canvas->SetLogy(false);
@@ -241,7 +241,7 @@ void PhotonCounter() {
   //hist_primary_photon_counter->Draw();
   hist_total_detected_photons->Draw();
   hist_total_detected_photons_tail->Draw("SAME");
-  canvas->Print("Configuration 2/Electron/1 GeV/TotalDetectedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/TotalDetectedPhotons.pdf");
   canvas->Clear();
 
 
@@ -250,17 +250,17 @@ void PhotonCounter() {
 
   hist_photon_reflection->SetFillColor(kYellow);
   hist_photon_reflection->Draw();
-  canvas->Print("Configuration 2/Electron/1 GeV/ReflectedPhotons.pdf");
+  canvas->Print("Configuration_2/Electron/1_GeV/ReflectedPhotons.pdf");
   canvas->Clear();
 
   // hist_inside_photons->SetFillColor(kYellow);
   // hist_inside_photons->Draw();
-  // canvas->Print("Configuration 2/Electron/1 GeV/InsidePhotons.pdf");
+  // canvas->Print("Configuration_2/Electron/1_GeV/InsidePhotons.pdf");
   // canvas->Clear();
   //
   // hist_outside_photons->SetFillColor(kYellow);
   // hist_outside_photons->Draw();
-  // canvas->Print("Configuration 2/Electron/1 GeV/OutsidePhotons.pdf");
+  // canvas->Print("Configuration_2/Electron/1_GeV/OutsidePhotons.pdf");
   // canvas->Clear();
 
 }
