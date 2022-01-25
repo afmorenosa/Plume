@@ -197,15 +197,18 @@ void PhotonCounter() {
   //>>>>>>>>>>>>>>>>> Set Canvas
 
   // Photon Counter
+  canvas->SetLogy(true);
 
   hist_primary_photon_counter->SetFillColor(kYellow);
+  hist_primary_photon_counter->SetMaximum(8000);
+  hist_primary_photon_counter->SetMinimum(1e-1);
   hist_primary_photon_counter->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/PrimaryCreatedPhotons.pdf");
   canvas->Clear();
 
-  canvas->SetLogy(true);
-
   hist_secondary_photon_counter->SetFillColor(kYellow);
+  hist_secondary_photon_counter->SetMaximum(2e5);
+  hist_secondary_photon_counter->SetMinimum(1e-1);
   hist_secondary_photon_counter->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/SecondaryCreatedPhotons.pdf");
   canvas->Clear();
@@ -214,6 +217,8 @@ void PhotonCounter() {
   hist_photon_counter_totals->SetFillColorAlpha(kYellow, 1.0);
   hist_secondary_photon_counter_tail->SetFillColorAlpha(kRed, 0.5);
   //hist_primary_photon_counter->Draw();
+  hist_photon_counter_totals->SetMaximum(2e5);
+  hist_photon_counter_totals->SetMinimum(1e-1);
   hist_photon_counter_totals->Draw();
   hist_secondary_photon_counter_tail->Draw("SAME");
   canvas->Print("Configuration_1/Electron/1_GeV/TotalCreatedPhotons.pdf");
@@ -222,11 +227,15 @@ void PhotonCounter() {
   // Detected Photons
 
   hist_primary_detected_photons->SetFillColor(kYellow);
+  hist_primary_detected_photons->SetMaximum(2e5);
+  hist_primary_detected_photons->SetMinimum(1e-1);
   hist_primary_detected_photons->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/PrimaryDetectedPhotons.pdf");
   canvas->Clear();
 
   hist_secondary_detected_photons->SetFillColor(kYellow);
+  hist_secondary_detected_photons->SetMaximum(2e5);
+  hist_secondary_detected_photons->SetMinimum(1e-1);
   hist_secondary_detected_photons->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/SecondaryDetectedPhotons.pdf");
   canvas->Clear();
@@ -235,6 +244,8 @@ void PhotonCounter() {
   hist_total_detected_photons->SetFillColorAlpha(kYellow, 1.0);
   hist_total_detected_photons_tail->SetFillColorAlpha(kRed, 0.5);
   //hist_primary_photon_counter->Draw();
+  hist_total_detected_photons->SetMaximum(2e5);
+  hist_total_detected_photons->SetMinimum(1e-1);
   hist_total_detected_photons->Draw();
   hist_total_detected_photons_tail->Draw("SAME");
   canvas->Print("Configuration_1/Electron/1_GeV/TotalDetectedPhotons.pdf");
