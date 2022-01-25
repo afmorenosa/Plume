@@ -68,7 +68,7 @@ void PhotonCounter() {
     "Primary Created Photons",
     "Primary Created Photons; Number of Photons; Number of Events",
     180,
-    600,
+    400,
     1200
   );
 
@@ -76,7 +76,7 @@ void PhotonCounter() {
     "Total Created Photons",
     "Total Created Photons; Number of Photons; Number of Events",
     100,
-    600,
+    400,
     2000
   );
 
@@ -92,7 +92,7 @@ void PhotonCounter() {
     "Total Created Photons Tail",
     "Total Created Photons Tail; Number of Photons; Number of Events",
     100,
-    600,
+    400,
     2000
   );
 
@@ -112,7 +112,7 @@ void PhotonCounter() {
     "Primary Detected Photons",
     "Primary Detected Photons; Number of Photons; Number of Events",
     100,
-    300,
+    100,
     600
   );
 
@@ -128,7 +128,7 @@ void PhotonCounter() {
     "Total Detected Photons",
     "Total Detected Photons; Number of Photons; Number of Events",
     100,
-    300,
+    100,
     1700
   );
 
@@ -136,7 +136,7 @@ void PhotonCounter() {
     "Total Detected Photons Tail",
     "Total Detected Photons Tail; Number of Photons; Number of Events",
     100,
-    300,
+    100,
     1700
   );
 
@@ -210,8 +210,6 @@ void PhotonCounter() {
   canvas->Print("Configuration_1/Electron/1_GeV/SecondaryCreatedPhotons.pdf");
   canvas->Clear();
 
-  canvas->SetLogy(false);
-
   //hist_primary_photon_counter->SetFillColorAlpha(kYellow, 1.0);
   hist_photon_counter_totals->SetFillColorAlpha(kYellow, 1.0);
   hist_secondary_photon_counter_tail->SetFillColorAlpha(kRed, 0.5);
@@ -228,14 +226,10 @@ void PhotonCounter() {
   canvas->Print("Configuration_1/Electron/1_GeV/PrimaryDetectedPhotons.pdf");
   canvas->Clear();
 
-  canvas->SetLogy(true);
-
   hist_secondary_detected_photons->SetFillColor(kYellow);
   hist_secondary_detected_photons->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/SecondaryDetectedPhotons.pdf");
   canvas->Clear();
-
-  canvas->SetLogy(false);
 
   //hist_primary_photon_counter->SetFillColorAlpha(kYellow, 1.0);
   hist_total_detected_photons->SetFillColorAlpha(kYellow, 1.0);
@@ -248,8 +242,6 @@ void PhotonCounter() {
 
 
   // Reflections
-  canvas->SetLogy(true);
-
   hist_photon_reflection->SetFillColor(kYellow);
   hist_photon_reflection->Draw();
   canvas->Print("Configuration_1/Electron/1_GeV/ReflectedPhotons.pdf");
