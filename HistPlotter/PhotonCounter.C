@@ -75,7 +75,7 @@ void PhotonCounter() {
     "Total Created Photons; Number of Photons; Number of Events",
     100,
     400,
-    2000
+    4000
   );
 
   TH1I *hist_secondary_photon_counter = new TH1I(
@@ -83,7 +83,7 @@ void PhotonCounter() {
     "Secondary Created Photons; Number of Photons; Number of Events",
     140,
     0,
-    4000
+    5000
   );
 
   TH1I *hist_secondary_photon_counter_tail = new TH1I(
@@ -91,7 +91,7 @@ void PhotonCounter() {
     "Total Created Photons Tail; Number of Photons; Number of Events",
     100,
     400,
-    2000
+    4000
   );
 
   // Reflections
@@ -119,7 +119,7 @@ void PhotonCounter() {
     "Secondary Detected Photons; Number of Photons; Number of Events",
     100,
     0,
-    4000
+    5000
   );
 
   TH1I *hist_total_detected_photons = new TH1I(
