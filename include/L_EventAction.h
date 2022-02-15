@@ -71,7 +71,7 @@ public:
   void PhotonDetected (
     G4int trackID,
     G4int parentTrackID,
-    const G4ThreeVector PhotonDetectedPosition
+    const G4ThreeVector PhotonDetectedPosition,
   ) {
 
     if (
@@ -113,6 +113,9 @@ public:
 
     }
   }
+
+  void InsertSecondaryPhotonDetection1() {_nSecPhotonDetected1++;}
+  void InsertSecondaryPhotonDetection2() {_nSecPhotonDetected2++;}
 
   // Reflections
   void InsertPhotonReflection() {_nPhotReflection++;}
@@ -199,6 +202,9 @@ private:
   // Detected Photons
   G4int _nPhotonDetected;
   G4int _nSecPhotonDetected;
+
+  G4int _nSecPhotonDetected1;
+  G4int _nSecPhotonDetected2;
 
   //Positions of Detected Photons
   std::vector<G4double> *_nPhotonDetectedPosition{};

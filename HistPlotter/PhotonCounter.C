@@ -30,129 +30,31 @@ void PhotonCounter() {
   // Zones
   Int_t Zones = -1;
 
-  // Photon Counter
-  Int_t nPhotCreated = -1;
-  Int_t nSecondaryPhotCreated = -1;
-
-  // Reflections
-  Int_t nPhotReflection = -1;
+  // Detected Photons
+  Int_t nSecPhotonDetected1 = -1;
+  Int_t nSecPhotonDetected2 = -1;
 
   // Detected Photons
-  Int_t nPhotonDetected = -1;
-  Int_t nSecPhotonDetected = -1;
-
-  // Photons Inside and Outside
-  // Int_t nPhotonInside = -1;
-  // Int_t nPhotonOutside = -1;
-
-  // Photon Counter
-  tree->SetBranchAddress("nPhotCreated", &nPhotCreated);
-  tree->SetBranchAddress("nSecondaryPhotCreated", &nSecondaryPhotCreated);
-
-  // Reflections
-  tree->SetBranchAddress("nPhotReflection", &nPhotReflection);
+  tree->SetBranchAddress("nSecPhotonDetected1", &nSecPhotonDetected1);
+  tree->SetBranchAddress("nSecPhotonDetected2", &nSecPhotonDetected2);
 
   // Detected Photons
-  tree->SetBranchAddress("nPhotonDetected", &nPhotonDetected);
-  tree->SetBranchAddress("nSecPhotonDetected", &nSecPhotonDetected);
 
-  // Photons Inside and Outside
-  // tree->SetBranchAddress("nPhotonInside", &nPhotonInside);
-  // tree->SetBranchAddress("nPhotonOutside", &nPhotonOutside);
-
-  // Photon Counter
-
-  TH1I *hist_primary_photon_counter = new TH1I(
-    "Primary Created Photons",
-    "Primary Created Photons; Number of Photons; Number of Events",
-    100,
-    600,
-    1200
-  );
-
-  TH1I *hist_photon_counter_totals = new TH1I(
-    "Total Created Photons",
-    "Total Created Photons; Number of Photons; Number of Events",
-    100,
-    600,
-    2000
-  );
-
-  TH1I *hist_secondary_photon_counter = new TH1I(
-    "Secondary Created Photons",
-    "Secondary Created Photons; Number of Photons; Number of Events",
+  TH1I *hist_secondary_detected_photons_1 = new TH1I(
+    "Secondary Detected Photons Module 1",
+    "Secondary Detected Photons Module 1; Number of Photons; Number of Events",
     100,
     0,
     4000
   );
 
-  TH1I *hist_secondary_photon_counter_tail = new TH1I(
-    "Total Created Photons Tail",
-    "Total Created Photons Tail; Number of Photons; Number of Events",
-    100,
-    600,
-    2000
-  );
-
-  // Reflections
-
-  TH1I *hist_photon_reflection = new TH1I(
-    "Reflected Photons",
-    "Reflected Photons; Number of Photons; Number of Events",
-    100,
-    0,
-    5000
-  );
-
-  // Detected Photons
-
-  TH1I *hist_primary_detected_photons = new TH1I(
-    "Primary Detected Photons",
-    "Primary Detected Photons; Number of Photons; Number of Events",
-    100,
-    300,
-    600
-  );
-
-  TH1I *hist_secondary_detected_photons = new TH1I(
-    "Secondary Detected Photons",
-    "Secondary Detected Photons; Number of Photons; Number of Events",
+  TH1I *hist_secondary_detected_photons_2 = new TH1I(
+    "Secondary Detected Photons Module 2",
+    "Secondary Detected Photons Module 2; Number of Photons; Number of Events",
     100,
     0,
     4000
   );
-
-  TH1I *hist_total_detected_photons = new TH1I(
-    "Total Detected Photons",
-    "Total Detected Photons; Number of Photons; Number of Events",
-    100,
-    300,
-    1700
-  );
-
-  TH1I *hist_total_detected_photons_tail = new TH1I(
-    "Total Detected Photons Tail",
-    "Total Detected Photons Tail; Number of Photons; Number of Events",
-    100,
-    300,
-    1700
-  );
-
-  // TH1I *hist_inside_photons = new TH1I(
-  //   "Inside Photons",
-  //   "Inside Photons; Number of Photons; Number of Events",
-  //   100,
-  //   0,
-  //   3000
-  // );
-  //
-  // TH1I *hist_outside_photons = new TH1I(
-  //   "Outside Photons",
-  //   "Outside Photons; Number of Photons; Number of Events",
-  //   100,
-  //   0,
-  //   3000
-  // );
 
   //>>>>>>>>>>>>>> Fill Histograms
 
@@ -162,105 +64,26 @@ void PhotonCounter() {
   for (int i = 0; i < nentries; i++) {
     nbytes = tree->GetEntry(i);
 
-    // Photon Counter
-    hist_photon_counter_totals->Fill(nSecondaryPhotCreated + nPhotCreated);
-    hist_primary_photon_counter->Fill(nPhotCreated);
-    hist_secondary_photon_counter->Fill(nSecondaryPhotCreated);
-
-    if (nSecondaryPhotCreated > 0) {
-      hist_secondary_photon_counter_tail->Fill(
-        nSecondaryPhotCreated + nPhotCreated
-      );
-    }
-
-    // Reflections
-    hist_photon_reflection->Fill(nPhotReflection);
-
     // Detected Photons
-    hist_primary_detected_photons->Fill(nPhotonDetected - nSecPhotonDetected);
-    hist_secondary_detected_photons->Fill(nSecPhotonDetected);
-    hist_total_detected_photons->Fill(nPhotonDetected);
-
-    if (nSecPhotonDetected > 0) {
-      hist_total_detected_photons_tail->Fill(
-        nPhotonDetected
-      );
-    }
-
-    // hist_inside_photons->Fill(nPhotonInside);
-    // hist_outside_photons->Fill(nPhotonOutside);
+    hist_secondary_detected_photons_1->Fill(nSecPhotonDetected1);
+    hist_secondary_detected_photons_2->Fill(nSecPhotonDetected2);
 
   }
 
   //>>>>>>>>>>>>>>>>> Set Canvas
 
-  // Photon Counter
-
-  hist_primary_photon_counter->SetFillColor(kYellow);
-  hist_primary_photon_counter->Draw();
-  canvas->Print("TestBeam/Simu/PrimaryCreatedPhotons.pdf");
-  canvas->Clear();
-
   canvas->SetLogy(true);
-
-  hist_secondary_photon_counter->SetFillColor(kYellow);
-  hist_secondary_photon_counter->Draw();
-  canvas->Print("TestBeam/Simu/SecondaryCreatedPhotons.pdf");
-  canvas->Clear();
-
-  canvas->SetLogy(false);
-
-  //hist_primary_photon_counter->SetFillColorAlpha(kYellow, 1.0);
-  hist_photon_counter_totals->SetFillColorAlpha(kYellow, 1.0);
-  hist_secondary_photon_counter_tail->SetFillColorAlpha(kRed, 0.5);
-  //hist_primary_photon_counter->Draw();
-  hist_photon_counter_totals->Draw();
-  hist_secondary_photon_counter_tail->Draw("SAME");
-  canvas->Print("TestBeam/Simu/TotalCreatedPhotons.pdf");
-  canvas->Clear();
 
   // Detected Photons
 
-  hist_primary_detected_photons->SetFillColor(kYellow);
-  hist_primary_detected_photons->Draw();
-  canvas->Print("TestBeam/Simu/PrimaryDetectedPhotons.pdf");
+  hist_secondary_detected_photons_1->SetFillColor(kYellow);
+  hist_secondary_detected_photons_1->Draw();
+  canvas->Print("TestBeam/Simu/SecondaryDetectedPhotons_1.pdf");
   canvas->Clear();
 
-  canvas->SetLogy(true);
-
-  hist_secondary_detected_photons->SetFillColor(kYellow);
-  hist_secondary_detected_photons->Draw();
-  canvas->Print("TestBeam/Simu/SecondaryDetectedPhotons.pdf");
+  hist_secondary_detected_photons_2->SetFillColor(kYellow);
+  hist_secondary_detected_photons_2->Draw();
+  canvas->Print("TestBeam/Simu/SecondaryDetectedPhotons_2.pdf");
   canvas->Clear();
-
-  canvas->SetLogy(false);
-
-  //hist_primary_photon_counter->SetFillColorAlpha(kYellow, 1.0);
-  hist_total_detected_photons->SetFillColorAlpha(kYellow, 1.0);
-  hist_total_detected_photons_tail->SetFillColorAlpha(kRed, 0.5);
-  //hist_primary_photon_counter->Draw();
-  hist_total_detected_photons->Draw();
-  hist_total_detected_photons_tail->Draw("SAME");
-  canvas->Print("TestBeam/Simu/TotalDetectedPhotons.pdf");
-  canvas->Clear();
-
-
-  // Reflections
-  canvas->SetLogy(true);
-
-  hist_photon_reflection->SetFillColor(kYellow);
-  hist_photon_reflection->Draw();
-  canvas->Print("TestBeam/Simu/ReflectedPhotons.pdf");
-  canvas->Clear();
-
-  // hist_inside_photons->SetFillColor(kYellow);
-  // hist_inside_photons->Draw();
-  // canvas->Print("TestBeam/Simu/InsidePhotons.pdf");
-  // canvas->Clear();
-  //
-  // hist_outside_photons->SetFillColor(kYellow);
-  // hist_outside_photons->Draw();
-  // canvas->Print("TestBeam/Simu/OutsidePhotons.pdf");
-  // canvas->Clear();
 
 }
