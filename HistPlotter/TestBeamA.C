@@ -65,19 +65,12 @@ void TestBeamA () {
     10
   );
 
-  std::vector<double> trigger_keys = {
-    0.01,
-    0.05,
-    0.1,
-    0.5,
-    1,
-    5,
-    10,
-    50
+  std::vector<int> trigger_keys = {
+    5, 6, 7, 8, 9, 10
   };
 
-  std::map<double, TH1F*> hists_sigChargeInWindowVT_trigger2;
-  std::map<double, TH1F*> hists_sigChargeInWindowVT_trigger1;
+  std::map<int, TH1F*> hists_sigChargeInWindowVT_trigger2;
+  std::map<int, TH1F*> hists_sigChargeInWindowVT_trigger1;
 
   for (size_t i = 0; i < trigger_keys.size(); i++) {
 
@@ -88,8 +81,8 @@ void TestBeamA () {
       TString(std::to_string(trigger_keys[i]).c_str()) +
       TString("; Charge; Events"),
       100,
-      -2,
-      7
+      -0.25,
+      4.5
     );
 
     hists_sigChargeInWindowVT_trigger2[trigger_keys[i]] = new TH1F(
@@ -99,8 +92,8 @@ void TestBeamA () {
       TString(std::to_string(trigger_keys[i]).c_str()) +
       TString("; Charge; Events"),
       100,
-      -2,
-      7.5
+      -0.25,
+      6
     );
 
   }
