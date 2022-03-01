@@ -7,7 +7,7 @@ void PhotonCounter() {
     600
   );
 
-  TFile *plume_file = TFile::Open("conf_0_e-_1GeV.root");
+  TFile *plume_file = TFile::Open("p_10GeV.root");
   // TFile *plume_file = TFile::Open("conf_0_e-_5GeV.root");
   // TFile *plume_file = TFile::Open("conf_0_e-_10GeV.root");
   // TFile *plume_file = TFile::Open("conf_0_e-_15GeV.root");
@@ -65,8 +65,8 @@ void PhotonCounter() {
   TH1I *hist_primary_photon_counter = new TH1I(
     "Primary Created Photons",
     "Primary Created Photons; Number of Photons; Number of Events",
-    180,
-    400,
+    100,
+    0,
     1200
   );
 
@@ -74,14 +74,14 @@ void PhotonCounter() {
     "Total Created Photons",
     "Total Created Photons; Number of Photons; Number of Events",
     100,
-    400,
+    0,
     4000
   );
 
   TH1I *hist_secondary_photon_counter = new TH1I(
     "Secondary Created Photons",
     "Secondary Created Photons; Number of Photons; Number of Events",
-    140,
+    100,
     0,
     5000
   );
@@ -90,7 +90,7 @@ void PhotonCounter() {
     "Total Created Photons Tail",
     "Total Created Photons Tail; Number of Photons; Number of Events",
     100,
-    400,
+    0,
     4000
   );
 
@@ -110,7 +110,7 @@ void PhotonCounter() {
     "Primary Detected Photons",
     "Primary Detected Photons; Number of Photons; Number of Events",
     100,
-    100,
+    0,
     600
   );
 
@@ -126,7 +126,7 @@ void PhotonCounter() {
     "Total Detected Photons",
     "Total Detected Photons; Number of Photons; Number of Events",
     100,
-    100,
+    0,
     1700
   );
 
@@ -134,7 +134,7 @@ void PhotonCounter() {
     "Total Detected Photons Tail",
     "Total Detected Photons Tail; Number of Photons; Number of Events",
     100,
-    100,
+    0,
     1700
   );
 
