@@ -52,6 +52,12 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   _nPhotonDetected = 0;
   _nSecPhotonDetected = 0;
 
+  _nPhotonDetected1 = 0;
+  _nPhotonDetected2 = 0;
+
+  _trigger_time1 = -1.0;
+  _trigger_time2 = -1.0;
+
   _nSecPhotonDetected1 = 0;
   _nSecPhotonDetected2 = 0;
 
@@ -136,6 +142,12 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   // Detected Photons
   _nPhotonDetected = 0;
   _nSecPhotonDetected = 0;
+
+  _nPhotonDetected1 = 0;
+  _nPhotonDetected2 = 0;
+
+  _trigger_time1 = -1.0;
+  _trigger_time2 = -1.0;
 
   _nSecPhotonDetected1 = 0;
   _nSecPhotonDetected2 = 0;
@@ -225,6 +237,12 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   // Detected Photons
   runAction->_nPhotonDetected = _nPhotonDetected;
   runAction->_nSecPhotonDetected = _nSecPhotonDetected;
+
+  runAction->_nPhotonDetected1 = _nPhotonDetected1;
+  runAction->_nPhotonDetected2 = _nPhotonDetected2;
+
+  runAction->_trigger_time1 = _trigger_time1;
+  runAction->_trigger_time2 = _trigger_time2;
 
   runAction->_nSecPhotonDetected1 = _nSecPhotonDetected1;
   runAction->_nSecPhotonDetected2 = _nSecPhotonDetected2;

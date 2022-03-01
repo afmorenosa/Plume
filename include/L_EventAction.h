@@ -72,6 +72,8 @@ public:
     G4int trackID,
     G4int parentTrackID,
     const G4ThreeVector PhotonDetectedPosition,
+    G4double track_time,
+    int module=1
   ) {
 
     if (
@@ -79,6 +81,12 @@ public:
     ) {
       track_detected[trackID] = true;
       _nPhotonDetected++;
+
+      if (module == 1) {
+        this->InsertPhotonDetection1(track_time);
+      } else {
+        this->InsertPhotonDetection2(track_time);
+      }
 
       G4double hit_radius = std::sqrt(
         PhotonDetectedPosition.x()*PhotonDetectedPosition.x() +
@@ -105,12 +113,34 @@ public:
         _nSecPhotonDetected++;
         _nSecPhotonDetectedPosition->push_back(hit_radius);
 
+        if (module == 1) {
+          this->InsertSecondaryPhotonDetection1();
+        } else {
+          this->InsertSecondaryPhotonDetection2();
+        }
+
       } else {
 
         _nPriPhotonDetectedPosition->push_back(hit_radius);
 
       }
 
+    }
+  }
+
+  void InsertPhotonDetection1(G4double track_time) {
+    _nPhotonDetected1++;
+
+    if (_nPhotonDetected1 == 510) {
+      _trigger_time1 = track_time;
+    }
+  }
+
+  void InsertPhotonDetection2(G4double track_time) {
+    _nPhotonDetected2++;
+
+    if (_nPhotonDetected2 == 510) {
+      _trigger_time2 = track_time;
     }
   }
 
@@ -202,6 +232,12 @@ private:
   // Detected Photons
   G4int _nPhotonDetected;
   G4int _nSecPhotonDetected;
+
+  G4int _nPhotonDetected1;
+  G4int _nPhotonDetected2;
+
+  G4double _trigger_time1;
+  G4double _trigger_time2;
 
   G4int _nSecPhotonDetected1;
   G4int _nSecPhotonDetected2;

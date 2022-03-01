@@ -74,6 +74,12 @@ public:
   G4int _nPhotonDetected;
   G4int _nSecPhotonDetected;
 
+  G4int _nPhotonDetected1;
+  G4int _nPhotonDetected2;
+
+  G4double _trigger_time1;
+  G4double _trigger_time2;
+
   G4int _nSecPhotonDetected1;
   G4int _nSecPhotonDetected2;
 
