@@ -66,6 +66,10 @@ runAction(runact), _steppingAction(steppingAction), printModulo(100) {
   _nPriPhotonDetectedPosition = new std::vector<G4double>{};
   _nSecPhotonDetectedPosition = new std::vector<G4double>{};
 
+  // Photons energy
+  _PhotonDetectedEnergy1 = new std::vector<G4double>{};
+  _PhotonDetectedEnergy2 = new std::vector<G4double>{};
+
   // Photon Paths
   _nPhotonStraight = 0;
   _nPhotReflected = 0;
@@ -152,6 +156,10 @@ void L_EventAction::BeginOfEventAction(const G4Event* event)
   _nSecPhotonDetected1 = 0;
   _nSecPhotonDetected2 = 0;
 
+  // Photons energy
+  _PhotonDetectedEnergy1->clear();
+  _PhotonDetectedEnergy2->clear();
+
   // Positions of Detected Photons
   _nPhotonDetectedPosition->clear();
   _nPriPhotonDetectedPosition->clear();
@@ -228,6 +236,22 @@ void L_EventAction::EndOfEventAction(const G4Event* event)
   // Photons counter
   runAction->_nPhotCreated = _nPhotCreated;
   runAction->_nSecondaryPhotCreated = _nSecondaryPhotCreated;
+
+  // Photons energy
+  runAction->_PhotonDetectedEnergy1->clear();
+
+  for (size_t i = 0; i < _PhotonDetectedEnergy1->size(); i++) {
+    runAction->_PhotonDetectedEnergy1->push_back(_PhotonDetectedEnergy1->at(i));
+  }
+
+  runAction->_PhotonDetectedEnergy2->clear();
+
+  for (size_t i = 0; i < _PhotonDetectedEnergy2->size(); i++) {
+    runAction->_PhotonDetectedEnergy2->push_back(_PhotonDetectedEnergy2->at(i));
+  }
+
+  runAction->_PhotonDetectedEnergy1 = _PhotonDetectedEnergy1;
+  runAction->_PhotonDetectedEnergy2 = _PhotonDetectedEnergy2;
 
   runAction->_nPhotCreated1 = _nPhotCreated1;
   runAction->_nSecondaryPhotCreated1 = _nSecondaryPhotCreated1;

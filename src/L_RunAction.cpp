@@ -12,6 +12,10 @@ L_RunAction::L_RunAction() {
   //	_outputFileName = "data.root";
   timer = new G4Timer();
 
+  // Photons energy
+  _PhotonDetectedEnergy1 = new std::vector<G4double>{};
+  _PhotonDetectedEnergy2 = new std::vector<G4double>{};
+
   // Positions of Detected Photons
   _nPhotonDetectedPosition = new std::vector<G4double>{};
   _nPriPhotonDetectedPosition = new std::vector<G4double>{};
@@ -117,6 +121,12 @@ void L_RunAction::BeginOfRunAction(const G4Run* run)
   tree->Branch("nPriPhotonDetectedPosition", _nPriPhotonDetectedPosition);
   // Positions of Secondary photons that reach the detector module
   tree->Branch("nSecPhotonDetectedPosition", _nSecPhotonDetectedPosition);
+
+  //---------------------------- Photons Energy ----------------------------//
+  // Detected Photons Energy module 1
+  tree->Branch("PhotonDetectedEnergy1", _PhotonDetectedEnergy1);
+  // Detected Photons Energy module 1
+  tree->Branch("PhotonDetectedEnergy2", _PhotonDetectedEnergy2);
 
   //----------------------------- Photon Paths -----------------------------//
   // Count of photons that reach the window without reflection

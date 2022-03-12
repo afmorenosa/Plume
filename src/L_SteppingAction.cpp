@@ -77,7 +77,8 @@ void L_SteppingAction::UserSteppingAction(const G4Step* aStep) {
     aPostPoint,
     trackID,
     aTrack->GetParentID(),
-    aTrack->GetGlobalTime()
+    aTrack->GetGlobalTime(),
+    aTrack->GetTotalEnergy()
   );
 
   // TO BE REVIEWED, GONNA BE A MISTAKE HERE///////////////////////////////
@@ -243,7 +244,8 @@ void L_SteppingAction::PhotonsPath(
   G4StepPoint *PostPoint,
   G4int trackID,
   G4int parentTrackID,
-  G4double track_time
+  G4double track_time,
+  G4double E
 ) {
 
   // Check if the particle does not escape the world
@@ -268,9 +270,8 @@ void L_SteppingAction::PhotonsPath(
 
     // Reach the detector tablet
     _eventAction->PhotonDetected(
-      trackID, parentTrackID, PostPoint->GetPosition(), track_time, 1
+      trackID, parentTrackID, PostPoint->GetPosition(), track_time, E, 1
     );
-
 
   } else if (
     PostPVname == "detector2"
@@ -278,7 +279,7 @@ void L_SteppingAction::PhotonsPath(
 
     // Reach the detector tablet
     _eventAction->PhotonDetected(
-      trackID, parentTrackID, PostPoint->GetPosition(), track_time, 2
+      trackID, parentTrackID, PostPoint->GetPosition(), track_time, E, 2
     );
 
   }

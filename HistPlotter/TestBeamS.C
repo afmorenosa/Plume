@@ -19,11 +19,17 @@ void TestBeamS () {
   Int_t nPhotonDetected1 = -1;
   Int_t nPhotonDetected2 = -1;
 
+  std::vector<double> *PhotonDetectedEnergy1 = {};
+  std::vector<double> *PhotonDetectedEnergy2 = {};
+
   tree->SetBranchAddress("trigger_time1", &trigger_time1);
   tree->SetBranchAddress("trigger_time2", &trigger_time2);
 
   tree->SetBranchAddress("nPhotonDetected1", &nPhotonDetected1);
   tree->SetBranchAddress("nPhotonDetected2", &nPhotonDetected2);
+
+  tree->SetBranchAddress("PhotonDetectedEnergy1", &PhotonDetectedEnergy1);
+  tree->SetBranchAddress("PhotonDetectedEnergy2", &PhotonDetectedEnergy2);
 
   //--------------------------------------------------------------------//
 
@@ -85,6 +91,38 @@ void TestBeamS () {
     16000
   );
 
+  TH1D *hist_detected_photons_energy_1 = new TH1D(
+    "Detected Photons Energy 1",
+    "Detected Photons Energy 1; Energy (eV); events",
+    100,
+    1.5e-3,
+    6.5e-3
+  );
+
+  TH1D *hist_detected_photons_energy_2 = new TH1D(
+    "Detected Photons Energy 2",
+    "Detected Photons Energy 2; Energy (eV); events",
+    100,
+    1.5e-3,
+    6.5e-3
+  );
+
+  TH1D *hist_detected_photons_wavelenght_1 = new TH1D(
+    "Detected Photons Wavelenght 1",
+    "Detected Photons Wavelenght 1; Wavelenght (mn); events",
+    100,
+    150e3,
+    750e3
+  );
+
+  TH1D *hist_detected_photons_wavelenght_2 = new TH1D(
+    "Detected Photons Wavelenght 2",
+    "Detected Photons Wavelenght 2; Wavelenght (mn); events",
+    100,
+    150e3,
+    750e3
+  );
+
   //--------------------------------------------------------------------//
 
   int nentries, nbytes;
@@ -108,6 +146,28 @@ void TestBeamS () {
 
       hist_photons_detected_1_triggered->Fill(nPhotonDetected1);
       hist_photons_detected_2_triggered->Fill(nPhotonDetected2);
+
+    }
+
+    for (size_t i = 0; i < PhotonDetectedEnergy1->size(); i++) {
+
+      hist_detected_photons_energy_1->Fill(
+        PhotonDetectedEnergy1->at(i) * 1000
+      );
+      hist_detected_photons_wavelenght_1->Fill(
+        1240 / (PhotonDetectedEnergy1->at(i) * 1000)
+      );
+
+    }
+
+    for (size_t i = 0; i < PhotonDetectedEnergy2->size(); i++) {
+
+      hist_detected_photons_energy_2->Fill(
+        PhotonDetectedEnergy2->at(i) * 1000
+      );
+      hist_detected_photons_wavelenght_2->Fill(
+        1240 / (PhotonDetectedEnergy2->at(i) * 1000)
+      );
 
     }
 
@@ -152,6 +212,29 @@ void TestBeamS () {
   hist_photons_detected_2_triggered->Draw();
   canvas->Print("simu/photons_detected_2_triggered.pdf");
   canvas->Clear();
+
+  canvas->SetLogy(false);
+
+  hist_detected_photons_energy_1->SetFillColor(kYellow);
+  hist_detected_photons_energy_1->Draw();
+  canvas->Print("simu/detected_photons_energy_1.pdf");
+  canvas->Clear();
+
+  hist_detected_photons_energy_2->SetFillColor(kYellow);
+  hist_detected_photons_energy_2->Draw();
+  canvas->Print("simu/detected_photons_energy_2.pdf");
+  canvas->Clear();
+
+  hist_detected_photons_wavelenght_1->SetFillColor(kYellow);
+  hist_detected_photons_wavelenght_1->Draw();
+  canvas->Print("simu/detected_photons_wavelenght_1.pdf");
+  canvas->Clear();
+
+  hist_detected_photons_wavelenght_2->SetFillColor(kYellow);
+  hist_detected_photons_wavelenght_2->Draw();
+  canvas->Print("simu/detected_photons_wavelenght_2.pdf");
+  canvas->Clear();
+
 
   //---------------------------------------------------------------------//
 

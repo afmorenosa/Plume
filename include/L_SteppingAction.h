@@ -43,7 +43,8 @@ private:
     G4StepPoint *PostPoint,
     G4int trackID,
     G4int parentTrackID,
-    G4double track_time
+    G4double track_time,
+    G4double E
   );
 
   void SecondModuleElectrons(

@@ -73,6 +73,7 @@ public:
     G4int parentTrackID,
     const G4ThreeVector PhotonDetectedPosition,
     G4double track_time,
+    G4double E,
     int module=1
   ) {
 
@@ -83,9 +84,15 @@ public:
       _nPhotonDetected++;
 
       if (module == 1) {
+
         this->InsertPhotonDetection1(track_time);
+        _PhotonDetectedEnergy1->push_back(E);
+
       } else {
+
         this->InsertPhotonDetection2(track_time);
+        _PhotonDetectedEnergy2->push_back(E);
+
       }
 
       G4double hit_radius = std::sqrt(
@@ -241,6 +248,10 @@ private:
 
   G4int _nSecPhotonDetected1;
   G4int _nSecPhotonDetected2;
+
+  // Photons energy
+  std::vector<G4double> *_PhotonDetectedEnergy1{};
+  std::vector<G4double> *_PhotonDetectedEnergy2{};
 
   //Positions of Detected Photons
   std::vector<G4double> *_nPhotonDetectedPosition{};

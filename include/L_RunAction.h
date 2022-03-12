@@ -70,6 +70,10 @@ public:
   G4int _nPhotCreated2;
   G4int _nSecondaryPhotCreated2;
 
+  // Photons energy
+  std::vector<G4double> *_PhotonDetectedEnergy1{};
+  std::vector<G4double> *_PhotonDetectedEnergy2{};
+
   // Detected Photons
   G4int _nPhotonDetected;
   G4int _nSecPhotonDetected;
