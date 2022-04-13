@@ -333,9 +333,9 @@ void L_SteppingAction::SecondModuleElectrons(
       // Register the position of the particle
       G4ThreeVector position_vec = PostPoint->GetPosition();
 
-      _eventAction->ElectronPositionReach(
-        PrePoint->GetPosition(), PostPoint->GetPosition()
-      );
+      // _eventAction->ElectronPositionReach(
+      //   PrePoint->GetPosition(), PostPoint->GetPosition()
+      // );
 
       // Register the zone of collision
       G4double radius = std::sqrt(

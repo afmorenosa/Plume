@@ -62,7 +62,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
 
   // Get the particle definition
   G4ParticleTable* particleTable = G4ParticleTable::GetParticleTable();
-  G4ParticleDefinition* particle = particleTable->FindParticle("proton");
+  G4ParticleDefinition* particle = particleTable->FindParticle("e-");
   G4double mass = particle->GetPDGMass();
 
   G4double theta = M_PI/6;
@@ -80,7 +80,7 @@ void L_PrimaryGeneratorAction::GeneratePrimaries(G4Event* anEvent) {
    G4ThreeVector dir = G4ThreeVector(0.0, 0.0, -1.0);
 
   // Set the Kinetic energy
-  G4double momentum = 140 * GeV;
+  G4double momentum = 6 * GeV;
   G4double Ekin = (TMath::Sqrt(momentum*momentum + mass*mass) - mass);
 
   // Set the properties for the particle gun
