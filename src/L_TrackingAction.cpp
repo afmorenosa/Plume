@@ -2,7 +2,7 @@
  * L_TrackingAction.cpp
  *
  *  Created on: Jul 13, 2021
- *      Author: afduquebr afmorenosa
+ *      Author: afduquebr ccmorenosa
  */
 
 #include "L_TrackingAction.h"
