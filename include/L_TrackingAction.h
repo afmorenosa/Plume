@@ -2,7 +2,7 @@
  * L_TrackingAction.h
  *
  *  Created on: Jul 13, 2021
- *      Author: afduquebr afmorenosa
+ *      Author: afduquebr ccatamorenos
  */
 
 #pragma once
